@@ -7,7 +7,7 @@ import java.sql.*;
 @Repository
 public class OrderRepository extends JpaRepository<Booking, Integer> {
  
-
+    // read 2 tables to retrieve all orders that belongs to a customer
     @Query(value = "SELECT * FROM Order co WHERE " +
             "EXISTS (SELECT 1 FROM customer c WHERE co.name = c.id ) " +
             "AND EXISTS (SELECT 1 FROM Order o WHERE o.orderId = o.orderId AND c.name IN :name)",
