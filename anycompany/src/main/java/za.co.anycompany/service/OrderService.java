@@ -12,6 +12,7 @@ public class OrderService {
     private OrderRepository orderRepository;
     private CustomerRepository customerRepository
 
+        //implementing the interfaces
     public List<Order> getAllBy(String id, List<String> name) {
     return orderRepository.queryBy(id, name);
     }
