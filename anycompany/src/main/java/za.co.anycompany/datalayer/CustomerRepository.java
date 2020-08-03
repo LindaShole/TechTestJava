@@ -11,11 +11,11 @@ public class CustomerRepository extends JpaRepository<Booking, Integer> {
     private EntityManager entityManager;
     
 @Transactional
-public void insertWithQuery(Person person) {
+public void insertWithQuery(Customer c) {
     entityManager.createNativeQuery("INSERT INTO Customer (customerId, name, country) VALUES (?,?,?)")
-      .setParameter(1, person.getCustomerId())
-      .setParameter(2, person.getName())
-      .setParameter(3, person.getCountry())
+      .setParameter(1, c.getCustomerId())
+      .setParameter(2, c.getName())
+      .setParameter(3, c.getCountry())
       .executeUpdate();
     }
 
