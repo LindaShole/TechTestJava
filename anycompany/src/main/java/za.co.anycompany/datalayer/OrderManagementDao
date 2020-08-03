@@ -1,0 +1,13 @@
+public class OrderManagementDao {    
+JdbcTemplate template;    
+    
+    
+public void setTemplate(JdbcTemplate template) {    
+    this.template = template;    
+}    
+public int save(Order o){    
+    String sql="insert into ORDER(oderId,amount,vat) values('"+o.getOrderId()+"',"+o.getAmount()+",'"+o.getVat()+"')";    
+    return template.update(sql);    
+}    
+    
+}   
