@@ -1,13 +1,15 @@
-public class OrderManagementDao {    
-JdbcTemplate template;    
-    
-    
-public void setTemplate(JdbcTemplate template) {    
-    this.template = template;    
-}    
-public int save(Order o){    
-    String sql="insert into ORDER(oderId,amount,vat) values('"+o.getOrderId()+"',"+o.getAmount()+",'"+o.getVat()+"')";    
-    return template.update(sql);    
-}    
-    
+public class OrderManagementDao {
+
+ @Autowired
+    private OrderRepository orderRepository;
+    private CustomerRepository customerRepository
+
+    public List<Order> getAllBy(String id, List<String> name) {
+    return orderRepository.queryBy(id, name);
+    }
+
+    public void insertWithQuery(Customer c) {
+        customerRepository.save(c);
+    }
+  
 }   
