@@ -9,7 +9,8 @@ public class CustomerRepository extends JpaRepository<Booking, Integer> {
     
 @PersistenceContext
     private EntityManager entityManager;
-    
+  
+ //this method saves customer entity to a db
 @Transactional
 public void insertWithQuery(Customer c) {
     entityManager.createNativeQuery("INSERT INTO Customer (customerId, name, country) VALUES (?,?,?)")
