@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-item>
+      <ion-label color="medium"><h1 style="text-align:center">Customer-Order Information</h1></ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="full">
+          <ion-item *ngFor="let customerOrderItem of customerOrderDetails">
+            <ion-text>
+              <p>Name: {{customerOrderItem.customerName}}</p>
+              <p>Country: {{customerOrderItem.country}}</p>
+              <p>Date of Birth: {{customerOrderItem.dateOfBirth}}</p>
+              <p>Order ID: {{customerOrderItem.orderId}}</p>
+              <p>Customer ID: {{customerOrderItem.customerId}}</p>
+              <p>Amount: {{customerOrderItem.amount}}</p>
+              <p>VAT: {{customerOrderItem.vat}}</p>
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
