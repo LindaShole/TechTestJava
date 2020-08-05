@@ -47,7 +47,7 @@ Prerequisites
 	
 		* ionic serve
 		
-*Unit tests
+* Unit tests
 	
 	Unit tests can be found under tests directory
 
