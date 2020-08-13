@@ -10,11 +10,11 @@ public class OrderRepository {
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";*
-    private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static final String DB_PASSWORD = "";
+    /*private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_CONNECTION = "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "";
+    private static final String DB_PASSWORD = "";*/
 
     
     
