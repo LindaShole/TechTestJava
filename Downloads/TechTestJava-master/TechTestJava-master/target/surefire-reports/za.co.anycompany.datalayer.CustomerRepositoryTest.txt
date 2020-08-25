@@ -1,0 +1,9 @@
+-------------------------------------------------------------------------------
+Test set: za.co.anycompany.datalayer.CustomerRepositoryTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec <<< FAILURE!
+za.co.anycompany.datalayer.CustomerRepositoryTest.testSaveCustomer()  Time elapsed: 0.026 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at za.co.anycompany.datalayer.CustomerRepository.save(CustomerRepository.java:69)
+	at za.co.anycompany.datalayer.CustomerRepositoryTest.testSaveCustomer(CustomerRepositoryTest.java:19)
+
