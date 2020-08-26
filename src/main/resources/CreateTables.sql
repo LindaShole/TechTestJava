@@ -1,0 +1,1 @@
+CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))
