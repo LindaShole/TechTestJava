@@ -19,12 +19,22 @@ public class OrderService {
 
     public void placeCustomerOrder(List<Customer> customerOrders){
         log.info("inside placeCustomerOrder() ");
-        customerRepository.saveAll(customerOrders);
-        log.info("Successful saved the customer details and their orders" + customerOrders.size());
-    }
+        try {
+            customerRepository.saveAll(customerOrders);
+            log.info("Successful saved the customer details and their orders" + customerOrders.size());
+        }catch (Exception e){
+            e.getMessage();
+        }
+        }
+
     public List<Customer> loadCustomerOrders(){
-        log.info("inside loadCustomerOrders() ");
-       return customerRepository.findAll();
+        try {
+            log.info("inside loadCustomerOrders() ");
+            return customerRepository.findAll();
+        }catch (Exception e){
+            e.getMessage();
+        }
+      return null;
     }
 
 
