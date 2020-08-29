@@ -1,32 +1,20 @@
 package za.co.anycompany.model;
 
-public class Order {
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Data
+@JsonInclude
+@Entity
+@Table(name = "order_table")
+public class Order  implements Serializable {
+    @Id
     private int orderId;
     private double amount;
-    private double VAT;
+    private double vat;
 
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public double getVAT() {
-        return VAT;
-    }
-
-    public void setVAT(double VAT) {
-        this.VAT = VAT;
-    }
 }
