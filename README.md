@@ -10,6 +10,7 @@ but attempted to implement some patterns. Unfortunately he has now left the comp
 The system should do the following:
 
  * Place an order, linked to a customer
+ * Retrieve a customer with their linked order(s)  
  * Load all customers and their linked orders
 
 Please do not change any of the existing static class declarations to be non-static.
