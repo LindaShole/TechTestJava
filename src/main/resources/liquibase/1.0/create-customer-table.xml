@@ -1,0 +1,31 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+
+    <changeSet author="Samu " id="theskosanas">
+
+        <createSequence sequenceName="SQC_CUSTOMER_ID"
+                        catalogName="investec"
+                        incrementBy="1"
+                        schemaName="investec"
+                        startValue="1"
+                        cycle="true"/>
+
+
+        <createTable schemaName="investec" tableName="customer">
+            <column autoIncrement="true" name="customer_id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="country" type="VARCHAR(100)"/>
+            <column name="date_of_birth" type="TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

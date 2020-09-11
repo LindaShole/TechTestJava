@@ -1,0 +1,37 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <property name="customerId1" value="nextval('investec.SQC_CUSTOMER_ID')"/>
+    <property name="generatedCustomerId1" value="currval('investec.SQC_CUSTOMER_ID')"/>
+
+    <property name="orderId1" value="nextval('investec.SQC_ORDER_ID')"/>
+    <property name="generatedOrderId1" value="currval('investec.SQC_ORDER_ID')"/>
+
+    <changeSet author="Samu " id="theskosanas">
+
+
+        <insert tableName="customer">
+            <column name="customer_id" valueComputed="${customerId1}"></column>
+            <column name="name" value="Samu"></column>
+            <column name="country" value="UK"></column>
+            <column name="date_of_birth" valueDate="CURRENT_TIMESTAMP"></column>
+        </insert>
+
+        <insert tableName="order">
+            <column name="order_id"  valueComputed="${orderId1}"></column>
+            <column name="amount" value="10"></column>
+            <column name="VAT" value="12"></column>
+        </insert>
+
+        <insert tableName="customer_order">
+            <column name="customer_order_id" valueSequenceNext="SQC_CUSTOMER_ORDER_ID"></column>
+            <column name="customer_id" valueComputed="${generatedCustomerId1}"></column>
+            <column name="order_id" valueComputed="${generatedOrderId1}"></column>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

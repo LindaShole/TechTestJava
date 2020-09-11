@@ -1,5 +1,6 @@
 package za.co.anycompany.model;
 
+
 public class Order {
 
     private int orderId;
@@ -28,5 +29,11 @@ public class Order {
 
     public void setVAT(double VAT) {
         this.VAT = VAT;
+    }
+
+    @Override
+    public String toString(){
+        String st = "Order{ orderId : "+orderId+",\n"+"amount : "+amount+",\n"+"VAT : "+VAT+"}";
+        return st;
     }
 }

@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    liquibase:
+      changeLog: classpath:liquibase/changelog.xml
+    schemaName: investec
+    username: investec
+    password: investec
+    port: 4040
+    databaseName: investec
+    host: localhost
+    url: jdbc:postgresql://localhost:4040/investec
