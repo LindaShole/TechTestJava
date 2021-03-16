@@ -58,6 +58,56 @@ public class CustomerRepository {
         return customer;
     }
 
+    public List<Customer> getAll(){
+        ResultSet resultSetCustomer = null;
+        ResultSet resultSetOrder = null;
+        List<Customer> customers = new ArrayList<>();
+        try(Connection connection = getDBConnection();
+            Statement statement = connection.createStatement();
+            PreparedStatement prpstmtOrder = connection.prepareStatement("SELECT * FROM ORDER WHERE customerId = ?")) {
+
+            resultSetCustomer = statement.executeQuery("SELECT * FROM CUSTOMER");
+            Order order = null;
+            Customer customer = null;
+            while (resultSetCustomer.next()) {
+                customer = new Customer();
+                customer.setId(resultSetCustomer.getInt("id"));
+                customer.setName(resultSetCustomer.getString("NAME"));
+                customer.setCountry(resultSetCustomer.getString("COUNTRY"));
+                customer.setDateOfBirth(resultSetCustomer.getDate("DATE_OF_BIRTH"));
+
+                prpstmtOrder.setInt(1, customer.getId());
+                resultSetOrder = prpstmtOrder.executeQuery();
+                while (resultSetOrder.next()) {
+                    order = new Order();
+                    order.setOrderId(resultSetOrder.getInt("orderId"));
+                    order.setAmount(resultSetOrder.getDouble("amount"));
+                    order.setVAT(resultSetOrder.getDouble("vat"));
+                    order.setCustomerId(resultSetOrder.getInt("customerId"));
+                    customer.getOrders().add(order);
+                }
+                customers.add(customer);
+            }
+        }
+        catch (SQLException e) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
+        }
+        finally {
+            try{
+                if(resultSetCustomer != null)
+                    resultSetCustomer.close();
+
+                if(resultSetOrder != null)
+                    resultSetOrder.close();
+            }
+            catch (SQLException e){
+                Logger.getAnonymousLogger().log(Level.SEVERE, e.getMessage());
+            }
+        }
+
+        return customers;
+    }
+
     private static Connection getDBConnection() {
         return ConnectionFactory.getDBConnection();
     }
