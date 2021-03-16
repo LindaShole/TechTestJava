@@ -7,11 +7,14 @@ import za.co.anycompany.model.Order;
 
 public class OrderService {
 
-    private OrderRepository orderRepository = new OrderRepository();
+    private OrderRepository orderRepository;
 
-    public boolean placeOrder(Order order, int customerId)
-    {
-        Customer customer = CustomerRepository.load(customerId);
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    public boolean placeOrder(Order order) {
+        Customer customer = CustomerRepository.load(order.getCustomerId());
 
         if (order.getAmount() == 0)
             return false;
