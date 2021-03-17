@@ -1,16 +1,17 @@
 package za.co.anycompany.datalayer;
 
+import java.util.ArrayList;
+import java.util.List;
 import za.co.anycompany.model.Customer;
 
 import java.sql.*;
-
 
 public class CustomerRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
+    private static final String DB_USER = "postgres";
+    private static final String DB_PASSWORD = "postgres";
 
     public static Customer load(int customerId) {
         Connection con = getDBConnection();
@@ -42,6 +43,40 @@ public class CustomerRepository {
             }
         }
         return customer;
+    }
+
+    public static List<Customer> loadAll() {
+        Connection con = getDBConnection();
+        PreparedStatement prpstmt = null;
+        ResultSet resultSet = null;
+        Customer customer = null;
+        List<Customer> customers = new ArrayList<>();
+        try {
+            prpstmt = con.prepareStatement("select * from CUSTOMER ");
+            resultSet = prpstmt.executeQuery();
+            while (resultSet.next()) {
+                customer =  new Customer();
+                customer.setName(resultSet.getString("NAME"));
+                customer.setCountry(resultSet.getString("COUNTRY"));
+                customer.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH"));
+                customers.add(customer);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (prpstmt != null)
+                    prpstmt.close();
+                if (resultSet != null)
+                    resultSet.close();
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return customers;
     }
 
 

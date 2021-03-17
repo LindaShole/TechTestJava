@@ -1,10 +1,13 @@
 package za.co.anycompany.model;
 
+import za.co.anycompany.model.Customer;
+
 public class Order {
 
     private int orderId;
     private double amount;
     private double VAT;
+    private Customer customer;
 
     public int getOrderId() {
         return orderId;
@@ -28,5 +31,13 @@ public class Order {
 
     public void setVAT(double VAT) {
         this.VAT = VAT;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
