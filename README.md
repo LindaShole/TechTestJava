@@ -1,27 +1,5 @@
-Hello Candidate,
+Hi,
 
-Welcome to AnyCompany Entertainment.
+I have implemented the functionality to create orders and customers via a rest API. To test the rest API via swagger, first start up the application by typing mvn spring-boot:run and then navigate to localhost:9090/swagger-ui.html in a browser.
 
-Here is our mostly complete system for placing orders.
-
-The developer who created this system did not follow any specific development methodology, 
-but attempted to implement some patterns. Unfortunately he has now left the company.
-
-The system should do the following:
-
- * Place an order, linked to a customer
- * Retrieve a customer with their linked order(s)  
- * Load all customers and their linked orders
-
-Please do not change any of the existing static class declarations to be non-static.
-
-Please refactor the solution according to your own best practices.
-
-**Please fork this repository and submit your attempt via a pull request**
-
-Details on how to do this can be found in the [Github help pages](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork)
-
-Best regards
-
-John
-CEO
+By default, the application uses jdbc for persistence, but I have also added the option of using jpa. For this reason, I have removed the static functions from the Customer/Order repositories. To enable jpa and disable jdbc, set the persistence.use-jpa property to true in the application.yml file.
