@@ -1,8 +1,12 @@
 package za.co.anycompany.datalayer;
 
-import za.co.anycompany.model.Order;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-import java.sql.*;
+import za.co.anycompany.model.Order;
 
 @Deprecated
 public class OrderRepository {
@@ -21,7 +25,7 @@ public class OrderRepository {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))");
             connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
-            preparedStatement.setInt(1, order.getOrderId());
+            preparedStatement.setInt(1, order.getId());
             preparedStatement.setDouble(2, order.getAmount());
             preparedStatement.setDouble(3, order.getVAT());
             preparedStatement.executeUpdate();

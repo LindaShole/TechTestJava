@@ -1,5 +1,9 @@
 package za.co.anycompany.service.impl;
 
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
         Customer customer = customerRepository.findById(customerId).get();
 		log.info("customer: {}", customer);
 		log.info("customer country: {}", customer.getCountry());
+		order.setCustomer(customer);
 
 		if (order.getAmount() == 0)
             return false;
@@ -41,4 +46,29 @@ public class OrderServiceImpl implements OrderService {
 		log.info("Order placed: {}", order);
         return true;
     }
+
+	@Override
+	public Customer getCustomerWithOrders(int customerId) {
+		Optional<Customer> customerOpt = customerRepository.findById(customerId);
+		if (customerOpt.isPresent()) {
+			Customer customer = customerOpt.get();
+			customer.getOrders();
+			log.info("getCustomerWithOrders: {}", customer);
+			return customer;
+		}
+		return null;
+	}
+
+	@Override
+	public Set<Customer> getAllCustomersWithOrders() {
+		Iterable<Customer> customers = customerRepository.findAll();
+		Set<Customer> loadedCustomers = new HashSet<Customer>();
+		for (Customer customer : customers) {
+			customer.getOrders();
+			loadedCustomers.add(customer);
+			log.info("getAllCustomersWithOrders: {}", customer);
+		}
+		return loadedCustomers;
+	}
+
 }
