@@ -3,9 +3,16 @@ package za.co.anycompany.model;
 import java.util.Date;
 
 public class Customer {
+	
+	
+	private int customerId;
     private String name;
     private String country;
     private Date dateOfBirth;
+    
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;

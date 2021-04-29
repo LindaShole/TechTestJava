@@ -7,7 +7,11 @@ import za.co.anycompany.model.Order;
 
 public class OrderService {
 
-    private OrderRepository orderRepository = new OrderRepository();
+    private OrderRepository orderRepository;
+    
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     public boolean placeOrder(Order order, int customerId)
     {

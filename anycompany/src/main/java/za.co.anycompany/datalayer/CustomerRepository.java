@@ -1,17 +1,14 @@
 package za.co.anycompany.datalayer;
 
 import za.co.anycompany.model.Customer;
+import za.co.anycompany.databaseConnection.DataBaseConnection;
 
 import java.sql.*;
 
 
 public class CustomerRepository {
 
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
-
+	//Removed DB connection to follow SOLID principles
     public static Customer load(int customerId) {
         Connection con = getDBConnection();
         PreparedStatement prpstmt = null;
@@ -44,21 +41,7 @@ public class CustomerRepository {
         return customer;
     }
 
-
     private static Connection getDBConnection() {
-        Connection dbConnection = null;
-        try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            return dbConnection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return dbConnection;
-    }
-
+    	return databaseConnection.getDBConnection();
+   }  
 }
