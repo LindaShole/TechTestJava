@@ -1,11 +1,12 @@
 package za.co.anycompany.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Customer {
     private String name;
     private String country;
     private Date dateOfBirth;
+    private int customerId;
 
     public String getName() {
         return name;
@@ -29,5 +30,13 @@ public class Customer {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }
