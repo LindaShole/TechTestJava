@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "92d74dbc-139e-46e5-91ed-7224f31f0a00",
+		"name": "Investec-Tech-Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "CreateCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"sfiso\",\r\n    \"country\": \"RZA\",\r\n    \"dateOfBirth\": 5555,\r\n    \"customerId\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{httpProtocol}}://{{host}}/api/customers",
+							"protocol": "{{httpProtocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{httpProtocol}}://{{host}}/api/customers",
+							"protocol": "{{httpProtocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{httpProtocol}}://{{host}}/api/customers/1",
+							"protocol": "{{httpProtocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"customers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "CreateOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderId\": 0,\r\n    \"amount\": 45.78,\r\n    \"customerId\": {{customerId}},\r\n    \"item\": \"Pizza\",\r\n    \"vat\": 0.14\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{httpProtocol}}://{{host}}/api/orders",
+							"protocol": "{{httpProtocol}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "httpProtocol",
+			"value": "http"
+		},
+		{
+			"key": "host",
+			"value": "localhost:9090"
+		},
+		{
+			"key": "customerId",
+			"value": "1"
+		},
+		{
+			"value": ""
+		}
+	]
+}
