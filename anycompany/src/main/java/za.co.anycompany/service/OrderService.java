@@ -1,9 +1,9 @@
-package za.co.anycompany.service;
+package service;
 
-import za.co.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.datalayer.OrderRepository;
-import za.co.anycompany.model.Customer;
-import za.co.anycompany.model.Order;
+import datalayer.CustomerRepository;
+import datalayer.OrderRepository;
+import model.Customer;
+import model.Order;
 
 public class OrderService {
 
@@ -20,6 +20,8 @@ public class OrderService {
             order.setVAT(0.2d);
         else
             order.setVAT(0);
+        
+        order.setCustomerId(customer.getCustomerId());
 
         orderRepository.save(order);
 
