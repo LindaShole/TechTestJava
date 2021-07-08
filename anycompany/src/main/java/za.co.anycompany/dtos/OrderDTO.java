@@ -1,6 +1,6 @@
-package za.co.anycompany.model;
+package za.co.anycompany.dtos;
 
-public class Order {
+public class OrderDTO {
 
     private int orderId;
     private int customerId;

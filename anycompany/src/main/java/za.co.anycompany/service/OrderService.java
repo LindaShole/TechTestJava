@@ -21,6 +21,7 @@ public class OrderService {
         else
             order.setVAT(0);
 
+        order.setCustomerId(customerId);
         orderRepository.save(order);
 
         return true;

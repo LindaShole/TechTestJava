@@ -3,6 +3,8 @@ package za.co.anycompany.datalayer;
 import za.co.anycompany.model.Order;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class OrderRepository {
 
@@ -18,11 +20,12 @@ public class OrderRepository {
 
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
+            statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, customerId int, amount number(10,2), vat number (3,1))");
+            connection.prepareStatement("INSERT INTO ORDER(oderId, customerId, amount, vat) VALUES(?,?,?,?)");
             preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setDouble(2, order.getAmount());
-            preparedStatement.setDouble(3, order.getVAT());
+            preparedStatement.setInt(2, order.getCustomerId());
+            preparedStatement.setDouble(3, order.getAmount());
+            preparedStatement.setDouble(4, order.getVAT());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -36,6 +39,40 @@ public class OrderRepository {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public List<Order> load(int customerId) {
+        Connection con = getDBConnection();
+        PreparedStatement prpstmt = null;
+        ResultSet resultSet = null;
+        Order order = new Order();
+        List<Order> orders = new ArrayList<>();
+        try {
+            prpstmt = con.prepareStatement("select * from ORDER where customerId = ?");
+            prpstmt.setInt(1, customerId);
+            resultSet = prpstmt.executeQuery();
+            while (resultSet.next()) {
+                order.setOrderId(resultSet.getInt("oderId"));
+                order.setCustomerId(resultSet.getInt("customerId"));
+                order.setAmount(resultSet.getDouble("amount"));
+                order.setVAT(resultSet.getDouble("vat"));
+                orders.add(order);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (prpstmt != null)
+                    prpstmt.close();
+                if (resultSet != null)
+                    resultSet.close();
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return orders;
     }
 
     private static Connection getDBConnection() {

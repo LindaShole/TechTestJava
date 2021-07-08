@@ -1,12 +1,14 @@
-package za.co.anycompany.model;
+package za.co.anycompany.dtos;
 
 import java.util.Date;
+import java.util.List;
 
-public class Customer {
+public class CustomerDTO {
     private int id;
     private String name;
     private String country;
     private Date dateOfBirth;
+    private List<OrderDTO> orders;
 
     public int getId() {
         return id;
@@ -38,5 +40,13 @@ public class Customer {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public List<OrderDTO> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<OrderDTO> orders) {
+        this.orders = orders;
     }
 }
