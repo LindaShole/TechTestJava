@@ -23,7 +23,7 @@ public class CustomerOrderRepository {
 		CustomerOrder customerOrder = new CustomerOrder();
 	}
 
-    public static CustomerOrder load(int customerId) {
+    public static CustomerOrder load(int customerId) { 
 
         try {
             prpstmt = con.prepareStatement("select * from ORDER customerId = ?");
