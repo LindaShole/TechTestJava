@@ -5,6 +5,8 @@ public class Order {
     private int orderId;
     private double amount;
     private double VAT;
+	//modified
+	private Customer customer;
 
     public int getOrderId() {
         return orderId;
@@ -29,4 +31,12 @@ public class Order {
     public void setVAT(double VAT) {
         this.VAT = VAT;
     }
+	//modified
+	public void setCustomer(Customer customer){
+		this.customer = customer;
+	}
+	
+	public Customer getCustomer(){
+		return customer;
+	}
 }
