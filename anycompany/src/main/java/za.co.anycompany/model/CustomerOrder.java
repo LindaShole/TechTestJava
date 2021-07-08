@@ -11,5 +11,5 @@ public class CustomerOrder {
 	
 	public void setOrder(){
 		this.order = order;
-	}		
+	}
 }
