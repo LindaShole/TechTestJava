@@ -5,12 +5,11 @@ import java.util.Date;
 public class Customer {
 	//modified
 	private int customerId;
+
     private String name;
     private String country;
     private Date dateOfBirth;
-	
-	//modified
-	private Order order;
+
 	
     public int getCustomerId() {
         return CustomerId;
@@ -48,12 +47,4 @@ public class Customer {
         return CustomerId;
     }
 
-//modified
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-	
-    public Order getOrder() {
-        return order;
-    }	
 }
