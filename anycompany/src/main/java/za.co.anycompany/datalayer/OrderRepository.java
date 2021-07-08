@@ -18,11 +18,15 @@ public class OrderRepository {
 
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
+			//modify
+            statement.executeUpdate("CREATE TABLE ORDER (oderId int not null,customerId not null, amount number(10,2), vat number (3,1)),
+			primary key (oderId), foreign Key (customerId) references customer(customerId)");
+			
+            connection.prepareStatement("INSERT INTO ORDER(oderId, customerId, amount, vat) VALUES(?,?,?,?)");
             preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setDouble(2, order.getAmount());
-            preparedStatement.setDouble(3, order.getVAT());
+			preparedStatement.setInt(2, order.getCustomer().getCustomerId());
+            preparedStatement.setDouble(3, order.getAmount());
+            preparedStatement.setDouble(4, order.getVAT());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
