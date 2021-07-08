@@ -8,6 +8,7 @@ import za.co.anycompany.model.Order;
 public class OrderService {
 
     private OrderRepository orderRepository = new OrderRepository();
+	private CustomerOrderRepository  customerOrderRepository = new CustomerOrderRepository();
 
     public boolean placeOrder(Order order, int customerId)
     {
@@ -21,8 +22,17 @@ public class OrderService {
         else
             order.setVAT(0);
 
+		order.setCustomer(customer);
         orderRepository.save(order);
 
         return true;
     }
+	
+	public CustomerOrder getCustomerOrder(int customerId){	
+		return customerOrderRepository.load(customerId);  
+	}
+	
+	public List<CustomerOrder> getCustomerOrder(){		
+		return customerOrderRepository.loadAll();  
+	}	
 }
