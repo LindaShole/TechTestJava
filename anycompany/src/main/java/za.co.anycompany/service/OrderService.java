@@ -1,9 +1,12 @@
-package za.co.anycompany.service;
+package main.java.za.co.anycompany.service;
 
-import za.co.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.datalayer.OrderRepository;
+import main.java.za.co.anycompany.framework.ServicesProperties;
+import main.java.za.co.anycompany.datalayer.CustomerRepository;
+import main.java.za.co.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
+
+import java.util.List;
 
 public class OrderService {
 
@@ -16,13 +19,17 @@ public class OrderService {
         if (order.getAmount() == 0)
             return false;
 
-        if (customer.getCountry() == "UK")
+        if (customer.getCountry() == ServicesProperties.getCOUNTRY())
             order.setVAT(0.2d);
         else
             order.setVAT(0);
 
-        orderRepository.save(order);
+        orderRepository.save(order, customerId);
 
         return true;
+    }
+
+    public List<Order> loadCustomerOrders(int customerId){
+         return orderRepository.loadCustomerOrders(customerId);
     }
 }
