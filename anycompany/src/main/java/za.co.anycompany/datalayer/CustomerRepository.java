@@ -1,4 +1,4 @@
-package za.co.anycompany.datalayer;
+package main.java.za.co.anycompany.datalayer;
 
 import za.co.anycompany.model.Customer;
 
@@ -7,20 +7,16 @@ import java.sql.*;
 
 public class CustomerRepository {
 
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
-
     public static Customer load(int customerId) {
-        Connection con = getDBConnection();
+        Connection con = DBConnection.getDBConnection();
         PreparedStatement prpstmt = null;
         ResultSet resultSet = null;
-        Customer customer = new Customer();
+        Customer customer = null;
         try {
             prpstmt = con.prepareStatement("select * from CUSTOMER where customerId = ?");
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
+            customer = new Customer();
             while (resultSet.next()) {
                 customer.setName(resultSet.getString("NAME"));
                 customer.setCountry(resultSet.getString("COUNTRY"));
@@ -44,21 +40,37 @@ public class CustomerRepository {
         return customer;
     }
 
+    public static Boolean create(Customer customer){
+        Connection connection = DBConnection.getDBConnection();
+        Statement statement = null;
+        PreparedStatement preparedStatement = null;
 
-    private static Connection getDBConnection() {
-        Connection dbConnection = null;
         try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            return dbConnection;
+            statement = connection.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMER(customerId int primary key not null, NAME varchar(250), COUNTRY varchar(250), DATE_OF_BIRTH date)");
+            preparedStatement = connection.prepareStatement("INSERT INTO CUSTOMER(customerId, NAME, COUNTRY, DATE_OF_BIRTH) VALUES(?,?,?,?)");
+            preparedStatement.setInt(1, customer.getCustomerId());
+            preparedStatement.setString(2, customer.getName());
+            preparedStatement.setString(3, customer.getCountry());
+            preparedStatement.setDate(4, (Date) customer.getDateOfBirth());
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try {
+                statement.close();
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+            catch (Exception e) {
+                System.out.println(e);
+            }
         }
-        return dbConnection;
+
+        return true;
     }
 
 }
