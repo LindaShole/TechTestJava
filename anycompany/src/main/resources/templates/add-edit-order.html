@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Customer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+</head>
+
+<body>
+	
+    <div class="container my-5" style="padding-top: 30px;">
+    
+        <h3> Order</h3>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-md-10">
+                    <form th:action="@{/order}" th:object="${order}" method="post">
+                    
+                    	<div class="row">
+                        	
+                            <!--<div class="form-group col-md-8">
+                                <label for="customerId" class="col-form-label">Customer No</label> 
+                                <input type="text" th:field="*{customerId}" class="form-control" 
+                                            id="customerId" placeholder="Customer No" />
+                            </div>-->
+
+                            <div class="form-group col-md-8">
+                                <label for="customerId" class="col-form-label">Customer</label> 
+                                <br>
+                                <select class="form-select" th:field="*{customerId}" id="customerId" style="width: 100%;">
+                                    <option th:each="customer: ${customers}" th:value="${customer.customerId}" th:text="${customer.name}"/>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-8">
+                                <label for="amount" class="col-form-label">Amount</label> 
+                                <input type="text" th:field="*{amount}" class="form-control" 
+                                            id="amount" placeholder="Amount" />
+                            </div>
+
+                            <div class="col-md-6">
+                                <input type="submit" class="btn btn-primary" value=" Submit ">
+                            </div>
+
+                            <input type="hidden" id="orderId" th:field="*{orderId}">
+                            <input type="hidden" id="VAT" th:field="*{VAT}">
+    
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
