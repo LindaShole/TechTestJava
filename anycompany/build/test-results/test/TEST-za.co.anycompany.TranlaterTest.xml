@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="za.co.anycompany.TranlaterTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-08-03T15:29:59" hostname="XIB-SM1" time="0.03">
+  <properties/>
+  <testcase name="toCustomer" classname="za.co.anycompany.TranlaterTest" time="0.03"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
