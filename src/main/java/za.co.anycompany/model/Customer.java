@@ -1,12 +1,31 @@
 package za.co.anycompany.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
-public class Customer {
+@Entity
+@Table
+
+public class Customer implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", updatable=false, nullable=false)
+    private Long id;
+
+    @Column(name = "name", updatable=false, nullable=false)
     private String name;
+
+    @Column(name = "country", updatable=false, nullable=false)
     private String country;
+
+    @Column(name = "dateOfBirth", updatable=false, nullable=false)
     private Date dateOfBirth;
 
+    @OneToMany(mappedBy = "id")
+    private Set<Order> order;
     public String getName() {
         return name;
     }
