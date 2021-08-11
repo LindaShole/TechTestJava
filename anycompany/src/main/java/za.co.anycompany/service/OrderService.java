@@ -7,22 +7,23 @@ import za.co.anycompany.model.Order;
 
 public class OrderService {
 
-    private OrderRepository orderRepository = new OrderRepository();
+  
+        private OrderRepository orderRepository = new OrderRepository();
 
-    public boolean placeOrder(Order order, int customerId)
-    {
-        Customer customer = CustomerRepository.load(customerId);
+        public boolean placeOrder(Order order, int customerId)
+        {
+            Customer customer = CustomerRepository.load(customerId,order);
 
-        if (order.getAmount() == 0)
-            return false;
+            if (order.getAmount() == 0)
+                return false;
 
-        if (customer.getCountry() == "UK")
-            order.setVAT(0.2d);
-        else
-            order.setVAT(0);
+            if (customer.getCountry() == "UK")
+                order.setVAT(0.2d);
+            else
+                order.setVAT(0);
 
-        orderRepository.save(order);
+            orderRepository.save(order,customer);
 
-        return true;
-    }
+            return true;
+        }
 }
