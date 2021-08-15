@@ -1,27 +1,19 @@
-Hello Candidate,
+Customer Order Service
+The App does following:
 
-Welcome to AnyCompany Entertainment.
+    1.Place an order, linked to a customer
+    2.Retrieve a customer with their linked order(s)
+    3.Load all customers and their linked orders
 
-Here is our mostly complete system for placing orders.
+To build the App: mvn clean install
 
-The developer who created this system did not follow any specific development methodology, 
-but attempted to implement some patterns. Unfortunately he has now left the company.
 
-The system should do the following:
 
- * Place an order, linked to a customer
- * Retrieve a customer with their linked order(s)  
- * Load all customers and their linked orders
+To Build the App without unit Tests: mvn clean install -DskipTests=true
 
-Please do not change any of the existing static class declarations to be non-static.
 
-Please refactor the solution according to your own best practices.
+To start the App: jar -jar target/anycompany-0.0.1-SNAPSHOT.jar OR 
 
-**Please fork this repository and submit your attempt via a pull request**
 
-Details on how to do this can be found in the [Github help pages](https://help.github.com/en/articles/creating-a-pull-request-from-a-fork)
+mvn spring-boot:run
 
-Best regards
-
-John
-CEO
