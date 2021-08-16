@@ -1,4 +1,4 @@
-package za.co.anycompany;
+package za.co.anycompany.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

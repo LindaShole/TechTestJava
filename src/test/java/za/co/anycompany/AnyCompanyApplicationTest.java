@@ -2,18 +2,16 @@ package za.co.anycompany;
 
 import org.junit.Assert;
 
-import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
+import za.co.anycompany.exception.ErrorResponse;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 import za.co.anycompany.service.CustomerService;
