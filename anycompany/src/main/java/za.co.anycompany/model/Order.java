@@ -1,10 +1,10 @@
-package za.co.anycompany.model;
+package main.java.za.co.anycompany.model;
 
 public class Order {
-
     private int orderId;
     private double amount;
     private double VAT;
+    private int customerId;
 
     public int getOrderId() {
         return orderId;
@@ -28,5 +28,13 @@ public class Order {
 
     public void setVAT(double VAT) {
         this.VAT = VAT;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 }

@@ -1,56 +1,51 @@
-package za.co.anycompany.datalayer;
+package main.java.za.co.anycompany.datalayer;
 
-import za.co.anycompany.model.Order;
-
+import main.java.za.co.anycompany.model.Order;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import static main.java.za.co.anycompany.utils.DBUtils.getDBConnection;
 
 public class OrderRepository {
+    public static void save(Order order) throws SQLException {
+        // Do not insert the ORDERID. This field will be an identity column in DB
+        String query = "INSERT INTO ORDER(AMOUNT, VAT, CUSTOMERID) VALUES(?,?,?)";
 
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
-
-    public void save(Order order) {
-        Connection connection = getDBConnection();
-        Statement statement = null;
-        PreparedStatement preparedStatement = null;
-
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
-            preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setDouble(2, order.getAmount());
-            preparedStatement.setDouble(3, order.getVAT());
+        try (Connection connection = getDBConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setDouble(1, order.getAmount());
+            preparedStatement.setDouble(2, order.getVAT());
+            preparedStatement.setLong(3, order.getCustomerId());
             preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-
-        } finally {
-            try {
-                statement.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;
         }
     }
 
-    private static Connection getDBConnection() {
-        Connection dbConnection = null;
-        try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
+    public static List<Order> getOrdersForCustomer(int customerId) throws SQLException {
+        String query = "select ORDERID, AMOUNT, VAT, CUSTOMERID from ORDERS where CUSTOMERID = ?";
+        List<Order> orderList = new ArrayList<>();
+        ResultSet resultSet;
+
+        try (Connection connection = getDBConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setInt(1, customerId);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()){
+                Order order = new Order();
+                order.setOrderId(resultSet.getInt("ORDERID"));
+                order.setAmount(resultSet.getDouble("AMOUNT"));
+                order.setVAT(resultSet.getDouble("VAT"));
+                order.setCustomerId(resultSet.getInt("CUSTOMERID"));
+                orderList.add(order);
+            }
+        }catch (SQLException ex){
+            ex.printStackTrace();
+            throw ex;
         }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            return dbConnection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return dbConnection;
+        return orderList;
     }
 }
