@@ -49,6 +49,33 @@ public class CustomerOrdersTest {
         }
     }
 
+    @Test
+    public void testCustomerExist() throws CustomerDataException {
+        Customer c = orderSvc.getCustomerOrders(3);
+
+        assertEquals("Customer exist in data store", "Piet Gouws", c.getName());
+    }
+
+    @Test
+    public void testOrderPlacement() throws OrderException, CustomerDataException, InvalidOrderException, InvalidCustomerException {
+    
+        boolean orderPlaced = orderSvc.placeOrder(new Order(1, 540.32), 1);
+        Customer c = orderSvc.getCustomerOrders(1);
+
+        assertEquals("Customer exist in data store", 1, c.getOrders().size());
+    }
+
+    @Test
+    public void testOrderPlacementWithCorrectVAT() throws OrderException, CustomerDataException, InvalidOrderException, InvalidCustomerException {
+    
+        boolean orderPlaced = orderSvc.placeOrder(new Order(2, 298.21), 4);
+        Customer c = orderSvc.getCustomerOrders(4);
+
+        Order o = c.getOrders().get(0);
+
+        assertEquals("Correct VAT was applied based on the country", 0.2, o.getVAT(), 0);
+    }
+
     @Test(expected = InvalidCustomerException.class)
     public void testOrderPlacementByInvalidCustomer() throws OrderException, CustomerDataException, InvalidOrderException, InvalidCustomerException {
         boolean orderPlaced = orderSvc.placeOrder(new Order(3, 298.21), 100);

@@ -51,11 +51,31 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Customer> listCustomersOrders() throws CustomerDataException {
-        return null;
+        try{
+            return customerRepository.getAllCustomersWithOrders();
+        }
+        catch(CustomerDataException e) {
+            // Log exception before rethrowing
+            throw e;
+        }
+        catch(Exception e) {
+            // Log exception before rethrowing
+            throw e;
+        }
     }
 
     @Override
     public Customer getCustomerOrders(int customerId) throws CustomerDataException {
-        return null;
+        try{
+            return customerRepository.getCustomerWithOrders(customerId);
+        }
+        catch(CustomerDataException e) {
+            // Log exception before rethrowing
+            throw e;
+        }
+        catch(Exception e) {
+            // Log exception before rethrowing
+            throw e;
+        }
     }
 }
