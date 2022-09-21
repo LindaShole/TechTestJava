@@ -1,10 +1,9 @@
 package za.co.anycompany.datalayer;
 
+import java.sql.*;
 import za.co.anycompany.model.Customer;
 
-import java.sql.*;
-
-
+@Deprecated
 public class CustomerRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
@@ -22,7 +21,7 @@ public class CustomerRepository {
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
             while (resultSet.next()) {
-                customer.setName(resultSet.getString("NAME"));
+                customer.setCustomerName(resultSet.getString("NAME"));
                 customer.setCountry(resultSet.getString("COUNTRY"));
                 customer.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH"));
             }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="za.co.anycompany.persistence.mapper.CustomerMapper">
+
+    <resultMap id="customerResultMap" type="za.co.anycompany.model.Customer">
+        <result column="customer_id" property="customerId"/>
+        <result column="customer_name" property="customerName"/>
+        <result column="country" property="country"/>
+        <result column="date_of_birth" property="dateOfBirth"/>
+    </resultMap>
+    
+    <select id="getCustomers" resultMap="customerResultMap">
+        SELECT  customer_id,
+                customer_name,
+                country,
+                date_of_birth
+        FROM customer
+    </select>
+    
+    <select id="getCustomerById" resultMap="customerResultMap">
+        SELECT  customer_id,
+                customer_name,
+                country,
+                date_of_birth
+        FROM customer
+        WHERE customer_id = #{customerId}
+    </select>
+    
+    <select id="getCustomerByOrderId" resultMap="customerResultMap">
+        SELECT  customer_id,
+                customer_name,
+                country,
+                date_of_birth
+        FROM customer
+        WHERE customer_id IN (
+                        SELECT customer_id
+                        FROM orders 
+                        WHERE order_id = #{orderId}
+                    )
+    </select>
+</mapper>

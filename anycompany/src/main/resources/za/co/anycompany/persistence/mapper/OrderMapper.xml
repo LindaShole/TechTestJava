@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="za.co.anycompany.persistence.mapper.OrderMapper">
+
+    <resultMap id="ordersResultMap" type="List">
+        <result column="order_id" property="orderId"/>
+        <result column="customer_id" property="customerId"/>
+        <result column="amount" property="amount"/>
+        <result column="vat" property="vat"/>
+    </resultMap>
+    
+    <insert id="insertOrder">
+        INSERT INTO orders(order_id, customer_id, amount, vat)
+        VALUES(#{oderId},#{customerId}, #{amount}, #{vat})
+    </insert>
+    
+    <select id="getOrders" resultMap="ordersResultMap">
+        SELECT
+            order_id,
+            customer_id,
+            amount,
+            vat
+        FROM orders
+    </select>
+    
+    <select id="getOrdersByCustomerId" resultMap="ordersResultMap">
+        SELECT
+            order_id,
+            customer_id,
+            amount,
+            vat
+        FROM orders
+        WHERE customer_id = #{customerId}
+    </select>
+</mapper>

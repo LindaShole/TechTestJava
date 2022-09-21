@@ -1,9 +1,9 @@
 package za.co.anycompany.datalayer;
 
+import java.sql.*;
 import za.co.anycompany.model.Order;
 
-import java.sql.*;
-
+@Deprecated
 public class OrderRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
