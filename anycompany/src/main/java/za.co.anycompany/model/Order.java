@@ -2,8 +2,12 @@ package za.co.anycompany.model;
 
 public class Order {
 
+    @Id
+    @Column
     private int orderId;
+    @Column
     private double amount;
+    @Column
     private double VAT;
 
     public int getOrderId() {

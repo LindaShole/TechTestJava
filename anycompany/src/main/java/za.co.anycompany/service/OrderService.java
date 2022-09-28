@@ -5,8 +5,15 @@ import za.co.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class OrderService {
 
+    @Autowired
     private OrderRepository orderRepository = new OrderRepository();
 
     public boolean placeOrder(Order order, int customerId)
