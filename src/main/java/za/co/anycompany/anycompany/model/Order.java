@@ -1,10 +1,23 @@
-package za.co.anycompany.model;
+package za.co.anycompany.anycompany.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+@Table("ORDERS")
 public class Order {
-
+    @Id
     private int orderId;
     private double amount;
     private double VAT;
+
+    public Order(int orderId, double amount, double VAT) {
+        this.orderId = orderId;
+        this.amount = amount;
+        this.VAT = VAT;
+    }
+
+    public Order() {
+    }
 
     public int getOrderId() {
         return orderId;

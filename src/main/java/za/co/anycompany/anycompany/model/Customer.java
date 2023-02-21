@@ -1,4 +1,4 @@
-package za.co.anycompany.model;
+package za.co.anycompany.anycompany.model;
 
 import java.util.Date;
 
