@@ -9,7 +9,7 @@ import java.sql.*;
 public class CustomerRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
+    private static final String DB_CONNECTION = "jdbc:h2:~\\Azure\\Java_DEV\\TechTestJava\\src\\main\\resources\\testdb;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
 
@@ -17,8 +17,12 @@ public class CustomerRepository {
         Connection con = getDBConnection();
         PreparedStatement prpstmt = null;
         ResultSet resultSet = null;
+        Statement statement = null;
         Customer customer = new Customer();
         try {
+            statement = con.createStatement();
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMER(CUSTOMERID INT PRIMARY KEY NOT NULL, CUSTOMER_NAME VARCHAR(50), COUNTRY VARCHAR(50), DATE_OF_BIRTH DATE);");
+            con.prepareStatement("INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (1,'Xolisani','South Africa', '2002-11-15');");
             prpstmt = con.prepareStatement("select * from CUSTOMER where customerId = ?");
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
