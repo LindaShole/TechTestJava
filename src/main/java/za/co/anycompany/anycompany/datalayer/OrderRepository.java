@@ -53,4 +53,9 @@ public class OrderRepository {
         }
         return dbConnection;
     }
+
+    public Order findById(Integer id) {
+        Order order = new Order();
+        return order;
+    }
 }
