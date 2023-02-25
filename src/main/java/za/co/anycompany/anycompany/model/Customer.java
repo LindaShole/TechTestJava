@@ -7,18 +7,20 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
-@Entity
+//@Entity
 @Table
 public class Customer {
     @Id
     @Column
-    private int customerid;
+    private int id;
     @Column
     private String name;
     @Column
     private String country;
     @Column
     private Date dateOfBirth;
+   /* @jakarta.persistence.Id
+    private Long id;*/
 
     public String getName() {
         return name;
@@ -29,11 +31,11 @@ public class Customer {
     }
 
     public int getCustomerid() {
-        return customerid;
+        return id;
     }
 
     public void setCustomerid(int customerid) {
-        this.customerid = customerid;
+        this.id = customerid;
     }
 
     public String getCountry() {
@@ -51,4 +53,12 @@ public class Customer {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+/*
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    } */
 }

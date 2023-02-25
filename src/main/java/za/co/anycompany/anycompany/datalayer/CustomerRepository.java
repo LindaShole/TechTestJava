@@ -30,7 +30,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
             while (resultSet.next()) {
-                customer.setName(resultSet.getString("NAME"));
+                customer.setName(resultSet.getString("CUSTOMER_NAME"));
                 customer.setCountry(resultSet.getString("COUNTRY"));
                 customer.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH"));
             }
@@ -91,6 +91,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
 
     @Override
     public Iterable<Customer> findAll() {
+        Customer customer = new Customer();
         return null;
     }
 

@@ -10,8 +10,13 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-    @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerRepository customerRepository = new CustomerRepository();
+/*
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
+
+ */
 //    private Customer customer;
 
     public List<Customer> getAllCustomers() {
@@ -34,5 +39,9 @@ public class CustomerService {
 
     public void update(Customer customer, int id){
         customerRepository.save(customer);
+    }
+
+    public Customer getCustomerByIdTest(int id){
+        return customerRepository.load(id);
     }
 }

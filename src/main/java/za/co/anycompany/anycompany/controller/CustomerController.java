@@ -34,6 +34,13 @@ public class CustomerController {
     }
 
     //http://localhost:8080/customers/{id}
+    @GetMapping("/customers/test/{id}")
+    private Customer getCustomerTest(@PathVariable int id){
+        return customerService.getCustomerByIdTest(id);
+    }
+
+
+    //http://localhost:8080/customers/{id}
     @DeleteMapping("/customers/{id}")
     private void deleteCustomer(@PathVariable int id){
         customerService.delete(id);
