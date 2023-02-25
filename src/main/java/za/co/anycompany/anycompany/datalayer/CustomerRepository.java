@@ -30,6 +30,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
             while (resultSet.next()) {
+                customer.setId(Integer.parseInt(resultSet.getString("CUSTOMERID")));
                 customer.setName(resultSet.getString("CUSTOMER_NAME"));
                 customer.setCountry(resultSet.getString("COUNTRY"));
                 customer.setDateOfBirth(resultSet.getDate("DATE_OF_BIRTH"));

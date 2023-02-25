@@ -53,12 +53,12 @@ public class Customer {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-/*
-    public void setId(Long id) {
+
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
-    } */
+    }
 }
