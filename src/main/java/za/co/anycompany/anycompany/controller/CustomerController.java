@@ -1,8 +1,9 @@
 package za.co.anycompany.anycompany.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.server.ResponseStatusException;
 import za.co.anycompany.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.anycompany.datalayer.OrderRepository;
@@ -12,7 +13,7 @@ import za.co.anycompany.anycompany.service.CustomerService;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -23,20 +24,21 @@ public class CustomerController {
 
     // http://localhost:8080/customers
     @GetMapping("/customers")
-    private List<Customer> getAllCustomers() throws Exception{
-        return customerService.getAllCustomers();
+    private String getAllCustomers() throws Exception{
+        //return customerService.getAllCustomers();
+        return "customers";
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
     private Customer getCustomer(@PathVariable int id){
-        return customerService.getCustomerById(id);
+        return customerService.getCustomerByIdTest(id);
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/test/{id}")
     private Customer getCustomerTest(@PathVariable int id){
-        return customerService.getCustomerByIdTest(id);
+        return customerService.getCustomerById(id);
     }
 
 
