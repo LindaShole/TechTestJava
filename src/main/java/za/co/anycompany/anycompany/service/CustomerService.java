@@ -25,7 +25,7 @@ public class CustomerService {
         return customers;
     }
 
-    public Customer getCustomerById(int id) {
+    public Customer getCustomerByIdTest(int id) {
         return customerRepository.findById(id).get();
     }
 
@@ -41,7 +41,7 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public Customer getCustomerByIdTest(int id){
+    public Customer getCustomerById(int id){
         return customerRepository.load(id);
     }
 }

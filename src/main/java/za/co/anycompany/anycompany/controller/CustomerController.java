@@ -26,13 +26,15 @@ public class CustomerController {
     @GetMapping("/customers")
     private String getAllCustomers() throws Exception{
         //return customerService.getAllCustomers();
-        return "customers";
+        return "customers"; // return form
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
-    private Customer getCustomer(@PathVariable int id){
-        return customerService.getCustomerByIdTest(id);
+    private String getCustomer(@PathVariable int id){
+        // Customer
+        //return customerService.getCustomerById(id);
+        return "customer"; // return form
     }
 
     //http://localhost:8080/customers/{id}
