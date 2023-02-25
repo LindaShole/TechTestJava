@@ -7,8 +7,9 @@ import java.sql.*;
 public class OrderRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:~\\Azure\\Java_DEV\\TechTestJava\\src\\main\\resources\\testdb;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
+    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
+    //private static final String DB_CONNECTION = "jdbc:h2:~\\Azure\\Java_DEV\\TechTestJava\\src\\main\\resources\\testdb;DB_CLOSE_DELAY=-1";
+    private static final String DB_USER = "sa";
     private static final String DB_PASSWORD = "";
 
     public void save(Order order) {
