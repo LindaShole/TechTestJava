@@ -1,14 +1,16 @@
 package za.co.anycompany.anycompany.model;
 
-import jakarta.persistence.Entity;
+//import jakarta.persistence.Entity;
+import javax.persistence.Entity;
+//import javax.persistence.Id;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
-//@Entity
-@Table
+@Entity
+@Table("CUSTOMER")
 public class Customer {
     @Id
     @Column

@@ -1,5 +1,6 @@
 package za.co.anycompany.anycompany.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,14 +9,26 @@ import za.co.anycompany.anycompany.service.CustomerService;
 
 import java.sql.ResultSet;
 import java.util.List;
+import org.springframework.ui.Model;
 
 @RestController
+@RequestMapping("/customers")
 public class CustomerController {
     @Autowired
     CustomerService customerService;
 
     public CustomerController(CustomerService customerService){
         this.customerService = customerService;
+    }
+
+    // Test
+    @Value("${spring.application.name}")
+    String appName;
+
+    @GetMapping("/home")
+    public String homePage(Model model) {
+        model.addAttribute("appName", appName);
+        return "home";
     }
 
     // http://localhost:8080/customers

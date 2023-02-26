@@ -1,13 +1,16 @@
 package za.co.anycompany.anycompany.datalayer;
 
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import za.co.anycompany.anycompany.model.Customer;
 
 import java.sql.*;
+import java.util.List;
 import java.util.Optional;
 
-
+@Repository
 public class CustomerRepository implements CrudRepository<Customer, Integer> {
 
     private static final String DB_DRIVER = "org.h2.Driver";
@@ -15,6 +18,11 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
     //  private static final String DB_CONNECTION = "jdbc:h2:~\\Azure\\Java_DEV\\TechTestJava\\src\\main\\resources\\testdb;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "sa";
     private static final String DB_PASSWORD = "";
+
+    /* //List<Customer> findAll();
+        @Query(value = "SELECT * FROM CUSTOMER");
+    Optional<List<Customer>> test(String tester);*/
+
 
     public static Customer load(int customerId) {
         Connection con = getDBConnection();
@@ -52,6 +60,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
         }
         return customer;
     }
+
 
 
     private static Connection getDBConnection() {
@@ -92,26 +101,9 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
 
     @Override
     public Iterable<Customer> findAll() {
-        Connection con = getDBConnection();
-        ResultSet[] resultSets = null;
-       // Customer customer = new Customer();
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                    "select * from CUSTOMER"
-            );
-            resultSets[0] = statement.executeQuery();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (con != null)
-                    con.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-       // return Collections.singleton(customer);
+
         return null;
+
     }
 
     @Override
