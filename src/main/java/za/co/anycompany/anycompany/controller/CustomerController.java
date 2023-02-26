@@ -1,19 +1,15 @@
 package za.co.anycompany.anycompany.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.server.ResponseStatusException;
-import za.co.anycompany.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
 import za.co.anycompany.anycompany.service.CustomerService;
 
+import java.sql.ResultSet;
 import java.util.List;
 
-@Controller
+@RestController
 public class CustomerController {
     @Autowired
     CustomerService customerService;
@@ -24,17 +20,18 @@ public class CustomerController {
 
     // http://localhost:8080/customers
     @GetMapping("/customers")
-    private String getAllCustomers() throws Exception{
-        //return customerService.getAllCustomers();
-        return "customers"; // return form
+    private List<Customer> getAllCustomers() throws Exception{
+        ResultSet resultsSet=null;
+        return customerService.getAllCustomers();
+     //   return "customers"; // return form
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
-    private String getCustomer(@PathVariable int id){
+    private Customer getCustomer(@PathVariable int id){
         // Customer
-        //return customerService.getCustomerById(id);
-        return "customer"; // return form
+        return customerService.getCustomerById(id);
+       // return "customer.html"; // return form
     }
 
     //http://localhost:8080/customers/{id}

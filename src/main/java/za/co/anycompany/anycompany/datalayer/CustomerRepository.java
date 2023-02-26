@@ -92,7 +92,25 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
 
     @Override
     public Iterable<Customer> findAll() {
-        Customer customer = new Customer();
+        Connection con = getDBConnection();
+        ResultSet[] resultSets = null;
+       // Customer customer = new Customer();
+        try {
+            PreparedStatement statement = con.prepareStatement(
+                    "select * from CUSTOMER"
+            );
+            resultSets[0] = statement.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (con != null)
+                    con.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+       // return Collections.singleton(customer);
         return null;
     }
 

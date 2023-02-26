@@ -1,10 +1,10 @@
 package za.co.anycompany.anycompany.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import za.co.anycompany.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.anycompany.model.Customer;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
