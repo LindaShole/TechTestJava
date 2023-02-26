@@ -14,7 +14,7 @@ import java.util.Map;
 @Service
 public class OrderService {
 
-    private Map<Integer, Order> db = new HashMap<>(){{
+   private Map<Integer, Order> db = new HashMap<>(){{
         put(1, new Order(1, 200.00, 1.15));
     }};
     private OrderRepository orderRepository = new OrderRepository();
@@ -38,6 +38,7 @@ public class OrderService {
 
     public Order get(Integer id) {
         return db.get(id);
+      //  return orderRepository.findById(id);
     }
 
     public Collection<Order> get() {

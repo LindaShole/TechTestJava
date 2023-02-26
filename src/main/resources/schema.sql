@@ -7,10 +7,11 @@ CREATE TABLE IF NOT EXISTS CUSTOMER(
 
 
 CREATE TABLE IF NOT EXISTS ORDERS (
-    oderId int primary key not null,
+    orderId int primary key not null,
     amount number(10,2),
-    vat number (3,1)
-    --foreign key (CUSTOMERID) references CUSTOMER(CUSTOMERID)
+    vat number (3,1),
+    customerid int,
+    foreign key (CUSTOMERID) references CUSTOMER(CUSTOMERID)
 );
 
 --INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (1,'Xolisani','South Africa', '2002-11-15');
@@ -20,6 +21,14 @@ INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES 
 INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (4,'Judith','SA', '2005-05-01');
 INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (5,'Ashal','UK', '1999-02-14');
 INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (6,'Linda','SA', '2000-08-30');
+INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (7,'Jacob','MAU', '1991-05-01');
+INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (8,'Neal','UK', '1993-02-14');
+INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (9,'Umesh','SA', '1994-04-27');
 commit ;
+
+insert into orders(orderId, amount, vat, customerid) values (1, 799.95, 1.15, 2);
+insert into orders(orderId, amount, vat, customerid) values (2, 69.75, 2.00, 3);
+insert into orders(orderId, amount, vat, customerid) values (3, 399.00, 1.5, 9);
+commit;
 
 -- --AUTO_INCREMENT
