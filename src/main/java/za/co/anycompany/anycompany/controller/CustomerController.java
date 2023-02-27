@@ -80,19 +80,19 @@ public class CustomerController {
     }
 
 
-    //http://localhost:8080/customers/{id}
+    // 4. http://localhost:8080/customers/{id}
     @DeleteMapping("/customers/{id}")
     private void deleteCustomer(@PathVariable int id){
         customerService.delete(id);
     }
 
-    // http://localhost:8080/customers
+    // 5. http://localhost:8080/customers
     @PostMapping("/customers")
     private int saveCustomer(@RequestBody Customer customer){
         return  customer.getCustomerid();
     }
 
-    // http://localhost:8080/customers
+    // 6. http://localhost:8080/customers
     @PutMapping("/customers")
     private Customer update(@RequestBody Customer customer){
         customerService.saveOrUpdate(customer);

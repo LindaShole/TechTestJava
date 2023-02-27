@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import za.co.anycompany.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.anycompany.model.Customer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
