@@ -1,14 +1,14 @@
 package za.co.anycompany.anycompany.model;
 
-import jakarta.persistence.Entity;
+import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.Date;
 
-//@Entity
-@Table
+@Entity
+@Table("CUSTOMER")
 public class Customer {
     @Id
     @Column
@@ -19,8 +19,6 @@ public class Customer {
     private String country;
     @Column
     private Date dateOfBirth;
-   /* @jakarta.persistence.Id
-    private Long id;*/
 
     public String getName() {
         return name;

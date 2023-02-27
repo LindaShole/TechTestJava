@@ -1,21 +1,46 @@
 package za.co.anycompany.anycompany.datalayer;
 
-
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 import za.co.anycompany.anycompany.model.Customer;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-
+@Repository
 public class CustomerRepository implements CrudRepository<Customer, Integer> {
 
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    //  private static final String DB_CONNECTION = "jdbc:h2:~\\Azure\\Java_DEV\\TechTestJava\\src\\main\\resources\\testdb;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "sa";
     private static final String DB_PASSWORD = "";
 
+    // Get the Customers with orders
+    public static List<Customer> getAll() {
+        List<Customer> customers = new ArrayList<Customer>();
+        Customer customer = new Customer();
+        Connection con = getDBConnection();
+        try {
+            Statement s = con.createStatement();
+            String select = "select customerid, customer_name, country FROM customer a";
+            ResultSet rows;
+            rows = s.executeQuery(select);
+            while (rows.next()) {
+                customer.setId(rows.getInt(1));
+                customer.setName(rows.getString(2));
+                customer.setCountry(rows.getString(3));
+                customers.add(customer);
+            }
+            return customers;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    // Load customer with specified Id
     public static Customer load(int customerId) {
         Connection con = getDBConnection();
         PreparedStatement prpstmt = null;
@@ -91,28 +116,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
     }
 
     @Override
-    public Iterable<Customer> findAll() {
-        Connection con = getDBConnection();
-        ResultSet[] resultSets = null;
-       // Customer customer = new Customer();
-        try {
-            PreparedStatement statement = con.prepareStatement(
-                    "select * from CUSTOMER"
-            );
-            resultSets[0] = statement.executeQuery();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (con != null)
-                    con.close();
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-       // return Collections.singleton(customer);
-        return null;
-    }
+    public Iterable<Customer> findAll() {return null;}
 
     @Override
     public Iterable<Customer> findAllById(Iterable<Integer> integers) {
