@@ -69,6 +69,17 @@
                 </button>
             </form>
             <!-- Form end -->
+            <p>Welcome to <span th:text="${appName}">appName</span></p>
+            <div class="alert alert-danger" role="alert">
+                <b>
+                    [<span th:text="${name}">Boring </span>]
+                    <span th:text="${country}">country</span>
+                </b>
+                <p th:text="${id}"></p>
+                <p th:text="${name}">name</p>
+                <p th:text="${country}">country</p>
+                <p>Orders for  <a th:href="@{/customers/(id=${id})}"><span th:text="${name}">name</span></a></p>
+            </div>
         </div>
     </div>
 </div>

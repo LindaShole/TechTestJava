@@ -5,11 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.service.CustomerService;
 
-import java.util.List;
 import org.springframework.ui.Model;
 
-@RestController
-//@RequestMapping("/customers")
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+@Controller
+
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -27,18 +33,31 @@ public class CustomerController {
         return "home";
     }
 
+    @GetMapping("/greeting")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+
     // http://localhost:8080/customers
     @GetMapping("/customers") // customers with orders
+
     private List<Customer> getAllCustomers() throws Exception{
+        //List<Customer>
          return customerService.getAllCustomers();
-     //   return "customers"; // return form
+     //   return "customers"; //
+     //      return "home";
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
-    private Customer getCustomer(@PathVariable int id){
-        return customerService.getCustomerById(id);
-       // return "customer.html"; // return form
+    private String getCustomer(@PathVariable int id, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
+
+        //model.addAttribute("name", name);
+        Customer customer = customerService.getCustomerById(id);
+        model.addAttribute("name", customer.getName());
+        model.addAttribute("country", customer.getCountry());
+        return "customer"; // return form
     }
 
     //http://localhost:8080/customers/test/{id}
