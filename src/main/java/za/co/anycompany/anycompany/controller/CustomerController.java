@@ -52,28 +52,28 @@ public class CustomerController {
         return "index";
     }
 
-    // http://localhost:8080/customers
+    /* // http://localhost:8080/customers
     @GetMapping("/customers") // customers with orders
 
     private String getAllCustomers() throws Exception{
         //List<Customer>
         List<Customer> customers = customerService.getAllCustomers();
-     //   return "customers"; //
-           return "index";
-    }
+        return "customers"; //
+      //     return "index";
+    }*/
 
-    //http://localhost:8080/customers/{id}
+    // 2. http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
     private String getCustomer(@PathVariable int id, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
-
         //model.addAttribute("name", name);
         Customer customer = customerService.getCustomerById(id);
         model.addAttribute("name", customer.getName());
         model.addAttribute("country", customer.getCountry());
+        model.addAttribute("date_of_birth", customer.getDateOfBirth());
         return "customer"; // return form
     }
 
-    //http://localhost:8080/customers/test/{id}
+    // 3. http://localhost:8080/customers/test/{id}
     @GetMapping("/customers/test/{id}")
     private Customer getCustomerTest(@PathVariable int id){
         return customerService.getCustomerById(id);
