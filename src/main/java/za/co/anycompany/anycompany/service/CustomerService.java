@@ -12,9 +12,7 @@ public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
 
     public List<Customer> getAllCustomers() {
-        List<Customer> allCustomers = new ArrayList<>();
-        allCustomers = customerRepository.getAll();
-
+        List<Customer> allCustomers = customerRepository.getAll();
         return allCustomers;
     }
 

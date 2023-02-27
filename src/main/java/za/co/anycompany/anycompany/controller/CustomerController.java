@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,20 +34,32 @@ public class CustomerController {
         return "home";
     }
 
-    @GetMapping("/greeting")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        model.addAttribute("name", name);
-        return "greeting";
+    // 1.  http://localhost:8080/home
+    @GetMapping("/home")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        List<Integer> ids = new ArrayList<>();
+        for(Customer customer : customers) {
+            model.addAttribute("id", customer.getId());
+            model.addAttribute("name", customer.getName());
+            model.addAttribute("country", customer.getCountry());
+            ids.add(customer.getId());
+        }
+       // Customer customer = customers.get(0);
+        model.addAttribute("ids", ids);
+        model.addAttribute("appName", appName);
+
+        return "index";
     }
 
     // http://localhost:8080/customers
     @GetMapping("/customers") // customers with orders
 
-    private List<Customer> getAllCustomers() throws Exception{
+    private String getAllCustomers() throws Exception{
         //List<Customer>
-         return customerService.getAllCustomers();
+        List<Customer> customers = customerService.getAllCustomers();
      //   return "customers"; //
-     //      return "home";
+           return "index";
     }
 
     //http://localhost:8080/customers/{id}

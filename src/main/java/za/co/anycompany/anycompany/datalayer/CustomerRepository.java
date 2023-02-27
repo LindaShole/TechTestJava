@@ -24,7 +24,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
         Connection con = getDBConnection();
         try {
             Statement s = con.createStatement();
-            String select = "select a.customerid, a.customer_name, a.country, b.amount, b.vat " + "FROM customer a" + " INNER JOIN orders b ON a.customerid=b.customerid";
+            String select = "select customerid, customer_name, country FROM customer a";
             ResultSet rows;
             rows = s.executeQuery(select);
             while (rows.next()) {
