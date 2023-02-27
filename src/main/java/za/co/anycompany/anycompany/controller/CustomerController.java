@@ -2,20 +2,16 @@ package za.co.anycompany.anycompany.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.service.CustomerService;
 
-import java.sql.ResultSet;
 import java.util.List;
 import org.springframework.ui.Model;
 
 @RestController
-@RequestMapping("/customers")
+//@RequestMapping("/customers")
 public class CustomerController {
-    @Autowired
-    CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(CustomerService customerService){
         this.customerService = customerService;
@@ -25,29 +21,27 @@ public class CustomerController {
     @Value("${spring.application.name}")
     String appName;
 
-    @GetMapping("/home")
+    @GetMapping("/customers/home")
     public String homePage(Model model) {
         model.addAttribute("appName", appName);
         return "home";
     }
 
     // http://localhost:8080/customers
-    @GetMapping("/customers")
+    @GetMapping("/customers") // customers with orders
     private List<Customer> getAllCustomers() throws Exception{
-        ResultSet resultsSet=null;
-        return customerService.getAllCustomers();
+         return customerService.getAllCustomers();
      //   return "customers"; // return form
     }
 
     //http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
     private Customer getCustomer(@PathVariable int id){
-        // Customer
         return customerService.getCustomerById(id);
        // return "customer.html"; // return form
     }
 
-    //http://localhost:8080/customers/{id}
+    //http://localhost:8080/customers/test/{id}
     @GetMapping("/customers/test/{id}")
     private Customer getCustomerTest(@PathVariable int id){
         return customerService.getCustomerById(id);
@@ -72,17 +66,4 @@ public class CustomerController {
         customerService.saveOrUpdate(customer);
         return customer;
     }
-
-/*
-    @GetMapping("/customer/{id}")
-    public Customer getCustomerById(@PathVariable int id) throws Exception{
-        return customerService.findById(id);
-    }
-
-    @GetMapping("/customer/{id}")
-    public Customer get(@PathVariable int id){
-        Customer customer = customerService.get(id);
-        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return order;
-    } */
 }

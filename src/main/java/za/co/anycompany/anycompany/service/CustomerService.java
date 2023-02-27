@@ -4,25 +4,18 @@ import org.springframework.stereotype.Service;
 import za.co.anycompany.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.anycompany.model.Customer;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
-/*
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
-
- */
-//    private Customer customer;
 
     public List<Customer> getAllCustomers() {
-        List<Customer> customers = new ArrayList<Customer>();
-        customerRepository.findAll().forEach(customers1 -> customers.add(customers1));
-        return customers;
+        List<Customer> allCustomers = new ArrayList<>();
+        allCustomers = customerRepository.getAll();
+
+        return allCustomers;
     }
 
     public Customer getCustomerByIdTest(int id) {
