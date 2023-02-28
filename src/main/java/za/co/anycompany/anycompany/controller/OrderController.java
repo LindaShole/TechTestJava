@@ -2,14 +2,17 @@ package za.co.anycompany.anycompany.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.model.Order;
 import za.co.anycompany.anycompany.service.OrderService;
 
 import java.util.*;
 
-@RestController
+@Controller
 public class OrderController {
     private final OrderService orderService;
 
@@ -17,16 +20,25 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping("/")
-    public String hello(){
-        return "Hello Xolisani";
-    }
-
+    // 1. http://localhost:8081/orders
     @GetMapping("/orders")
-    public Collection<Order> get(){
-        return orderService.get();
+    public String get(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
+        List<Order> orders = orderService.getAllOrders();
+        List<Integer> ids = new ArrayList<>();
+        for(Order order : orders) {
+            model.addAttribute("id", order.getOrderId());
+            model.addAttribute("amount", order.getAmount());
+            model.addAttribute("VAT", order.getVAT());
+            model.addAttribute("customerid", order.getCustomerId());
+            ids.add(order.getOrderId());
+        }
+        //return orderService.get();
+        model.addAttribute("ids", ids);
+        //model.addAttribute("appName", appName);
+        return "orders";
     }
 
+    // 2. http://localhost:8081/orders/{id}
     @GetMapping("/orders/{id}")
     public Order get(@PathVariable int id){
         Order order = orderService.get(id);
@@ -34,12 +46,14 @@ public class OrderController {
         return order;
     }
 
+    // 3. http://localhost:8081/orders/{id}
     @DeleteMapping("/orders/{id}")
     public void delete(@PathVariable Integer id){
         Order order = orderService.remove(id);
         if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    // 4. http://localhost:8081/orders
     @PostMapping("/orders")
     public Order create(@RequestBody Order order){ //@Valid
         order.setOrderId(Integer.parseInt(UUID.randomUUID().toString()));
@@ -47,10 +61,11 @@ public class OrderController {
         return order;
     }
 
+    // 5. http://localhost:8081/orders/{id}  *test the POST HERE*
     @PostMapping("/myorders")
     public void placeOrder(@RequestBody Order order){
-        orderService.placeOrder(order, 1);
+        order.setAmount(299);
+       // order.setCustomerId(11);
+        orderService.placeOrder(order, 11);
     }
-
-
 }

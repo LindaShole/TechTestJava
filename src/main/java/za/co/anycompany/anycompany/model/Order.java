@@ -9,6 +9,15 @@ public class Order {
     private int orderId;
     private double amount;
     private double VAT;
+    private int customerId;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public Order(int orderId, double amount, double VAT) {
         this.orderId = orderId;
