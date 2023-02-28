@@ -25,10 +25,10 @@
             </form -->
             <div class="container">
                 <div class="row">
-                    <h5 class="col-3" > Order Id </h5>
-                    <h5 class="col-3" > Value (R) </h5>
-                    <h5 class="col-3" > VAT </h5>
-                    <h5 class="col-3" > Customer Id </h5>
+                    <h5 class="col-3"> Order Id </h5>
+                    <h5 class="col-3"> Value (R) </h5>
+                    <h5 class="col-3"> VAT </h5>
+                    <h5 class="col-3"> Customer Id </h5>
                 </div>
 
                 <th:block th:each="id: ${ids}">
@@ -36,7 +36,7 @@
                         <!-- a th:href="@{/customers/(id=${id})}"> Customer Id  [[${id}]] </a> <br/ -->
                         <p class="col-3" th:text="${id}"> Order Id </p>
                         <p class="col-3" th:text="${amount}"> Value (R) </p>
-                        <p class="col-3" th:text="${VAT}">  VAT </p>
+                        <p class="col-3" th:text="${VAT}"> VAT </p>
                         <p class="col-3" th:text="${customerid}"> Customer Id </p>
                     </div>
                 </th:block>
