@@ -9,6 +9,7 @@ import za.co.anycompany.anycompany.model.Order;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -52,5 +53,10 @@ public class OrderService {
     public Order save(int orderId, Order order) {
 
         return order;
+    }
+
+    public List<Order> getAllOrders() {
+        List<Order> allOrders = orderRepository.getAll();
+        return allOrders;
     }
 }
