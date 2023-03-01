@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Order App | Order </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
@@ -10,37 +10,37 @@
     <div class="row align-items-center alert alert-info" style="height: 100vh;">
         <div class="mx-auto col-10 col-md-8 col-lg-6 border border-primary">
             <h1>Order Summary</span></h1>
-            <p>The Details about the order are summarised below</p>
+            <p>Your order has been placed.</p>
             <div class="row">
                 <div class="col-3">
                     Order ID
                 </div>
                 <div class="col-9">
-                    <p th:text="${orderId}">orderId</p>
+                    <p th:text="${order.orderId}">orderId</p>
                 </div>
                 <div class="col-3">
                     Order Value (R)
                 </div>
                 <div class="col-9">
-                    <p th:text="${amount}">amount</p>
+                    <p th:text="${order.amount}">amount</p>
                 </div>
                 <div class="col-3">
                     VAT
                 </div>
                 <div class="col-9">
-                    <span th:text="${VAT}">VAT</span>
+                    <span th:text="${order.VAT}">VAT</span>
                 </div>
                 <div class="col-3">
                     Customer ID
                 </div>
                 <div class="col-9">
-                    <span th:text="${customerId}">customerId</span>
+                    <span th:text="${order.customerId}">customerId</span>
                 </div>
             </div>
             <div class="row mx-2 py-3">
                 <p class="btn btn-primary btn-lg btn-block">Ordered by <a class="text-dark"
-                                                                          th:href="@{/customers/(${customerId})}"><span
-                        th:text="${customerId}">customerId</span></a></p>
+                                                                          th:href="@{/customers/(${order.customerId})}"><span
+                        th:text="${order.customerId}">customerId</span></a></p>
             </div>
         </div>
     </div>

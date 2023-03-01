@@ -57,32 +57,52 @@ public class OrderRepository {
     }
 
     public Order findById(Integer id) {
-        Order order = new Order();
+       Order order = new Order();
+
+        Connection connection = getDBConnection();
+        PreparedStatement prpstmt = null;
+        ResultSet resultSet = null;
+        try {
+            Statement statement = connection.createStatement();
+          //  String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
+            prpstmt = connection.prepareStatement("select orderId, amount, VAT, customerId from ORDERS where orderId = ?");
+            prpstmt.setInt(1, id);
+            resultSet = prpstmt.executeQuery();
+
+            while (resultSet.next()) {
+                order.setOrderId(resultSet.getInt(1));
+                order.setAmount(resultSet.getDouble(2)) ;
+                order.setVAT(resultSet.getDouble(3));
+                order.setCustomerId(resultSet.getInt(4));
+            }
+
+            return order;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return order;
     }
 
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<Order>();
-        Order order = new Order();
+   //     Order order = new Order();
         Connection connection = getDBConnection();
         try {
             Statement statement = connection.createStatement();
-            String select = "Select orderId, amount, VAT, customerId from ORDERS";
-            //statement.executeUpdate("CREATE TABLE ORDERS (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            //connection.prepareStatement("INSERT INTO ORDERS(oderId, amount, vat) VALUES(?,?,?)");
-            //preparedStatement.setInt(1, order.getOrderId());
-            //preparedStatement.setDouble(2, order.getAmount());
-            //preparedStatement.setDouble(3, order.getVAT());
-            //preparedStatement.executeUpdate();
+            String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
             ResultSet rows;
             rows = statement.executeQuery(select);
             while (rows.next()) {
-                order.setCustomerId(rows.getInt(1));
+                Order order = new Order();
+                order.setOrderId(rows.getInt(1));
                 order.setAmount(rows.getDouble(2)) ;
                 order.setVAT(rows.getDouble(3));
                 order.setCustomerId(rows.getInt(4));
-                orders.add(order);
+                orders.add(order); //orders.size() ,
+                System.out.println(orders);
             }
+
             return orders;
 
         } catch (SQLException e) {

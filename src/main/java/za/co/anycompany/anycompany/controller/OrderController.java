@@ -24,26 +24,25 @@ public class OrderController {
     @GetMapping("/orders")
     public String get(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
         List<Order> orders = orderService.getAllOrders();
-        List<Integer> ids = new ArrayList<>();
-        for(Order order : orders) {
-            model.addAttribute("id", order.getOrderId());
-            model.addAttribute("amount", order.getAmount());
-            model.addAttribute("VAT", order.getVAT());
-            model.addAttribute("customerid", order.getCustomerId());
-            ids.add(order.getOrderId());
-        }
-        //return orderService.get();
-        model.addAttribute("ids", ids);
-        //model.addAttribute("appName", appName);
+        model.addAttribute("orders", orders);
+
         return "orders";
     }
 
     // 2. http://localhost:8081/orders/{id}
     @GetMapping("/orders/{id}")
-    public Order get(@PathVariable int id){
+    public String get(@PathVariable int id, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
+        //model.addAttribute("name", name);
+        Order order = orderService.getOrderById(id);
+        model.addAttribute("orderId", order.getOrderId());
+        model.addAttribute("amount", order.getAmount());
+        model.addAttribute("VAT", order.getVAT());
+        model.addAttribute("customerId", order.getCustomerId());
+       /* return "customer"; // return form
+
         Order order = orderService.get(id);
-        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        return order;
+        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);*/
+        return "order";
     }
 
     // 3. http://localhost:8081/orders/{id}
@@ -53,12 +52,42 @@ public class OrderController {
         if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    // 4. http://localhost:8081/orders
+    // 4.0. http://localhost:8081/order "get the form"
+    @GetMapping("/order")
+    public String orderHere(Model model){
+        // get one order
+        Order order = new Order();
+        model.addAttribute("order", order);
+
+        // get all order
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
+
+        return "place";
+    }
+
+    // 4.1 http://localhost:8081/orders
     @PostMapping("/orders")
-    public Order create(@RequestBody Order order){ //@Valid
-        order.setOrderId(Integer.parseInt(UUID.randomUUID().toString()));
-        orderService.save(order.getOrderId(), order);
-        return order;
+    public String create(@RequestBody Order order){ //@Valid
+        //int customerId = order.getCustomerId();
+
+        order.setAmount(1165.36);
+        order.setOrderId(4);
+        //Integer.parseInt(UUID.randomUUID().toString())
+        orderService.placeOrder( order, 11);
+        return "orders";
+    }
+
+    // 4.1 http://localhost:8081/orders
+    @PostMapping("/order")
+    public String orderPlaced(@ModelAttribute("order") Order order){ //@Valid
+        //int customerId = order.getCustomerId();
+
+     //   order.setAmount(1165.36);
+     //   order.setOrderId(4);
+        //Integer.parseInt(UUID.randomUUID().toString())
+   //     orderService.placeOrder( order, 11);
+        return "ordered";
     }
 
     // 5. http://localhost:8081/orders/{id}  *test the POST HERE*
