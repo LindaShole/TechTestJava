@@ -57,7 +57,30 @@ public class OrderRepository {
     }
 
     public Order findById(Integer id) {
-        Order order = new Order();
+       Order order = new Order();
+
+        Connection connection = getDBConnection();
+        PreparedStatement prpstmt = null;
+        ResultSet resultSet = null;
+        try {
+            Statement statement = connection.createStatement();
+          //  String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
+            prpstmt = connection.prepareStatement("select orderId, amount, VAT, customerId from ORDERS where orderId = ?");
+            prpstmt.setInt(1, id);
+            resultSet = prpstmt.executeQuery();
+
+            while (resultSet.next()) {
+                order.setOrderId(resultSet.getInt(1));
+                order.setAmount(resultSet.getDouble(2)) ;
+                order.setVAT(resultSet.getDouble(3));
+                order.setCustomerId(resultSet.getInt(4));
+            }
+
+            return order;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
         return order;
     }
 

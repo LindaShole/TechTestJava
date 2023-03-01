@@ -50,12 +50,9 @@ public class OrderService {
         return db.remove(id);
     }
 
-    public Order save(int orderId, Order order) {
+    public Order save(int orderId, Order order) {return order;}
 
-        return order;
-    }
+    public List<Order> getAllOrders() {return orderRepository.getAll();}
 
-    public List<Order> getAllOrders() {
-        return orderRepository.getAll();
-    }
+    public Order getOrderById(int id) {return orderRepository.findById(id);}
 }

@@ -1,24 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Place Order</title>
+    <title>Order App | Order </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
-
-
-<h1>Place Your Order</h1>
-
-<input id="amount" type="text">
-<input id="vat" type="text">
-<button id="submit-button" onclick="saveOrder()">Place Order</button>
-
-<script>
-    async function saveOrder() {
-        let formData = new formData();
-        formData.append("data",);
-    }
-</script>
+<div>
+    <div class="row align-items-center alert alert-info" style="height: 100vh;">
+        <div class="mx-auto col-10 col-md-8 col-lg-6 border border-primary">
+            <h1>Order Summary</span></h1>
+            <p>The Details about the order are summarised below</p>
+            <div class="row">
+                <div class="col-3">
+                    Order ID
+                </div>
+                <div class="col-9">
+                    <p th:text="${orderId}">orderId</p>
+                </div>
+                <div class="col-3">
+                    Order Value (R)
+                </div>
+                <div class="col-9">
+                    <p th:text="${amount}">amount</p>
+                </div>
+                <div class="col-3">
+                    VAT
+                </div>
+                <div class="col-9">
+                    <span th:text="${VAT}">VAT</span>
+                </div>
+                <div class="col-3">
+                    Customer ID
+                </div>
+                <div class="col-9">
+                    <span th:text="${customerId}">customerId</span>
+                </div>
+            </div>
+            <div class="row mx-2 py-3">
+                <p class="btn btn-primary btn-lg btn-block">Ordered by <a class="text-dark"
+                                                                          th:href="@{/customers/(${customerId})}"><span
+                        th:text="${customerId}">customerId</span></a></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
