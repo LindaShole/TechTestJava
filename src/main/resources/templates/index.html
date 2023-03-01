@@ -17,13 +17,12 @@
                     <h5 class="col-4"> Customer Name </h5>
                     <h5 class="col-4"> Customer Region </h5>
                 </div>
-
-                <th:block th:each="id: ${ids}">
+                <th:block th:each="customer: ${customers}">
                     <div class="row">
                         <!-- a th:href="@{/customers/(id=${id})}"> Customer Id  [[${id}]] </a> <br/ -->
-                        <p class="col-4" th:text="${id}"> Customer Id </p>
-                        <p class="col-4" th:text="${name}"> Customer Name </p>
-                        <p class="col-4" th:text="${country}"> Customer Region </p>
+                        <p class="col-4" th:text="${customer.id}"> Customer Id </p>
+                        <p class="col-4" th:text="${customer.name}"> Customer Name </p>
+                        <p class="col-4" th:text="${customer.country}"> Customer Region </p>
                     </div>
                 </th:block>
             </div>

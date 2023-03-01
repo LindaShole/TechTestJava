@@ -11,8 +11,7 @@ public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
 
     public List<Customer> getAllCustomers() {
-        List<Customer> allCustomers = customerRepository.getAll();
-        return allCustomers;
+        return customerRepository.getAll();
     }
 
     public Customer getCustomerByIdTest(int id) {

@@ -32,15 +32,7 @@ public class CustomerController {
     @GetMapping("/home")
     public String getCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-        List<Integer> ids = new ArrayList<>();
-        for(Customer customer : customers) {
-            model.addAttribute("id", customer.getId());
-            model.addAttribute("name", customer.getName());
-            model.addAttribute("country", customer.getCountry());
-            ids.add(customer.getId());
-        }
-       // Customer customer = customers.get(0);
-        model.addAttribute("ids", ids);
+        model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
         return "index";
@@ -50,15 +42,8 @@ public class CustomerController {
     @GetMapping("/customers")
     public String getAllCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-        List<Integer> ids = new ArrayList<>();
-        for(Customer customer : customers) {
-            model.addAttribute("id", customer.getId());
-            model.addAttribute("name", customer.getName());
-            model.addAttribute("country", customer.getCountry());
-            ids.add(customer.getId());
-        }
-        // Customer customer = customers.get(0);
-        model.addAttribute("ids", ids);
+
+        model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
         return "index";

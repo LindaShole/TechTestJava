@@ -63,26 +63,23 @@ public class OrderRepository {
 
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<Order>();
-        Order order = new Order();
+   //     Order order = new Order();
         Connection connection = getDBConnection();
         try {
             Statement statement = connection.createStatement();
-            String select = "Select orderId, amount, VAT, customerId from ORDERS";
-            //statement.executeUpdate("CREATE TABLE ORDERS (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            //connection.prepareStatement("INSERT INTO ORDERS(oderId, amount, vat) VALUES(?,?,?)");
-            //preparedStatement.setInt(1, order.getOrderId());
-            //preparedStatement.setDouble(2, order.getAmount());
-            //preparedStatement.setDouble(3, order.getVAT());
-            //preparedStatement.executeUpdate();
+            String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
             ResultSet rows;
             rows = statement.executeQuery(select);
             while (rows.next()) {
-                order.setCustomerId(rows.getInt(1));
+                Order order = new Order();
+                order.setOrderId(rows.getInt(1));
                 order.setAmount(rows.getDouble(2)) ;
                 order.setVAT(rows.getDouble(3));
                 order.setCustomerId(rows.getInt(4));
-                orders.add(order);
+                orders.add(order); //orders.size() ,
+                System.out.println(orders);
             }
+
             return orders;
 
         } catch (SQLException e) {

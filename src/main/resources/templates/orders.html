@@ -13,16 +13,7 @@
             <p class="description">
                 The orders below show the full history.
             </p>
-            <!-- Form -->
-            <!--form class="form-example" action="http://localhost:8080/orders" method="post">
-            <div class="alert alert-danger" role="alert">
-                <p th:text="${id}"></p>
-                <p th:text="${amount}">name</p>
-                <p th:text="${VAT}">country</p>
-                <p th:text="${customerid}">customerid</p>
-                <p>Orders for  <a th:href="@{/orders/(id=${id})}"><span th:text="${amount}">amount</span></a></p>
-            </div>
-            </form -->
+
             <div class="container">
                 <div class="row">
                     <h5 class="col-3"> Order Id </h5>
@@ -31,13 +22,12 @@
                     <h5 class="col-3"> Customer Id </h5>
                 </div>
 
-                <th:block th:each="id: ${ids}">
+                <th:block th:each="order: ${orders}">
                     <div class="row">
-                        <!-- a th:href="@{/customers/(id=${id})}"> Customer Id  [[${id}]] </a> <br/ -->
-                        <p class="col-3" th:text="${id}"> Order Id </p>
-                        <p class="col-3" th:text="${amount}"> Value (R) </p>
-                        <p class="col-3" th:text="${VAT}"> VAT </p>
-                        <p class="col-3" th:text="${customerid}"> Customer Id </p>
+                        <p class="col-3" th:text="${order.orderId}"> Order Id </p>
+                        <p class="col-3" th:text="${order.amount}"> Value (R) </p>
+                        <p class="col-3" th:text="${order.VAT}"> VAT </p>
+                        <p class="col-3" th:text="${order.customerId}"> Customer Id </p>
                     </div>
                 </th:block>
             </div>

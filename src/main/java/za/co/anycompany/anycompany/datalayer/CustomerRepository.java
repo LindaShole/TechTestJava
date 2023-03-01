@@ -20,7 +20,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
     // Get the Customers with orders
     public static List<Customer> getAll() {
         List<Customer> customers = new ArrayList<Customer>();
-        Customer customer = new Customer();
+
         Connection con = getDBConnection();
         try {
             Statement s = con.createStatement();
@@ -28,9 +28,12 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
             ResultSet rows;
             rows = s.executeQuery(select);
             while (rows.next()) {
-                customer.setId(rows.getInt(1));
-                customer.setName(rows.getString(2));
-                customer.setCountry(rows.getString(3));
+                // user data to create customer
+                Customer customer = new Customer();
+                customer.setId(rows.getInt("customerid"));
+                customer.setName(rows.getString("customer_name"));
+                customer.setCountry(rows.getString("country"));
+                // save customer to list
                 customers.add(customer);
             }
             return customers;

@@ -24,17 +24,8 @@ public class OrderController {
     @GetMapping("/orders")
     public String get(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
         List<Order> orders = orderService.getAllOrders();
-        List<Integer> ids = new ArrayList<>();
-        for(Order order : orders) {
-            model.addAttribute("id", order.getOrderId());
-            model.addAttribute("amount", order.getAmount());
-            model.addAttribute("VAT", order.getVAT());
-            model.addAttribute("customerid", order.getCustomerId());
-            ids.add(order.getOrderId());
-        }
-        //return orderService.get();
-        model.addAttribute("ids", ids);
-        //model.addAttribute("appName", appName);
+        model.addAttribute("orders", orders);
+
         return "orders";
     }
 
