@@ -28,15 +28,9 @@ public class CustomerController {
     @Value("${spring.application.name}")
     String appName;
 
-    @GetMapping("/customers/home")
-    public String homePage(Model model) {
-        model.addAttribute("appName", appName);
-        return "home";
-    }
-
     // 1.  http://localhost:8080/home
     @GetMapping("/home")
-    public String greeting(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
+    public String getCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         List<Integer> ids = new ArrayList<>();
         for(Customer customer : customers) {
@@ -52,15 +46,23 @@ public class CustomerController {
         return "index";
     }
 
-    /* // http://localhost:8080/customers
-    @GetMapping("/customers") // customers with orders
-
-    private String getAllCustomers() throws Exception{
-        //List<Customer>
+    // 1.1 http://localhost:8080/customers // make same end-point
+    @GetMapping("/customers")
+    public String getAllCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-        return "customers"; //
-      //     return "index";
-    }*/
+        List<Integer> ids = new ArrayList<>();
+        for(Customer customer : customers) {
+            model.addAttribute("id", customer.getId());
+            model.addAttribute("name", customer.getName());
+            model.addAttribute("country", customer.getCountry());
+            ids.add(customer.getId());
+        }
+        // Customer customer = customers.get(0);
+        model.addAttribute("ids", ids);
+        model.addAttribute("appName", appName);
+
+        return "index";
+    }
 
     // 2. http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
