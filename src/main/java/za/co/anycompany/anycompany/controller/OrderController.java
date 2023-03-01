@@ -52,12 +52,42 @@ public class OrderController {
         if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
-    // 4. http://localhost:8081/orders
+    // 4.0. http://localhost:8081/order "get the form"
+    @GetMapping("/order")
+    public String orderHere(Model model){
+        // get one order
+        Order order = new Order();
+        model.addAttribute("order", order);
+
+        // get all order
+        List<Order> orders = orderService.getAllOrders();
+        model.addAttribute("orders", orders);
+
+        return "place";
+    }
+
+    // 4.1 http://localhost:8081/orders
     @PostMapping("/orders")
-    public Order create(@RequestBody Order order){ //@Valid
-        order.setOrderId(Integer.parseInt(UUID.randomUUID().toString()));
-        orderService.save(order.getOrderId(), order);
-        return order;
+    public String create(@RequestBody Order order){ //@Valid
+        //int customerId = order.getCustomerId();
+
+        order.setAmount(1165.36);
+        order.setOrderId(4);
+        //Integer.parseInt(UUID.randomUUID().toString())
+        orderService.placeOrder( order, 11);
+        return "orders";
+    }
+
+    // 4.1 http://localhost:8081/orders
+    @PostMapping("/order")
+    public String orderPlaced(@ModelAttribute("order") Order order){ //@Valid
+        //int customerId = order.getCustomerId();
+
+     //   order.setAmount(1165.36);
+     //   order.setOrderId(4);
+        //Integer.parseInt(UUID.randomUUID().toString())
+   //     orderService.placeOrder( order, 11);
+        return "ordered";
     }
 
     // 5. http://localhost:8081/orders/{id}  *test the POST HERE*
