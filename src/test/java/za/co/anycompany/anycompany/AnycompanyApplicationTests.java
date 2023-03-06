@@ -19,6 +19,10 @@ import static org.hamcrest.Matchers.containsInAnyOrder;
 class AnycompanyApplicationTests {
 	private CustomerRepository customerRepository = new CustomerRepository();
 	private OrderRepository orderRepository = new OrderRepository();
+
+	// REQ1 - Place an order, linked to a customer
+    // REQ2 - Retrieve a customer with their linked order(s)
+ 	// REQ3 - Load all customers and their linked orders
 	@Test
 	public void contextLoads() throws Exception{
 	}
