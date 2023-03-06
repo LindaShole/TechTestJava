@@ -4,11 +4,13 @@
     <title>Order App | Welcome</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script typpe="text/javascript" src="/js/main.js"></script>
 </head>
-<body>
+<body class="page">
 <div>
-    <div class="row align-items-center alert alert-info" style="height: 100vh;">
-        <div class="mx-auto col-10 col-md-8 col-lg-6 border border-primary">
+    <div class="row align-items-center" >
+        <div class="mx-auto col-10 col-md-8 col-lg-12">
             <h1>Customer Summary</span></h1>
             <p>Click the Link below to view all customer orders</p>
             <div class="row">
@@ -40,28 +42,13 @@
             </div>
             <div class="row mx-2 py-3">
                 <p class="btn btn-primary btn-lg btn-block">Orders for <a class="text-dark"
-                                                                          th:href="@{/customers/(id=${id})}"><span
+                                                                          th:href="@{/orders/customers/*(id=${id})}"><span
                         th:text="${name}">name</span></a></p>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    (async function createOrder() {
-        let order = {"amount": 999.95};
-
-        await fetch("http://localhost:8080/myorders", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(order)
-        })
-            .then(result => result.text())
-            .then(text => alert(text));
-    })();
 </script>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package za.co.anycompany.anycompany.datalayer;
 
+import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.model.Order;
 
 import java.sql.*;
@@ -100,7 +101,7 @@ public class OrderRepository {
                 order.setVAT(rows.getDouble(3));
                 order.setCustomerId(rows.getInt(4));
                 orders.add(order); //orders.size() ,
-                System.out.println(orders);
+                //System.out.println(orders);
             }
 
             return orders;
@@ -109,5 +110,35 @@ public class OrderRepository {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public List<Order> getOrdersByCustomerId(Integer id) {
+        Order order = new Order();
+        List<Order> orders = new ArrayList<Order>();
+
+        Connection connection = getDBConnection();
+        PreparedStatement prpstmt = null;
+        ResultSet resultSet = null;
+        try {
+            Statement statement = connection.createStatement();
+            //  String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
+            prpstmt = connection.prepareStatement("select orderId, amount, VAT, customerId from ORDERS where customerId = ?");
+            prpstmt.setInt(1, id);
+            resultSet = prpstmt.executeQuery();
+
+            while (resultSet.next()) {
+                order.setOrderId(resultSet.getInt(1));
+                order.setAmount(resultSet.getDouble(2)) ;
+                order.setVAT(resultSet.getDouble(3));
+                order.setCustomerId(resultSet.getInt(4));
+                orders.add(order); //orders.size() ,
+            }
+
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return orders;
     }
 }

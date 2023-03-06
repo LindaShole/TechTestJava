@@ -45,6 +45,24 @@ public class OrderController {
         return "order";
     }
 
+    @GetMapping("/orders/{id}/customer/{customerId}")
+    public String getCustomerOrders(@PathVariable int customerId, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
+        //model.addAttribute("name", name);
+        List <Order> orders = orderService.getOrderByCustomerId(customerId);
+        model.addAttribute("orders", orders);
+        //Customer customer = new Customer();
+
+      /*  model.addAttribute("orderId", order.getOrderId());
+        model.addAttribute("amount", order.getAmount());
+        model.addAttribute("VAT", order.getVAT());
+        model.addAttribute("customerId", order.getCustomerId());
+       /* return "customer"; // return form
+
+        Order order = orderService.get(id);
+        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);*/
+        return "orders";
+    }
+
     // 3. http://localhost:8081/orders/{id}
     @DeleteMapping("/orders/{id}")
     public void delete(@PathVariable Integer id){
