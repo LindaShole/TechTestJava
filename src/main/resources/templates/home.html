@@ -9,12 +9,12 @@
     </script>
 </head>
 <body class="page">
-<div class="container-fluid canvas">
+<div class="container-fluid canvas rounded">
     <div class="row align-items-center wrapper">
         <div class="mx-auto col-12 col-md-10 col-lg-12 box">
-            <h1>Welcome to <span th:text="${appName}">appName</span></h1>
-            <p>We are leaders in the procurement and supply of Entertainment Gear! </p>
-            <div class="container">
+            <h2>Welcome to <span th:text="${appName}">appName</span></h2>
+            <p class="p-1 bg-secondary">We are leaders in the procurement and supply of Entertainment Gear! </p>
+            <div class="container bg-info">
                 <div class="row">
                     <h5 class="col-4"> Customer Id </h5>
                     <h5 class="col-4"> Customer Name </h5>
@@ -33,10 +33,10 @@
     </div>
     <div class="wrapper">
         <div class="row box">
-            <a class="col-3" href="/customers" > Show Customers</a>
-            <a class="col-3" href="/orders" > Show Orders</a>
-            <a class="col-3" href="/customer/orders" > Customer Orders </a>
-            <a class="col-3" href="/customers/orders" > Orders and Customers </a>
+            <a class="col-2 btn-primary mx-1" href="/customers" > Show Customers</a>
+            <a class="col-2 btn-primary mx-1" href="/orders" > Show Orders</a>
+            <a class="col-2 btn-primary mx-1" href="/customer/orders" > Customer Orders </a>
+            <a class="col-2 btn-primary mx-1" href="/customers/orders" > Orders and Customers </a>
         </div>
     </div>
 </div>

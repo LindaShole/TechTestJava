@@ -29,13 +29,13 @@ public class CustomerController {
     String appName;
 
     // 1.  http://localhost:8080/home
-    @GetMapping("/home")
+    @GetMapping("/")
     public String getCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
-        return "index";
+        return "home";
     }
 
     // 1.1 http://localhost:8080/customers // make same end-point
@@ -46,7 +46,7 @@ public class CustomerController {
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
-        return "index";
+        return "customers";
     }
 
     // 2. http://localhost:8080/customers/{id}
