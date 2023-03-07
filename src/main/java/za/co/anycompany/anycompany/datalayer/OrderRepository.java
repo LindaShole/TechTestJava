@@ -1,6 +1,5 @@
 package za.co.anycompany.anycompany.datalayer;
 
-import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.model.Order;
 
 import java.sql.*;
@@ -21,20 +20,28 @@ public class OrderRepository {
 
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE ORDERS (oderId int primary key not null, amount number(10,2), vat number (3,1))");
-            connection.prepareStatement("INSERT INTO ORDERS(oderId, amount, vat) VALUES(?,?,?)");
-            preparedStatement.setInt(1, order.getOrderId());
-            preparedStatement.setDouble(2, order.getAmount());
-            preparedStatement.setDouble(3, order.getVAT());
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS ORDERS (orderId int primary key not null, amount number(10,2), vat number (3,1))");
+           /* statement.executeUpdate("INSERT INTO ORDERS(amount, vat) VALUES(299.65,2)");
+            statement.executeUpdate("INSERT INTO ORDERS(amount, vat) VALUES(299.65,1.5)");
+            statement.executeUpdate("INSERT INTO ORDERS(amount, vat) VALUES(299.65,1.2)");
+            connection.prepareStatement("INSERT INTO ORDERS(orderId, amount, vat) VALUES(4,299.65,2)");*/
+            preparedStatement = connection.prepareStatement("INSERT INTO ORDERS(amount, vat, customerId) VALUES(?,?,?)");
+            /*preparedStatement.setInt(1, order.getOrderId());*/
+            preparedStatement.setDouble(1, order.getAmount());
+            preparedStatement.setDouble(2, order.getVAT());
+            preparedStatement.setInt(3, order.getCustomerId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
 
         } finally {
             try {
-                statement.close();
-                preparedStatement.close();
-                connection.close();
+                if(preparedStatement != null)
+                    preparedStatement.close();
+                if(connection != null)
+                    connection.close();
+                if(statement != null)
+                    statement.close();
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
             }
@@ -140,5 +147,10 @@ public class OrderRepository {
             System.out.println(e.getMessage());
         }
         return orders;
+    }
+
+    public Order remove(Integer id) {
+        Order order = new Order();
+        return order;
     }
 }
