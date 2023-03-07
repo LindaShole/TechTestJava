@@ -52,8 +52,10 @@
     margin-top: 20px;
     text-decoration: none;
     border-radius: 50px;
-    color: dimgray;
-/* color: rgba(255,255,255,0.7);*/
+    text-align: center;
+    font-weight: bold;
+    /*  color: dimgray;
+   color: rgba(255,255,255,0.7);*/
 }
 
 .wrapper .box:before{

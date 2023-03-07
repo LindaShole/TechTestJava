@@ -98,13 +98,7 @@ public class OrderController {
 
     // 4.1 http://localhost:8081/orders
     @PostMapping("/order")
-    public String orderPlaced(@ModelAttribute("order") Order order){ //@Valid
-        //int customerId = order.getCustomerId();
-
-     //   order.setAmount(1165.36);
-     //   order.setOrderId(4);
-        //Integer.parseInt(UUID.randomUUID().toString())
-   //     orderService.placeOrder( order, 11);
+    public String orderPlaced(@ModelAttribute("order") Order order){
         return "ordered";
     }
 
