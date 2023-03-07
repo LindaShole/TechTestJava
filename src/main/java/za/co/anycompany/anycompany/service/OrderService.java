@@ -55,4 +55,6 @@ public class OrderService {
     public List<Order> getAllOrders() {return orderRepository.getAll();}
 
     public Order getOrderById(int id) {return orderRepository.findById(id);}
+
+    public List<Order> getOrderByCustomerId(int id) {return orderRepository.getOrdersByCustomerId(id);}
 }

@@ -4,13 +4,16 @@
     <title>Order App | Welcome</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="/js/main.js"></script>
 </head>
-<body>
-<div>
-    <div class="row align-items-center alert alert-info" style="height: 100vh;">
-        <div class="mx-auto col-10 col-md-8 col-lg-6 border border-primary">
-            <h1>Customer Summary</span></h1>
-            <p>Click the Link below to view all customer orders</p>
+<body class="page">
+<div class="container-fluid canvas rounded">
+    <div class="row align-items-center wrapper" >
+        <div class="mx-auto col-12 col-md-10 col-lg-12 box">
+            <h2 class="display-2">Customer Summary</span></h2>
+            <p class="p-1 bg-secondary">Click the Link below to view all customer orders</p>
+            <div class="container bg-info">
             <div class="row">
                 <div class="col-3">
                     Customer ID
@@ -38,30 +41,17 @@
                     </span>
                 </div>
             </div>
+
             <div class="row mx-2 py-3">
                 <p class="btn btn-primary btn-lg btn-block">Orders for <a class="text-dark"
-                                                                          th:href="@{/customers/(id=${id})}"><span
+                                                                          th:href="@{/orders/customers/*(id=${id})}"><span
                         th:text="${name}">name</span></a></p>
+            </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    (async function createOrder() {
-        let order = {"amount": 999.95};
-
-        await fetch("http://localhost:8080/myorders", {
-            method: "POST",
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(order)
-        })
-            .then(result => result.text())
-            .then(text => alert(text));
-    })();
 </script>
 </body>
 </html>
