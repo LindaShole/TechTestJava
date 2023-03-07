@@ -77,16 +77,19 @@ public class OrderController {
 
     // 2.1 http://localhost:8081/orders
     @PostMapping("/orders")
-    public String create(@RequestBody Order order){
-        order.setAmount(1165.36);
-        order.setOrderId(4);
-        orderService.placeOrder( order, 11);
-        return "orders";
+    public String create(@ModelAttribute("order") Order order){
+        orderService.placeOrder( order, order.getCustomerId());
+        return "ordered";
     }
 
     // 2.2 http://localhost:8081/orders
     @PostMapping("/order")
     public String orderPlaced(@ModelAttribute("order") Order order){
+        order.setAmount(200);
+        order.setVAT(2);
+        order.setCustomerId(4);
+      /*  order.setOrderId(5); */
+        orderService.placeOrder(order, 4);
         return "ordered";
     }
 
