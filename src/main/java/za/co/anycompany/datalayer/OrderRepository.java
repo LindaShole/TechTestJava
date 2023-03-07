@@ -1,6 +1,6 @@
-package za.co.anycompany.anycompany.datalayer;
+package za.co.anycompany.datalayer;
 
-import za.co.anycompany.anycompany.model.Order;
+import za.co.anycompany.model.Order;
 
 import java.sql.*;
 import java.util.ArrayList;

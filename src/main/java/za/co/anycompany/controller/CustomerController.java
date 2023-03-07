@@ -1,9 +1,9 @@
-package za.co.anycompany.anycompany.controller;
+package za.co.anycompany.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.service.CustomerService;
+import za.co.anycompany.model.Customer;
+import za.co.anycompany.service.CustomerService;
 
 import org.springframework.ui.Model;
 

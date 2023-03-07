@@ -1,16 +1,13 @@
-package za.co.anycompany.anycompany.service;
+package za.co.anycompany.service;
 
 
 import org.springframework.stereotype.Service;
-import za.co.anycompany.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.anycompany.datalayer.OrderRepository;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
+import za.co.anycompany.datalayer.CustomerRepository;
+import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.model.Customer;
+import za.co.anycompany.model.Order;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class OrderService {

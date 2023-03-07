@@ -1,4 +1,4 @@
-package za.co.anycompany.anycompany.model;
+package za.co.anycompany.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;

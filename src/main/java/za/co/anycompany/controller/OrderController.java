@@ -1,14 +1,12 @@
-package za.co.anycompany.anycompany.controller;
+package za.co.anycompany.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
-import za.co.anycompany.anycompany.service.OrderService;
+import za.co.anycompany.model.Order;
+import za.co.anycompany.service.OrderService;
 
 import java.util.*;
 

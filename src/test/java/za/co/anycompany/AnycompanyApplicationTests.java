@@ -1,16 +1,12 @@
-package za.co.anycompany.anycompany;
+package za.co.anycompany;
 
 import org.junit.jupiter.api.Test;
 //import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import za.co.anycompany.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.anycompany.datalayer.OrderRepository;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
+import za.co.anycompany.datalayer.CustomerRepository;
+import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.model.Order;
 
-import java.util.List;
-
-import static org.junit.Assert.assertThat;
+//import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
