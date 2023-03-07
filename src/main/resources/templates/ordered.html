@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order App | Order Placed </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body class="page">
+<div class="container-fluid canvas rounded">
+    <div class="row align-items-center wrapper" >
+        <div class="mx-auto px-3 col-12 col-md-10 col-lg-12 box">
+            <h2 class="display-2">Order Summary</span></h2>
+            <p class="p-1 bg-secondary">Your order has been placed.</p>
+            <div class="row bg-secondary">
+                <div class="col-3">
+                    Order ID
+                </div>
+                <div class="col-9">
+                    <p th:text="${order.orderId}">orderId</p>
+                </div>
+                <div class="col-3">
+                    Order Value (R)
+                </div>
+                <div class="col-9">
+                    <p th:text="${order.amount}">amount</p>
+                </div>
+                <div class="col-3">
+                    VAT
+                </div>
+                <div class="col-9">
+                    <span th:text="${order.VAT}">VAT</span>
+                </div>
+                <div class="col-3">
+                    Customer ID
+                </div>
+                <div class="col-9">
+                    <span th:text="${order.customerId}">customerId</span>
+                </div>
+            </div>
+            <div class="row mx-2 py-3">
+                <p class="btn btn-primary btn-lg btn-block">Ordered by <a class="text-dark"
+                                                                          th:href="@{/customers/(${order.customerId})}"><span
+                        th:text="${order.customerId}">customerId</span></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
