@@ -1,19 +1,20 @@
 package za.co.anycompany.anycompany;
 
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+
 import za.co.anycompany.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.anycompany.model.Customer;
 import za.co.anycompany.anycompany.model.Order;
 
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
+import java.util.List;
+import java.util.Optional;
+
 
 //@SpringBootTest
 class AnycompanyApplicationTests {
@@ -23,18 +24,39 @@ class AnycompanyApplicationTests {
 	// REQ1 - Place an order, linked to a customer
     // REQ2 - Retrieve a customer with their linked order(s)
  	// REQ3 - Load all customers and their linked orders
+
+
+	@BeforeEach
+	void setup(){
+
+	}
+
+	@AfterEach
+	void cleanup(){
+
+	}
 	@Test
 	public void contextLoads() throws Exception{
 	}
 
+	// REQ 1
+	@Test
+	void orderCanBePlacedForExistingCustomer(){
+		Customer customer = customerRepository.load(1);
+		assertThat(customer.getName()).startsWith("Xolis");
+	}
+
+	@Test
+	void userIsBlocked(){
+		List<Customer> customers = customerRepository.getAll();
+		assertThat(customers.size())
+				.as("Array size is %s ", 0)
+				.isOne();
+	}
+
 	@Test
 	public void returnsNullIfTheCustomerDoesNotExist() throws Exception{
-/*
 
-		Customer results = customerRepository.load(1);
-
-		 assertThat(results.getCountry(), is("Xolisani") );
-*/
 	}
 
 
