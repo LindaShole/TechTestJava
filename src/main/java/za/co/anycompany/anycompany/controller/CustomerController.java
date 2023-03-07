@@ -42,7 +42,6 @@ public class CustomerController {
     @GetMapping("/customers")
     public String getAllCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
