@@ -49,7 +49,19 @@ public class OrderController {
         return "orders";
     }
 
-    // 1.4 http://localhost:8081/order
+    // 1.4 http://localhost:8081/orders/customers
+    @GetMapping("/orders/customers")
+    public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
+        List<Order> orders = orderService.getAllOrders();
+        /*List<Customer> customers = null;
+        for(Order order : orders){
+           customers.add(order.getCustomerId(), );
+        }*/
+        model.addAttribute("orders", orders);
+        return "orders";
+    }
+
+    // 1.5 http://localhost:8081/order
     @GetMapping("/order")
     public String orderHere(Model model){
         // get one order
