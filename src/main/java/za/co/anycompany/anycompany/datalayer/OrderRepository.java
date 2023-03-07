@@ -107,8 +107,7 @@ public class OrderRepository {
                 order.setAmount(rows.getDouble(2)) ;
                 order.setVAT(rows.getDouble(3));
                 order.setCustomerId(rows.getInt(4));
-                orders.add(order); //orders.size() ,
-                //System.out.println(orders);
+                orders.add(order);
             }
 
             return orders;
@@ -119,7 +118,7 @@ public class OrderRepository {
         return null;
     }
 
-    public List<Order> getOrdersByCustomerId(Integer id) {
+    public List<Order> getOrdersByCustomerId(Integer customerId) {
         Order order = new Order();
         List<Order> orders = new ArrayList<Order>();
 
@@ -130,7 +129,7 @@ public class OrderRepository {
             Statement statement = connection.createStatement();
             //  String select = "Select orderId, amount, VAT, customerId from ORDERS order by orderId asc";
             prpstmt = connection.prepareStatement("select orderId, amount, VAT, customerId from ORDERS where customerId = ?");
-            prpstmt.setInt(1, id);
+            prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
 
             while (resultSet.next()) {
@@ -138,11 +137,9 @@ public class OrderRepository {
                 order.setAmount(resultSet.getDouble(2)) ;
                 order.setVAT(resultSet.getDouble(3));
                 order.setCustomerId(resultSet.getInt(4));
-                orders.add(order); //orders.size() ,
+                orders.add(order);
             }
-
             return orders;
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
