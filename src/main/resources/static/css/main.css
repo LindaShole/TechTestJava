@@ -104,3 +104,7 @@ p {
 .bg-brand-dark{
     background-color: rgba( 113,122,207, 0.8);
 }
+
+.form-brand{
+    background-color: rgba( 113,122,207, 0.3);
+}
