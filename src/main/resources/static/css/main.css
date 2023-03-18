@@ -48,12 +48,12 @@
 
 .box a{
     border: none;
-    background: lightpink;
-    padding: 10px 20px;
+    /* background: lightpink; */
+    padding: 4px 8px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-right: 10px;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 5px;
     text-align: center;
     font-weight: bold;
     /*  color: dimgray;
