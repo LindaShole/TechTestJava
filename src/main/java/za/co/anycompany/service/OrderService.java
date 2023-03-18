@@ -12,18 +12,19 @@ import java.util.List;
 @Service
 public class OrderService {
     private OrderRepository orderRepository = new OrderRepository();
+    private CustomerRepository customerRepository = new CustomerRepository();
 
     public boolean placeOrder(Order order, int customerId)
     {
-        Customer customer = CustomerRepository.load(customerId);
+        Customer customer = customerRepository.load(customerId);
 
         if (order.getAmount() == 0)
             return false;
 
-        if (customer.getCountry() != "UK")
-            order.setVAT(0);
-        else
+        if (customer.getCountry() == "UK")
             order.setVAT(0.2d);
+        else
+            order.setVAT(0);
 
         orderRepository.save(order);
 

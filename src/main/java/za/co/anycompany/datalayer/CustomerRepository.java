@@ -48,7 +48,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
         Connection con = getDBConnection();
         PreparedStatement prpstmt = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+        Statement statement;
         Customer customer = new Customer();
         try {
             statement = con.createStatement();
