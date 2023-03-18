@@ -6,12 +6,49 @@
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body class="page">
+<nav class="navbar navbar-expand-lg navbar-light bg-brand">
+    <a class="heading-5 navbar-brand" href="/">
+        AnyCompany
+        <img src="/images/Zebra-Head.svg" width="60" height="60" class="d-inline-block align-center" alt="Brand Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSC"
+            aria-controls="navbarSC" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSC">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/"> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders"> Orders </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers"> Customers </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Admins
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/orders">Orders</a>
+                    <a class="dropdown-item" href="/customers">Customers</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Users</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container-fluid canvas rounded">
     <div class="row align-items-center wrapper">
         <div class="mx-auto col-12 col-md-10 col-lg-12 box">
@@ -35,12 +72,12 @@
         </div>
         <div class="mx-auto col-12 col-md-10 col-lg-12 box">
             <div class="row box py-2 px-4">
-                <a class="col btn-primary" href="/customers" > Show Customers</a>
-                <a class="col btn-primary" href="/orders" > Show Orders</a>
-                <a class="col btn-primary" href="/customer/orders" > Customer Orders </a>
-                <a class="col btn-primary" href="/customers/orders" > Orders and Customers </a>
-                <a class="col btn-primary" href="/order" > Place Order </a>
-                <a class="col btn-primary" href="/customer/1" > View Customer </a>
+                <a class="col btn-primary" href="/customers"> Show Customers</a>
+                <a class="col btn-primary" href="/orders"> Show Orders</a>
+                <a class="col btn-primary" href="/customer/orders"> Customer Orders </a>
+                <a class="col btn-primary" href="/customers/orders"> Orders and Customers </a>
+                <a class="col btn-primary" href="/order"> Place Order </a>
+                <a class="col btn-primary" href="/customers/1"> View Customer </a>
             </div>
         </div>
     </div>
