@@ -108,3 +108,8 @@ p {
 .form-brand{
     background-color: rgba( 113,122,207, 0.3);
 }
+
+.form-text{
+    line-height: 1.9;
+    color: rgba(255,255,255,0.6);
+}
