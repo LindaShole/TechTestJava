@@ -1,9 +1,7 @@
 package za.co.anycompany;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,16 +20,16 @@ class AnycompanyApplicationTests {
     // REQ2 - Retrieve a customer with their linked order(s)
  	// REQ3 - Load all customers and their linked orders
 
-
+	@BeforeAll
+	static void beforeTesting(){
+		System.out.println("Before All The Tests Run");
+	}
 	@BeforeEach
 	void setup(){
 
 	}
 
-	@AfterEach
-	void cleanup(){
 
-	}
 	@Test
 	public void contextLoads() throws Exception{
 	}
@@ -69,4 +67,19 @@ class AnycompanyApplicationTests {
 
 		assertThat(order.getAmount(), is(450.23) );*/
 	}
+
+	@AfterEach
+	void cleanup(){
+
+	}
+
+	@AfterAll
+	static void afterTesting(){
+		System.out.println("After All The Tests Run");
+	}
+
+	// assertEquals
+	// assertTrue
+	// assertNull
+	// assertArrayEquals
 }

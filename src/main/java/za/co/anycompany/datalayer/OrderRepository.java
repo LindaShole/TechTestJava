@@ -160,7 +160,7 @@ public class OrderRepository {
         Connection connection = getDBConnection();
         try {
             Statement statement = connection.createStatement();
-            String select = "Select customerId from ORDERS order by orderId asc";
+            String select = "Select distinct customerId from ORDERS";
             ResultSet rows;
             rows = statement.executeQuery(select);
             while (rows.next()) {

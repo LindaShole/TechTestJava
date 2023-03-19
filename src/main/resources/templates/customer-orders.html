@@ -55,25 +55,30 @@
             <h2 class="heading-2">The Orders 🎁 with corresponding 🙎‍♂ Customers 🙎‍♀️️.</h2>
             <p class="sub-heading-2">The orders below show the full history.</p>
             <div class="container bg-brand py-2 px-4">
-                <div class="row">
-                    <h5 class="heading-5 col-1 mb-2"> Index </h5>
-                    <h5 class="heading-5 col-2 mb-2"> Order Id </h5>
-                    <h5 class="heading-5 col-3 mb-2"> Value (R) </h5>
-                    <h5 class="heading-5 col-3 mb-2"> VAT </h5>
-                    <h5 class="heading-5 col-3 mb-2"> Customer ID </h5>
-                </div>
+
 
                 <th:block th:each="arrayOfL, iStat: ${arrayOfList}">
+                    <a class="row btn btn-info"
+                       th:href="@{/orders/customer(customerid=${arrayOfL[0].getCustomerId()})}">
+                        <span class="col-2"> Customer Id : </span>
+                        <span class="col-1" th:text="${arrayOfL[0].getCustomerId()}"> Customer Id </span>
+                    </a>
+
                     <div class="row">
-                        <th:block th:each="i : ${#numbers.sequence(1, arrayOfL.size()  )  }">
-                            <p class="col-1 bg-brand-dark" th:text="${i - 1}">Index</p>
-                            <p class="col-2 bg-brand-dark" th:text="${arrayOfL[i - 1].getOrderId()}">Order Id</p>
+                        <h5 class="heading-5 col-3 mb-2"> Index </h5>
+                        <h5 class="heading-5 col-3 mb-2"> Order Id </h5>
+                        <h5 class="heading-5 col-3 mb-2"> Value (R) </h5>
+                        <h5 class="heading-5 col-3 mb-2"> VAT </h5>
+                    </div>
+                    <th:block th:each="i : ${#numbers.sequence(1, arrayOfL.size()  )  }">
+                        <div class="row">
+                            <p class="col-3 bg-brand-dark" th:text="${i - 1}">Index</p>
+                            <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getOrderId()}">Order Id</p>
                             <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getAmount()}"> Amount </p>
                             <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getVAT()}"> VAT </p>
-                            <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getCustomerId()}"> Customer
-                                ID </p>
-                        </th:block>
-                    </div>
+                        </div>
+                    </th:block>
+
                 </th:block>
             </div>
         </div>
