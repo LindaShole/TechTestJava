@@ -40,9 +40,9 @@ public class OrderController {
     }
 
     // 1.3 http://localhost:8081/orders/customer/{customerId}
-    @GetMapping("/orders/customer/{customerId}")
-    public String getCustomerOrders(@PathVariable int customerId , Model model){
-        List <Order> orders = orderService.getOrderByCustomerId(customerId);
+    @GetMapping("/orders/customer")
+    public String getCustomerOrders(@RequestParam Integer customerid , Model model){
+        List <Order> orders = orderService.getOrderByCustomerId(customerid);
         model.addAttribute("orders", orders);
         return "orders";
     }
@@ -51,12 +51,24 @@ public class OrderController {
     @GetMapping("/orders/customers")
     public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
         List<Order> orders = orderService.getAllOrders();
-        /*List<Customer> customers = null;
-        for(Order order : orders){
-           customers.add(order.getCustomerId(), );
-        }*/
+        List<Integer> customerIds = orderService.getAllCustomersWithOrders() ; //new ArrayList<Integer>();
+        List<Order>[] arrayOfList = new List[customerIds.size()];
+        Integer i = 0;
+        for(Integer customerId : customerIds){
+         //  customerIds.add(order.getCustomerId());
+            List<Order> testOrders = orderService.getOrderByCustomerId(customerId);
+            arrayOfList[i] = testOrders;
+            i++;
+            System.out.println(testOrders.size());
+            System.out.println("Customer Id" + customerId);
+            System.out.println("i " + i);
+            System.out.println("Array of List Size" + arrayOfList.length);
+            System.out.println("-- -- -- --");
+        }
         model.addAttribute("orders", orders);
-        return "orders";
+        model.addAttribute("customerIds", customerIds);
+        model.addAttribute("arrayOfList", arrayOfList);
+        return "customer-orders";
     }
 
     // 1.5 http://localhost:8081/order

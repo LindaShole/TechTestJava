@@ -6,9 +6,11 @@
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body class="page">
@@ -51,7 +53,8 @@
     <div class="row align-items-center wrapper">
         <div class="mx-auto col-12 col-md-10 col-lg-12 box">
             <h2 class="heading-2"> List of All <span th:text="${appName}">appName</span> Customers </h2>
-            <p class="sub-heading-2">Below is the list of all our customers, remember everyone matters! <span th:text="${name}">name</span> </p>
+            <p class="sub-heading-2">Below is the list of all our customers, remember everyone matters! <span
+                    th:text="${name}">name</span></p>
             <div class="container bg-brand py-2 px-4">
                 <div class="row">
                     <h5 class="heading-5 col-4 mb-2"> Customer Id </h5>
@@ -59,12 +62,12 @@
                     <h5 class="heading-5 col-4 mb-2"> Customer Region </h5>
                 </div>
                 <th:block th:each="customer: ${customers}">
-                    <div class="row">
-                        <!-- a th:href="@{/customers/(id=${id})}"> Customer Id  [[${id}]] </a> <br/ -->
-                        <p class="col-4 bg-brand-dark" th:text="${customer.id}"> Customer Id </p>
-                        <p class="col-4 bg-brand-dark" th:text="${customer.name}"> Customer Name </p>
-                        <p class="col-4 bg-brand-dark" th:text="${customer.country}"> Customer Region </p>
-                    </div>
+                    <a class="row" th:href="@{/orders/customer(customerid=${customer.id})}">
+                        <span class="col-4 bg-brand-dark form-text" th:text="${customer.id}"> Customer Id </span>
+                        <span class="col-4 bg-brand-dark form-text" th:text="${customer.name}"> Customer Name </span>
+                        <span class="col-4 bg-brand-dark form-text"
+                              th:text="${customer.country}"> Customer Region </span>
+                    </a>
                 </th:block>
             </div>
         </div>

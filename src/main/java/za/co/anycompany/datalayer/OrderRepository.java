@@ -153,4 +153,25 @@ public class OrderRepository {
         Order order = new Order();
         return order;
     }
+
+    public List<Integer> getAllCustomer() {
+        List<Integer> orders = new ArrayList<Integer>();
+
+        Connection connection = getDBConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String select = "Select customerId from ORDERS order by orderId asc";
+            ResultSet rows;
+            rows = statement.executeQuery(select);
+            while (rows.next()) {
+                orders.add(rows.getInt(1));
+            }
+
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
 }
