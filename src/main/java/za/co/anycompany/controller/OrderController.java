@@ -65,6 +65,10 @@ public class OrderController {
             System.out.println("Array of List Size" + arrayOfList.length);
             System.out.println("-- -- -- --");
         }
+        for (int j = 0; j < arrayOfList.length; j++) {
+            List<Order> l = arrayOfList[j];
+            System.out.println(l);
+        }
         model.addAttribute("orders", orders);
         model.addAttribute("customerIds", customerIds);
         model.addAttribute("arrayOfList", arrayOfList);

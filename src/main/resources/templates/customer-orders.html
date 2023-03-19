@@ -6,9 +6,11 @@
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@200;300;400;600;700;900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,400;0,700;0,900;1,200;1,600&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
     <script type="text/javascript" src="/js/main.js"></script>
 </head>
 <body class="page">
@@ -53,27 +55,26 @@
             <h2 class="heading-2">The Orders 🎁 with corresponding 🙎‍♂ Customers 🙎‍♀️️.</h2>
             <p class="sub-heading-2">The orders below show the full history.</p>
             <div class="container bg-brand py-2 px-4">
-                <th:block th:each="customerId: ${customerIds}">
-                    <h2 th:text="${customerId}"> Customer ID  </h2>
                 <div class="row">
-                    <h5 class="heading-5 col-3 mb-2"> Order Id </h5>
+                    <h5 class="heading-5 col-1 mb-2"> Index </h5>
+                    <h5 class="heading-5 col-2 mb-2"> Order Id </h5>
                     <h5 class="heading-5 col-3 mb-2"> Value (R) </h5>
                     <h5 class="heading-5 col-3 mb-2"> VAT </h5>
-
+                    <h5 class="heading-5 col-3 mb-2"> Customer ID </h5>
                 </div>
 
-                <th:block th:each="arrayOfL: ${arrayOfList}">
+                <th:block th:each="arrayOfL, iStat: ${arrayOfList}">
                     <div class="row">
-                        <p class="col-3 bg-brand-dark" th:text="${order.orderId}"> Order Id </p>
-                        <p class="col-3 bg-brand-dark" th:text="${order.amount}"> Value (R) </p>
-                        <p class="col-3 bg-brand-dark" th:text="${order.VAT}"> VAT </p>
-
+                        <th:block th:each="i : ${#numbers.sequence(1, arrayOfL.size()  )  }">
+                            <p class="col-1 bg-brand-dark" th:text="${i - 1}">Index</p>
+                            <p class="col-2 bg-brand-dark" th:text="${arrayOfL[i - 1].getOrderId()}">Order Id</p>
+                            <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getAmount()}"> Amount </p>
+                            <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getVAT()}"> VAT </p>
+                            <p class="col-3 bg-brand-dark" th:text="${arrayOfL[i - 1].getCustomerId()}"> Customer
+                                ID </p>
+                        </th:block>
                     </div>
                 </th:block>
-                </th:block>
-
-                <!-- h5 class="heading-5 col-3 mb-2"> Customer Id </h5>
-                <p class="col-3 bg-brand-dark" th:text="${order.customerId}"> Customer Id </p -->
             </div>
         </div>
     </div>
