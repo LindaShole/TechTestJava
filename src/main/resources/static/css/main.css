@@ -28,30 +28,32 @@
 }
 
 .box{
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.4);
     backdrop-filter: blur(30px);
     border: 2px solid rgba(255,255,255,0.1);
 }
 .box h2{
-    font-size: 25px;
+    font-size: 35px;
     margin-bottom: 30px;
-    color: rgba(255,255,255,0.7);
+    /* color: rgba(255,255,255,0.7); */
+    color: #141D71; /* Dark Blue Text */
+    text-align: center;
 
 }
 
 .box p{
     line-height: 1.9;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.6);
 }
 
 .box a{
     border: none;
-    background: lightpink;
-    padding: 10px 20px;
+    /* background: lightpink; */
+    padding: 4px 8px;
     font-size: 20px;
-    margin-top: 20px;
+    margin-right: 10px;
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 5px;
     text-align: center;
     font-weight: bold;
     /*  color: dimgray;
@@ -74,4 +76,158 @@ h1, h2, h3 ,h4, h5, h6 {
 
 p {
     font-family: 'Montserrat', sans-serif;
+}
+
+.heading-2{
+    font-family: 'Source Serif Pro', serif;
+    font-weight: 700;
+}
+.heading-5{
+    font-family: 'Source Serif Pro', serif;
+    font-weight: 700;
+    color: rgba(20,29,113,1);
+}
+
+.sub-heading-2{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    text-align: center;
+    color: rgba(20,29,113,1);
+    background-color: rgba( 113,122,207, 0.6);
+    font-size: 12px;
+}
+
+.bg-brand{
+    background-color: rgba( 113,122,207, 0.6);
+}
+
+.bg-brand-dark{
+    background-color: rgba( 113,122,207, 0.8);
+}
+
+.form-brand{
+    background-color: rgba( 113,122,207, 0.3);
+}
+
+.form-text{
+    line-height: 1.9;
+    color: rgba(255,255,255,0.6);
+}
+
+/*      Forms, FLOATING          */
+
+.form-signin {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.form-label-group input,
+.form-label-group label {
+    height: 3.125rem;
+    padding: .75rem;
+}
+
+.form-label-group label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    margin-bottom: 0; /* Override default `<label>` margin */
+    line-height: 1.5;
+    color: #495057;
+    pointer-events: none;
+    cursor: text; /* Match the input under the label */
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+    color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+    color: transparent;
+}
+
+.form-label-group input::placeholder {
+    color: transparent;
+}
+
+.form-label-group input:not(:-moz-placeholder-shown) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:-ms-input-placeholder) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+    padding-top: 1.25rem;
+    padding-bottom: .25rem;
+}
+
+.form-label-group input:not(:-moz-placeholder-shown) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+.form-label-group input:not(:-ms-input-placeholder) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+.form-label-group input:not(:placeholder-shown) ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+.form-label-group input:-webkit-autofill ~ label {
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    font-size: 12px;
+    color: #777;
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+@supports (-ms-ime-align: auto) {
+    .form-label-group {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column-reverse;
+        flex-direction: column-reverse;
+    }
+
+    .form-label-group label {
+        position: static;
+    }
+
+    .form-label-group input::-ms-input-placeholder {
+        color: #777;
+    }
 }
