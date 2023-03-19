@@ -51,23 +51,13 @@ public class OrderController {
     @GetMapping("/orders/customers")
     public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
         List<Order> orders = orderService.getAllOrders();
-        List<Integer> customerIds = orderService.getAllCustomersWithOrders() ; //new ArrayList<Integer>();
+        List<Integer> customerIds = orderService.getAllCustomersWithOrders() ;
         List<Order>[] arrayOfList = new List[customerIds.size()];
         Integer i = 0;
         for(Integer customerId : customerIds){
-         //  customerIds.add(order.getCustomerId());
             List<Order> testOrders = orderService.getOrderByCustomerId(customerId);
             arrayOfList[i] = testOrders;
             i++;
-            System.out.println(testOrders.size());
-            System.out.println("Customer Id" + customerId);
-            System.out.println("i " + i);
-            System.out.println("Array of List Size" + arrayOfList.length);
-            System.out.println("-- -- -- --");
-        }
-        for (int j = 0; j < arrayOfList.length; j++) {
-            List<Order> l = arrayOfList[j];
-            System.out.println(l);
         }
         model.addAttribute("orders", orders);
         model.addAttribute("customerIds", customerIds);
