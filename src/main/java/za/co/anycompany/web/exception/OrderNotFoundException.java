@@ -1,4 +1,4 @@
-package za.co.anycompany.anycompany.web.exception;
+package za.co.anycompany.web.exception;
 
 public class OrderNotFoundException extends RuntimeException {
 

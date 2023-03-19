@@ -1,4 +1,4 @@
-package za.co.anycompany.anycompany;
+package za.co.anycompany;
 
 
 import org.hibernate.exception.ConstraintViolationException;
@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import za.co.anycompany.anycompany.web.exception.OrderIdMismatchException;
-import za.co.anycompany.anycompany.web.exception.OrderNotFoundException;
+import za.co.anycompany.web.exception.OrderIdMismatchException;
+import za.co.anycompany.web.exception.OrderNotFoundException;
 
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {

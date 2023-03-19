@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Order App | Customer Details </title>
+    <title>Order App | Orders </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,49 +48,36 @@
     </div>
 </nav>
 <div class="container-fluid canvas rounded">
-    <div class="row align-items-center wrapper" >
+    <div class="row align-items-center wrapper">
         <div class="mx-auto col-12 col-md-10 col-lg-12 box">
-            <h2 class="heading-2">Customer Summary</span></h2>
-            <p class="sub-heading-2">Click the Link below to view all customer orders</p>
+            <h2 class="heading-2">The Orders 🎁 with corresponding 🙎‍♂ Customers 🙎‍♀️️.</h2>
+            <p class="sub-heading-2">The orders below show the full history.</p>
             <div class="container bg-brand py-2 px-4">
-            <div class="row">
-                <div class="heading-5 col-3">
-                    Customer ID
-                </div>
-                <div class="col-9 form-text">
-                    <p th:text="${id}"></p>
-                </div>
-                <div class="heading-5 col-3">
-                    Customer Name
-                </div>
-                <div class="col-9 form-text">
-                    <p th:text="${name}">name</p>
-                </div>
-                <div class="heading-5 col-3">
-                    Customer Region
-                </div>
-                <div class="col-9 form-text">
-                    <span th:text="${country}">country</span>
-                </div>
-                <div class="heading-5 col-3">
-                    Date Of Birth
-                </div>
-                <div class="col-9 form-text">
-                    <span th:text="${date_of_birth}">date_of_birth
-                    </span>
-                </div>
-            </div>
+                <th:block th:each="customerId: ${customerIds}">
+                    <h2 th:text="${customerId}"> Customer ID  </h2>
+                <div class="row">
+                    <h5 class="heading-5 col-3 mb-2"> Order Id </h5>
+                    <h5 class="heading-5 col-3 mb-2"> Value (R) </h5>
+                    <h5 class="heading-5 col-3 mb-2"> VAT </h5>
 
-            <div class="row mx-2 py-3">
-                <p class="btn btn-primary btn-lg btn-block">Orders for <a class="text-dark"
-                                                                          th:href="@{/orders/customer(customerid=${id})}" ><span
-                        th:text="${name}">name</span></a></p>
-            </div>
+                </div>
+
+                <th:block th:each="arrayOfL: ${arrayOfList}">
+                    <div class="row">
+                        <p class="col-3 bg-brand-dark" th:text="${order.orderId}"> Order Id </p>
+                        <p class="col-3 bg-brand-dark" th:text="${order.amount}"> Value (R) </p>
+                        <p class="col-3 bg-brand-dark" th:text="${order.VAT}"> VAT </p>
+
+                    </div>
+                </th:block>
+                </th:block>
+
+                <!-- h5 class="heading-5 col-3 mb-2"> Customer Id </h5>
+                <p class="col-3 bg-brand-dark" th:text="${order.customerId}"> Customer Id </p -->
             </div>
         </div>
     </div>
 </div>
 
-</script>
 </body>
 </html>

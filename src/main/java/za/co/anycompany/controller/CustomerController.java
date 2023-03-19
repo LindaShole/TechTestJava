@@ -1,18 +1,16 @@
-package za.co.anycompany.anycompany.controller;
+package za.co.anycompany.controller;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.service.CustomerService;
+import za.co.anycompany.model.Customer;
+import za.co.anycompany.service.CustomerService;
 
 import org.springframework.ui.Model;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -24,32 +22,31 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    // Test
     @Value("${spring.application.name}")
     String appName;
 
-    // 1.  http://localhost:8080/home
-    @GetMapping("/home")
+    // 1.1  http://localhost:8080/
+    @GetMapping("/")
     public String getCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
-        return "index";
+        return "home";
     }
 
-    // 1.1 http://localhost:8080/customers // make same end-point
+    // 1.2 http://localhost:8080/customers
     @GetMapping("/customers")
     public String getAllCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-
+        model.addAttribute("name", name);
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
 
-        return "index";
+        return "customers";
     }
 
-    // 2. http://localhost:8080/customers/{id}
+    // 1.3 http://localhost:8080/customers/{id}
     @GetMapping("/customers/{id}")
     private String getCustomer(@PathVariable int id, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
         //model.addAttribute("name", name);
@@ -57,29 +54,22 @@ public class CustomerController {
         model.addAttribute("name", customer.getName());
         model.addAttribute("country", customer.getCountry());
         model.addAttribute("date_of_birth", customer.getDateOfBirth());
-        return "customer"; // return form
+        return "customer";
     }
 
-    // 3. http://localhost:8080/customers/test/{id}
-    @GetMapping("/customers/test/{id}")
-    private Customer getCustomerTest(@PathVariable int id){
-        return customerService.getCustomerById(id);
-    }
-
-
-    // 4. http://localhost:8080/customers/{id}
+    // 2. http://localhost:8080/customers/{id}
     @DeleteMapping("/customers/{id}")
     private void deleteCustomer(@PathVariable int id){
         customerService.delete(id);
     }
 
-    // 5. http://localhost:8080/customers
+    // 3. http://localhost:8080/customers
     @PostMapping("/customers")
     private int saveCustomer(@RequestBody Customer customer){
         return  customer.getCustomerid();
     }
 
-    // 6. http://localhost:8080/customers
+    // 4. http://localhost:8080/customers
     @PutMapping("/customers")
     private Customer update(@RequestBody Customer customer){
         customerService.saveOrUpdate(customer);

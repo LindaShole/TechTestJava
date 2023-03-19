@@ -1,19 +1,16 @@
-package za.co.anycompany.anycompany;
+package za.co.anycompany;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import za.co.anycompany.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.anycompany.datalayer.OrderRepository;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-import java.util.Optional;
+
+import za.co.anycompany.datalayer.CustomerRepository;
+import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.model.Order;
 
 
 //@SpringBootTest

@@ -1,8 +1,8 @@
-package za.co.anycompany.anycompany.service;
+package za.co.anycompany.service;
 
 import org.springframework.stereotype.Service;
-import za.co.anycompany.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.anycompany.model.Customer;
+import za.co.anycompany.datalayer.CustomerRepository;
+import za.co.anycompany.model.Customer;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package za.co.anycompany.anycompany.model;
+package za.co.anycompany.model;
 
 import javax.persistence.Entity;
 import org.springframework.data.annotation.Id;
