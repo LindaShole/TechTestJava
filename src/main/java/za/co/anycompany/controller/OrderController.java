@@ -59,7 +59,6 @@ public class OrderController {
             arrayOfList[i] = testOrders;
             i++;
         }
-        model.addAttribute("orders", orders);
         model.addAttribute("customerIds", customerIds);
         model.addAttribute("arrayOfList", arrayOfList);
         return "customer-orders";
