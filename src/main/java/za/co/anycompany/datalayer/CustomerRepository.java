@@ -53,7 +53,7 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
         try {
             statement = con.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMER(CUSTOMERID INT PRIMARY KEY NOT NULL, CUSTOMER_NAME VARCHAR(50), COUNTRY VARCHAR(50), DATE_OF_BIRTH DATE);");
-            con.prepareStatement("INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (1,'Xolisani','South Africa', '2002-11-15');");
+            con.prepareStatement("INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (25,'Xolisani','South Africa', '2002-11-15');");
             prpstmt = con.prepareStatement("select * from CUSTOMER where customerId = ?");
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();
