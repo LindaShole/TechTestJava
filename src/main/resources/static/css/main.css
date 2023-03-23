@@ -28,7 +28,7 @@
 }
 
 .box{
-    background: rgba(255,255,255,0.4);
+    background: rgba(249,190,178,0.45);
     backdrop-filter: blur(30px);
     border: 2px solid rgba(255,255,255,0.1);
 }
@@ -95,6 +95,10 @@ p {
     color: rgba(20,29,113,1);
     background-color: rgba( 113,122,207, 0.6);
     font-size: 12px;
+}
+
+.bg-brand-sec{
+background-color: rgba(221,244,203,0.5);
 }
 
 .bg-brand{
