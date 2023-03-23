@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Order App | Welcome</title>
+    <link rel="icon" href="/images/Zebra-Head.svg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
           integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -74,8 +75,8 @@
             <div class="row box py-2 px-4">
                 <a class="col btn-primary" href="/customers"> Show Customers</a>
                 <a class="col btn-primary" href="/orders"> Show Orders</a>
-                <a class="col btn-primary" href="/customer/orders"> Customer Orders </a>
-                <a class="col btn-primary" href="/customers/orders"> Orders and Customers </a>
+                <a class="col btn-primary" href="/orders/customer?customerid=0"> Customer Orders </a>
+                <a class="col btn-primary" href="/orders/customers"> Orders and Customers </a>
                 <a class="col btn-primary" href="/order"> Place Order </a>
                 <a class="col btn-primary" href="/customers/1"> View Customer </a>
             </div>
