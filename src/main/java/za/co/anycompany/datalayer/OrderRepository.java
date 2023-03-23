@@ -1,6 +1,8 @@
 package za.co.anycompany.datalayer;
 
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
+import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 
 import java.sql.*;
@@ -8,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class OrderRepository {
-
+public class OrderRepository  {
+//implements CrudRepository<Order, Integer>
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "sa";
