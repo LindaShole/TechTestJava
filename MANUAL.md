@@ -2,7 +2,7 @@
 
 ## Introduction
 > Hi this is an app which was specifically developed to solve the problem as 
-> stated in the GitHub repository ([Link](https://github.com/LindaShole/TechTestJava)).
+> stated in the GitHub repository ([GitHub Project](https://github.com/LindaShole/TechTestJava)).
 
 ## Assumptions
 1. Customers Already exist in the System.
@@ -14,14 +14,21 @@
 7. All orders correspond to a Customer
 8. Customers have unique names and a customer has unique ID
 
+## App Address 
+
+* [Localhost](http://localhost:8081/) 
+* [Azure](https://azure-spring-apps-dev-anycompany.azuremicroservices.io/)
+
 ## The available end-points
 * __/login__     --->       (Enter Username and Password)
 * __/__          --->      (Landing Page with CTA to other pages)
 * __/customers__  --->      (Shows all Customers)
 * __/customers/{id}__ --->  (View the customer Details)
+* __/customer?customer={id}__ --->  (View the customer Details)
 * __/orders__ --->  (Shows all Orders)
 * __/order__ --->  (Allows User to Place Order)
 * __/orders/customer?customer={id}__  --->  (Show all orders for a corresponding Customer) 
+* __/order/{id}__ ---> (Show the order with id={id})
 
 ## Project Summary
 
