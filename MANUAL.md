@@ -4,6 +4,16 @@
 > Hi this is an app which was specifically developed to solve the problem as 
 > stated in the GitHub repository ([Link](https://github.com/LindaShole/TechTestJava)).
 
+## Assumptions
+1. Customers Already exist in the System.
+2. A System Admin will be running the system and not customers
+3. There is no sensitive data and system admin has all rights
+4. Only valid accounts can login
+5. We use cookies/session variables
+6. Customers May not have orders
+7. All orders correspond to a Customer
+8. Customers have unique names and a customer has unique ID
+
 ## The available end-points
 * __/login__     --->       (Enter Username and Password)
 * __/__          --->      (Landing Page with CTA to other pages)

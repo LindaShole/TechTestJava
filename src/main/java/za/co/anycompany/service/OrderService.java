@@ -36,7 +36,26 @@ public class OrderService {
 
     public List<Order> getAllOrders() {return orderRepository.getAll();}
 
-    public Order getOrderById(int id) {return orderRepository.findById(id);}
+    public Order getOrderById(int id) {
+        Order order = new Order() ; //= orderRepository.findById(id);
+        if(id<0){
+            return null;
+        }
+
+        if(id==0){
+            return null;
+        }
+        if(id>0){
+            order = orderRepository.findById(id);
+            if (0 != order.getOrderId()){
+                return order;
+            }
+            else {
+                return null;
+            }
+        }
+        return order;
+    }
 
     public List<Order> getOrderByCustomerId(int id) {return orderRepository.getOrdersByCustomerId(id);}
 

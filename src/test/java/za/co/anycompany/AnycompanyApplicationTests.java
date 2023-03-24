@@ -1,32 +1,57 @@
 package za.co.anycompany;
 
-import org.junit.jupiter.api.Test;
-//import org.junit.Test;
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+
 import za.co.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.model.Order;
 
-//import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.contains;
-import static org.hamcrest.Matchers.containsInAnyOrder;
 
 //@SpringBootTest
 class AnycompanyApplicationTests {
 	private CustomerRepository customerRepository = new CustomerRepository();
 	private OrderRepository orderRepository = new OrderRepository();
+
+	// REQ1 - Place an order, linked to a customer
+    // REQ2 - Retrieve a customer with their linked order(s)
+ 	// REQ3 - Load all customers and their linked orders
+
+	@BeforeAll
+	static void beforeTesting(){
+		System.out.println("Before All The Tests Run");
+	}
+	@BeforeEach
+	void setup(){
+
+	}
+
+
 	@Test
 	public void contextLoads() throws Exception{
 	}
 
+	// REQ 1
+	@Test
+	void orderCanBePlacedForExistingCustomer(){
+	//	Customer customer = customerRepository.load(1);
+	//	assertThat(customer.getName()).startsWith("Xolis");
+	}
+
+	@Test
+	void userIsBlocked(){
+	//	List<Customer> customers = customerRepository.getAll();
+	//	assertThat(customers.size())
+	//			.as("Array size is %s ", 0)
+	//			.isOne();
+	}
+
 	@Test
 	public void returnsNullIfTheCustomerDoesNotExist() throws Exception{
-/*
 
-		Customer results = customerRepository.load(1);
-
-		 assertThat(results.getCountry(), is("Xolisani") );
-*/
 	}
 
 
@@ -42,4 +67,23 @@ class AnycompanyApplicationTests {
 
 		assertThat(order.getAmount(), is(450.23) );*/
 	}
+
+	@AfterEach
+	void cleanup(){
+
+	}
+
+	@AfterAll
+	static void afterTesting(){
+		System.out.println("After All The Tests Run");
+	}
+
+	// assertEquals
+	// assertTrue
+	// assertNull
+	// assertArrayEquals
+	// mock(Interface / class)
+	// assertThrows(classofexception, () -> {
+	// respositore.determineLetterGrade(-1);
+	// });
 }
