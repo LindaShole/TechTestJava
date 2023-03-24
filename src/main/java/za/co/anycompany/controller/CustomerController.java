@@ -37,8 +37,19 @@ public class CustomerController {
 
     // 1.2 http://localhost:8080/customers
     @GetMapping("/customers")
-    public String getAllCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
+    public String getAllCustomers(@RequestParam Integer customerid, @RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
+        Customer customer = customerService.getCustomerById(customerid);
+
+        if (customerid > 0){
+            model.addAttribute("id", customer.getCustomerid());
+            model.addAttribute("name", customer.getName());
+            model.addAttribute("country", customer.getCountry());
+            model.addAttribute("date_of_birth", customer.getDateOfBirth());
+            model.addAttribute("appName", appName);
+
+            return "customer";
+        }
         model.addAttribute("name", name);
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);

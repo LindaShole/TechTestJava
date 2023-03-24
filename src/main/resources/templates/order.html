@@ -13,44 +13,83 @@
     <script typpe="text/javascript" src="/js/main.js"></script>
 </head>
 <body class="page">
+<nav class="navbar navbar-expand-lg navbar-light bg-brand">
+    <a class="heading-5 navbar-brand" href="/">
+        AnyCompany
+        <img src="/images/Zebra-Head.svg" width="60" height="60" class="d-inline-block align-center" alt="Brand Logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSC"
+            aria-controls="navbarSC" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSC">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/"> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/orders"> Orders </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers"> Customers </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Admins
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/orders">Orders</a>
+                    <a class="dropdown-item" href="/customers">Customers</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Users</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div>
-    <div class="row align-items-center" >
-        <div class="mx-auto col-10 col-md-8 col-lg-12">
-            <h1>Order Summary</span></h1>
-            <p>The Details about the order are summarised below</p>
+    <div class="container-fluid canvas rounded">
+    <div class="row align-items-center wrapper" >
+        <div class="mx-auto px-3 col-12 col-md-10 col-lg-12 box">
+            <h2 class="heading-2">Order Summary</span></h2>
+            <p class="sub-heading-2">The Details about the order are summarised below</p>
+            <div class="container bg-brand py-2 px-4">
             <div class="row">
-                <div class="col-3">
+                <div class="heading-5 col-3">
                     Order ID
                 </div>
-                <div class="col-9">
+                <div class="form-text col-9">
                     <p th:text="${orderId}">orderId</p>
                 </div>
-                <div class="col-3">
+                <div class="heading-5 col-3">
                     Order Value (R)
                 </div>
-                <div class="col-9">
+                <div class="form-text col-9">
                     <p th:text="${amount}">amount</p>
                 </div>
-                <div class="col-3">
+                <div class="heading-5 col-3">
                     VAT
                 </div>
-                <div class="col-9">
+                <div class="form-text col-9">
                     <span th:text="${VAT}">VAT</span>
                 </div>
-                <div class="col-3">
+                <div class="heading-5 col-3">
                     Customer ID
                 </div>
-                <div class="col-9">
+                <div class="form-text col-9">
                     <span th:text="${customerId}">customerId</span>
                 </div>
             </div>
             <div class="row mx-2 py-3">
-                <p class="btn btn-primary btn-lg btn-block">Ordered by <a class="text-dark"
-                                                                          th:href="@{/customers/(${customerId})}"><span
+                <p class="btn btn-primary btn-lg btn-block">Ordered by Customer with Customer ID:  <a class="text-dark"
+                                                                          th:href="@{/customers(customerid=${customerId})}"><span
                         th:text="${customerId}">customerId</span></a></p>
+            </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 </body>
