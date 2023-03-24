@@ -82,5 +82,8 @@ class AnycompanyApplicationTests {
 	// assertTrue
 	// assertNull
 	// assertArrayEquals
-	// mock(Interafce / class)
+	// mock(Interface / class)
+	// assertThrows(classofexception, () -> {
+	// respositore.determineLetterGrade(-1);
+	// });
 }

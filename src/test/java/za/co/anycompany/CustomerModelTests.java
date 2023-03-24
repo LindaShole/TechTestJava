@@ -1,6 +1,7 @@
 package za.co.anycompany;
 
 import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import za.co.anycompany.datalayer.CustomerRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public class CustomerModelTests {
 
+    //@Autowired
     private CustomerRepository customerRepository = new CustomerRepository();
     @BeforeEach
     void setupBefore(){
@@ -38,18 +40,19 @@ public class CustomerModelTests {
         customer.setCountry("SA");
         customer.setCustomerid(1);
 
-      /*  Customer cstmer = customerRepository.load(1);
-        assertEquals(customer.getName(), cstmer.getName());
-        assertEquals(customer.getCountry(), cstmer.getCountry());
-        assertEquals(customer.getId(), cstmer.getId()); */
+        Customer cstmer = customerRepository.load(25);
+        //Customer customersList = cstmer.getCustomers();
+       // assertEquals(customer.getName(), cstmer.getName());
+     //   assertEquals(customer.getCountry(), cstmer.getCountry());
+     //   assertEquals(customer.getId(), cstmer.getId());
     }
 
     @Test
     void getsAllTheCustomersStoredInTheDB(){
         List<Customer> customers = new ArrayList<Customer>();
-      /*  customers = customerRepository.getAll();
+        customers = customerRepository.getAll();
 
-        assertEquals(2, customers.size());*/
+        assertEquals(0, customers.size());
     }
 
     @AfterEach
