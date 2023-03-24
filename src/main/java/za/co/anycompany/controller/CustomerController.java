@@ -24,10 +24,19 @@ public class CustomerController {
 
     @Value("${spring.application.name}")
     String appName;
+    // 1.0  http://localhost:8080/
+    @GetMapping("/")
+    public String getCustomersIndex(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
+        List<Customer> customers = customerService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        model.addAttribute("appName", appName);
+
+        return "home";
+    }
 
     // 1.1  http://localhost:8080/
     @GetMapping("/home")
-    public String getCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
+    public String getCustomersHome(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
         model.addAttribute("customers", customers);
         model.addAttribute("appName", appName);
