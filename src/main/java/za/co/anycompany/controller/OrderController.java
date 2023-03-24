@@ -34,8 +34,7 @@ public class OrderController {
         model.addAttribute("amount", order.getAmount());
         model.addAttribute("VAT", order.getVAT());
         model.addAttribute("customerId", order.getCustomerId());
-       /* Order order = orderService.get(id);
-        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);*/
+
         return "order";
     }
 
@@ -43,6 +42,7 @@ public class OrderController {
     @GetMapping("/orders/customer")
     public String getCustomerOrders(@RequestParam Integer customerid , Model model){
         List <Order> orders = orderService.getOrderByCustomerId(customerid);
+
         model.addAttribute("orders", orders);
         return "orders";
     }
@@ -50,7 +50,7 @@ public class OrderController {
     // 1.4 http://localhost:8081/orders/customers
     @GetMapping("/orders/customers")
     public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
-        List<Order> orders = orderService.getAllOrders();
+    //    List<Order> orders = orderService.getAllOrders();
         List<Integer> customerIds = orderService.getAllCustomersWithOrders() ;
         List<Order>[] arrayOfList = new List[customerIds.size()];
         Integer i = 0;

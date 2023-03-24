@@ -21,24 +21,18 @@ public class PageController {
 
     @RequestMapping(value="login", method = RequestMethod.GET)
     public String loginUser(){
-        //model.put("name", name);
-        //logger.debug("Request param is {} ", name); // warn, info, debug m                            b
-        //System.out.println("Request param is " + name);
         return "login";
     }
 
     @RequestMapping(value="login", method = RequestMethod.POST)
     public String welcomeUser(@RequestParam String name, @RequestParam String password, ModelMap model){
-
         if(pageService.authenticate(name, password)){
             model.put("name", name);
             model.put("password", password);
-            logger.debug("Request param is {} ", name); // warn, info, debug m
-            logger.debug("Request param is {} ", password); // warn, info, debug m
+            logger.debug("Request param is {} ", name);
+            logger.debug("Request param is {} ", password);
             return "index";
         }
-                     //                        b
-        //System.out.println("Request param is " + name);
         model.put("errorMessage", "Invalid Login Credentials!");
         return "login";
     }
