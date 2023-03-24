@@ -1,8 +1,13 @@
-package za.co.anycompany.anycompany.model;
+package za.co.anycompany.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 @Table("ORDERS")
 public class Order {
     @Id
@@ -10,6 +15,26 @@ public class Order {
     private double amount;
     private double VAT;
     private int customerId;
+
+    public Order(int orderId, double amount, double VAT, int customerId, Customer customer) {
+        this.orderId = orderId;
+        this.amount = amount;
+        this.VAT = VAT;
+        this.customerId = customerId;
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    @ManyToOne
+    @JoinColumn(name="customerId")
+    private Customer customer;
 
     public int getCustomerId() {
         return customerId;

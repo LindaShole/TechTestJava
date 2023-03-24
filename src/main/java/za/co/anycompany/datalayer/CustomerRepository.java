@@ -1,8 +1,8 @@
-package za.co.anycompany.anycompany.datalayer;
+package za.co.anycompany.datalayer;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import za.co.anycompany.anycompany.model.Customer;
+import za.co.anycompany.model.Customer;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -48,12 +48,12 @@ public class CustomerRepository implements CrudRepository<Customer, Integer> {
         Connection con = getDBConnection();
         PreparedStatement prpstmt = null;
         ResultSet resultSet = null;
-        Statement statement = null;
+        Statement statement;
         Customer customer = new Customer();
         try {
             statement = con.createStatement();
             statement.executeUpdate("CREATE TABLE IF NOT EXISTS CUSTOMER(CUSTOMERID INT PRIMARY KEY NOT NULL, CUSTOMER_NAME VARCHAR(50), COUNTRY VARCHAR(50), DATE_OF_BIRTH DATE);");
-            con.prepareStatement("INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (1,'Xolisani','South Africa', '2002-11-15');");
+            con.prepareStatement("INSERT INTO CUSTOMER (CUSTOMERID, CUSTOMER_NAME, COUNTRY, DATE_OF_BIRTH) VALUES (25,'Xolisani','South Africa', '2002-11-15');");
             prpstmt = con.prepareStatement("select * from CUSTOMER where customerId = ?");
             prpstmt.setInt(1, customerId);
             resultSet = prpstmt.executeQuery();

@@ -1,14 +1,12 @@
-package za.co.anycompany.anycompany.controller;
+package za.co.anycompany.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import za.co.anycompany.anycompany.model.Customer;
-import za.co.anycompany.anycompany.model.Order;
-import za.co.anycompany.anycompany.service.OrderService;
+import za.co.anycompany.model.Order;
+import za.co.anycompany.service.OrderService;
 
 import java.util.*;
 
@@ -36,15 +34,15 @@ public class OrderController {
         model.addAttribute("amount", order.getAmount());
         model.addAttribute("VAT", order.getVAT());
         model.addAttribute("customerId", order.getCustomerId());
-       /* Order order = orderService.get(id);
-        if (order==null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);*/
+
         return "order";
     }
 
     // 1.3 http://localhost:8081/orders/customer/{customerId}
-    @GetMapping("/orders/customer/{customerId}")
-    public String getCustomerOrders(@PathVariable int customerId , Model model){
-        List <Order> orders = orderService.getOrderByCustomerId(customerId);
+    @GetMapping("/orders/customer")
+    public String getCustomerOrders(@RequestParam Integer customerid , Model model){
+        List <Order> orders = orderService.getOrderByCustomerId(customerid);
+
         model.addAttribute("orders", orders);
         return "orders";
     }
@@ -52,13 +50,18 @@ public class OrderController {
     // 1.4 http://localhost:8081/orders/customers
     @GetMapping("/orders/customers")
     public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
-        List<Order> orders = orderService.getAllOrders();
-        /*List<Customer> customers = null;
-        for(Order order : orders){
-           customers.add(order.getCustomerId(), );
-        }*/
-        model.addAttribute("orders", orders);
-        return "orders";
+    //    List<Order> orders = orderService.getAllOrders();
+        List<Integer> customerIds = orderService.getAllCustomersWithOrders() ;
+        List<Order>[] arrayOfList = new List[customerIds.size()];
+        Integer i = 0;
+        for(Integer customerId : customerIds){
+            List<Order> testOrders = orderService.getOrderByCustomerId(customerId);
+            arrayOfList[i] = testOrders;
+            i++;
+        }
+        model.addAttribute("customerIds", customerIds);
+        model.addAttribute("arrayOfList", arrayOfList);
+        return "customer-orders";
     }
 
     // 1.5 http://localhost:8081/order

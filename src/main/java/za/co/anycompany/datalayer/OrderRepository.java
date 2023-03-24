@@ -1,13 +1,17 @@
-package za.co.anycompany.anycompany.datalayer;
+package za.co.anycompany.datalayer;
 
-import za.co.anycompany.anycompany.model.Order;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import za.co.anycompany.model.Customer;
+import za.co.anycompany.model.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderRepository {
-
+@Repository
+public class OrderRepository  {
+//implements CrudRepository<Order, Integer>
     private static final String DB_DRIVER = "org.h2.Driver";
     private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
     private static final String DB_USER = "sa";
@@ -119,7 +123,7 @@ public class OrderRepository {
     }
 
     public List<Order> getOrdersByCustomerId(Integer customerId) {
-        Order order = new Order();
+        // Order order = new Order();
         List<Order> orders = new ArrayList<Order>();
 
         Connection connection = getDBConnection();
@@ -133,6 +137,7 @@ public class OrderRepository {
             resultSet = prpstmt.executeQuery();
 
             while (resultSet.next()) {
+                Order order = new Order();
                 order.setOrderId(resultSet.getInt(1));
                 order.setAmount(resultSet.getDouble(2)) ;
                 order.setVAT(resultSet.getDouble(3));
@@ -149,5 +154,26 @@ public class OrderRepository {
     public Order remove(Integer id) {
         Order order = new Order();
         return order;
+    }
+
+    public List<Integer> getAllCustomer() {
+        List<Integer> orders = new ArrayList<Integer>();
+
+        Connection connection = getDBConnection();
+        try {
+            Statement statement = connection.createStatement();
+            String select = "Select distinct customerId from ORDERS";
+            ResultSet rows;
+            rows = statement.executeQuery(select);
+            while (rows.next()) {
+                orders.add(rows.getInt(1));
+            }
+
+            return orders;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
