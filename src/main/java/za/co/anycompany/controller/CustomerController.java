@@ -28,10 +28,16 @@ public class CustomerController {
     @GetMapping("/")
     public String getCustomersIndex(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-        model.addAttribute("customers", customers);
-        model.addAttribute("appName", appName);
 
-        return "home";
+        if(null==customers){
+            return "error";
+        }
+        else {
+            model.addAttribute("customers", customers);
+            model.addAttribute("appName", appName);
+
+            return "home";
+        }
     }
 
     // 1.1  http://localhost:8080/
