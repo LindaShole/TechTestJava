@@ -56,7 +56,7 @@ public class CustomerServiceTests {
 
         CustomerService customerServiceMock = mock(CustomerService.class);
        // customerServiceMock.getCustomerByIdTest(1) .getAllCustomers()
-        when(customerServiceMock.getCustomerByIdTest(2)).thenReturn(customer);
+        when(customerServiceMock.getCustomerById(2)).thenReturn(customer);
       //  given(repository.existsById(1)).willReturn(Optional.empty());
 
 

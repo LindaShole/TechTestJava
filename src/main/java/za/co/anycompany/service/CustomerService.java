@@ -10,27 +10,41 @@ import java.util.List;
 public class CustomerService {
     private CustomerRepository customerRepository = new CustomerRepository();
 
+    // 1.
     public List<Customer> getAllCustomers() {
-        return customerRepository.getAll();
+        List<Customer> customers =  customerRepository.getAll();
+
+        if (customers.size() == 0)
+            return null;
+
+        else
+            return customers;
     }
 
-    public Customer getCustomerByIdTest(int id) {
-        return customerRepository.findById(id).get();
-    }
-
+    // 2.
     public void delete(int id) {
         customerRepository.deleteById(id);
     }
 
+    // 3.
     public void saveOrUpdate(Customer customer) {
         customerRepository.save(customer);
     }
 
+    // 4.
     public void update(Customer customer, int id){
         customerRepository.save(customer);
     }
 
+    // 5.
     public Customer getCustomerById(int id){
-        return customerRepository.load(id);
+        Customer customer = customerRepository.load(id);
+
+        if(null==customer.getId())
+            return null;
+
+        else {
+            return customer;
+        }
     }
 }
