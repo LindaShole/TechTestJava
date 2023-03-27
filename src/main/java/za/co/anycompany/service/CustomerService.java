@@ -8,10 +8,9 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-    // 1.
     private CustomerRepository customerRepository = new CustomerRepository();
 
-    // 2.
+    // 1.
     public List<Customer> getAllCustomers() {
         List<Customer> customers =  customerRepository.getAll();
 
@@ -22,28 +21,30 @@ public class CustomerService {
             return customers;
     }
 
-    // 3.
-    public Customer getCustomerByIdTest(int id) {
-        return customerRepository.findById(id).get();
-    }
-
-    // 4.
+    // 2.
     public void delete(int id) {
         customerRepository.deleteById(id);
     }
 
-    // 5.
+    // 3.
     public void saveOrUpdate(Customer customer) {
         customerRepository.save(customer);
     }
 
-    // 6.
+    // 4.
     public void update(Customer customer, int id){
         customerRepository.save(customer);
     }
 
-    // 7.
+    // 5.
     public Customer getCustomerById(int id){
-        return customerRepository.load(id);
+        Customer customer = customerRepository.load(id);
+
+        if(null==customer.getId())
+            return null;
+
+        else {
+            return customer;
+        }
     }
 }

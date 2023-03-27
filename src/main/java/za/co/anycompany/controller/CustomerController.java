@@ -44,10 +44,16 @@ public class CustomerController {
     @GetMapping("/home")
     public String getCustomersHome(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model) {
         List<Customer> customers = customerService.getAllCustomers();
-        model.addAttribute("customers", customers);
-        model.addAttribute("appName", appName);
 
-        return "home";
+        if(null==customers){
+            return "error";
+        }
+        else {
+            model.addAttribute("customers", customers);
+            model.addAttribute("appName", appName);
+
+            return "home";
+        }
     }
 
     // 1.2 http://localhost:8080/customer
@@ -80,10 +86,16 @@ public class CustomerController {
     @GetMapping("/customers/{id}")
     private String getCustomer(@PathVariable int id, Model model){
         Customer customer = customerService.getCustomerById(id);
-        model.addAttribute("name", customer.getName());
-        model.addAttribute("country", customer.getCountry());
-        model.addAttribute("date_of_birth", customer.getDateOfBirth());
-        return "customer";
+
+        if (null==customer.getName())
+            return "error";
+
+        else {
+            model.addAttribute("name", customer.getName());
+            model.addAttribute("country", customer.getCountry());
+            model.addAttribute("date_of_birth", customer.getDateOfBirth());
+            return "customer";
+        }
     }
 
     // 2. http://localhost:8080/customers/{id}
