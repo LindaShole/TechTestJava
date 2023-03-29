@@ -22,20 +22,29 @@ public class OrderController {
     @GetMapping("/orders")
     public String get(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
         List<Order> orders = orderService.getAllOrders();
-        model.addAttribute("orders", orders);
-        return "orders";
+        if(orders.size()==0)
+            return "error";
+        else{
+            model.addAttribute("orders", orders);
+            return "orders";
+        }
     }
 
     // 1.2 http://localhost:8081/orders/{id}
     @GetMapping("/orders/{id}")
     public String get(@PathVariable int id, @RequestParam(name="name", required=false, defaultValue="Xolisani") String name, Model model){
         Order order = orderService.getOrderById(id);
-        model.addAttribute("orderId", order.getOrderId());
-        model.addAttribute("amount", order.getAmount());
-        model.addAttribute("VAT", order.getVAT());
-        model.addAttribute("customerId", order.getCustomerId());
 
-        return "order";
+        if (null==order)
+            return "error";
+        else{
+            model.addAttribute("orderId", order.getOrderId());
+            model.addAttribute("amount", order.getAmount());
+            model.addAttribute("VAT", order.getVAT());
+            model.addAttribute("customerId", order.getCustomerId());
+
+            return "order";
+        }
     }
 
     // 1.3 http://localhost:8081/orders/customer/{customerId}
@@ -43,14 +52,18 @@ public class OrderController {
     public String getCustomerOrders(@RequestParam Integer customerid , Model model){
         List <Order> orders = orderService.getOrderByCustomerId(customerid);
 
-        model.addAttribute("orders", orders);
-        return "orders";
+        if(orders==null)
+            return "error";
+
+        else{
+            model.addAttribute("orders", orders);
+            return "orders";
+        }
     }
 
     // 1.4 http://localhost:8081/orders/customers
     @GetMapping("/orders/customers")
     public String getOrdersAndCustomers(@RequestParam(name="name", required=false, defaultValue="User") String name, Model model){
-    //    List<Order> orders = orderService.getAllOrders();
         List<Integer> customerIds = orderService.getAllCustomersWithOrders() ;
         List<Order>[] arrayOfList = new List[customerIds.size()];
         Integer i = 0;
@@ -59,9 +72,13 @@ public class OrderController {
             arrayOfList[i] = testOrders;
             i++;
         }
-        model.addAttribute("customerIds", customerIds);
-        model.addAttribute("arrayOfList", arrayOfList);
-        return "customer-orders";
+        if(customerIds.size()==0)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        else{
+            model.addAttribute("customerIds", customerIds);
+            model.addAttribute("arrayOfList", arrayOfList);
+            return "customer-orders";
+        }
     }
 
     // 1.5 http://localhost:8081/order
@@ -70,7 +87,7 @@ public class OrderController {
         // get one order
         Order order = new Order();
         model.addAttribute("order", order);
-        // get all order
+        // get all orders
         List<Order> orders = orderService.getAllOrders();
         model.addAttribute("orders", orders);
         return "place";
