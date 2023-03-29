@@ -34,7 +34,14 @@ public class OrderService {
     return orderRepository.remove(id);
 }
 
-    public List<Order> getAllOrders() {return orderRepository.getAll();}
+    public List<Order> getAllOrders() {
+        List<Order> orders = orderRepository.getAll();
+        if(orders.size()==0)
+            return null;
+        else {
+            return orders;
+        }
+    }
 
     public Order getOrderById(int id) {
         Order order = new Order() ; //= orderRepository.findById(id);
@@ -57,9 +64,22 @@ public class OrderService {
         return order;
     }
 
-    public List<Order> getOrderByCustomerId(int id) {return orderRepository.getOrdersByCustomerId(id);}
+    public List<Order> getOrderByCustomerId(int id) {
+        List<Order> orders = orderRepository.getOrdersByCustomerId(id);
+        if(orders.size()==0)
+            return null;
+
+        else{
+            return orders;
+        }
+    }
 
     public List<Integer> getAllCustomersWithOrders() {
-        return orderRepository.getAllCustomer();
+        List<Integer> customerIds = orderRepository.getAllCustomer();
+        if(customerIds.size()==0)
+            return null;
+        else{
+            return customerIds;
+        }
     }
 }
