@@ -24,8 +24,8 @@
 }
 
 .wrapper {
- background-color: rgba( 113,122,207, 0.8);
-  box-shadow: 0px 1px 2px 0px rgba(113,122,207,0.7),
+    background-color: rgba( 192,192,192, 0.7);
+    box-shadow: 0px 1px 2px 0px rgba(113,122,207,0.7),
               1px 2px 4px 0px rgba(113,122,207,0.7),
               2px 4px 8px 0px rgba(113,122,207,0.7),
               2px 4px 8px 0px rgba(113,122,207,0.7);
@@ -34,12 +34,12 @@
 }
 
 .box{
-    background: rgba(249,190,178,0.45);
+    /*background: rgba(249,190,178,0.45);*/
     backdrop-filter: blur(30px);
     border: 2px solid rgba(255,255,255,0.1);
 }
 .box h2{
-    font-size: 35px;
+    font-size: 45px;
     margin-bottom: 30px;
     /* color: rgba(255,255,255,0.7); */
     color: #141D71; /* Dark Blue Text */
@@ -114,6 +114,13 @@ background-color: rgba(221,244,203,0.5);
 
 .bg-brand-dark{
     background-color: rgba( 113,122,207, 0.8);
+}
+
+.bg-brand-light{
+    /* background-color: rgba( 255,255,255, 1); */
+    background-color: rgba( 211,211,211, .9);
+    border: 2px solid rgb( 113,122,207);
+    border-radius:5px;
 }
 
 .form-brand{
