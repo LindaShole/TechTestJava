@@ -7,7 +7,7 @@ variables:
   DOCKER_DRIVER: overlay
   CONTAINER: $ECR_REPO:$CI_PIPELINE_IID
   MAVEN_CLI_OPTS: "--batch-mode --errors -s /root/.m2/settings-gitlab.xml"
-  BUILDER_IMAGE: "registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/maven-3:latest"
+  BUILDER_IMAGE: "maven-3:latest"
   REGION: eu-west-1
 
 cache:
@@ -45,7 +45,7 @@ maven-build:
     - docker push $CONTAINER
 
 deploy-dev:
-  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  image: ......aws-sam-cli-build-image-nodejs14.x
   stage: dev_deploy
   script:
     - echo *****************************************************
@@ -76,7 +76,7 @@ deploy-dev:
 
 deploy-staging:
   when: manual
-  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  image:  url .../aws-sam-cli-build-image-nodejs14.x
   stage: staging_deploy
   script:
     - echo *****************************************************
@@ -106,7 +106,7 @@ deploy-staging:
 
 deploy-production:
   when: manual
-  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  image: url.../aws-sam-cli-build-image-nodejs14.x
   stage: production_deploy
   script:
     - echo *****************************************************
@@ -132,3 +132,4 @@ deploy-production:
     - cdk deploy --require-approval never
   rules:
     - if: "$CI_COMMIT_BRANCH ==  'main' || $CI_COMMIT_BRANCH =~  '/^(hotfix//|feature//|enhancement//|init_dev//)*/'"
+#added this rule to help with branch naming conventions

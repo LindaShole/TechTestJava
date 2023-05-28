@@ -15,8 +15,9 @@ public class CustomerService {
 
     public List<CustomerModel> findAllCustomers(){
         return customerRepository.findAll();
+        // depending on the amount of customers we have in the database, we can implement pagination
+        // otherwise we will run out of memory..
     }
-
     public void checkIfCustomerExists(CustomerModel customerModel){
 
         CustomerModel customer =  customerRepository.findById(customerModel.getId());

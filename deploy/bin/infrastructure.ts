@@ -29,4 +29,4 @@ let props = {
 
 const app = new App();
 
-new Infrastructure(app, `play-integrity-stack-${env.ENVIRONMENT}`, env.ENVIRONMENT as string, props);
+new Infrastructure(app, `anyCompany-stack-${env.ENVIRONMENT}`, env.ENVIRONMENT as string, props);

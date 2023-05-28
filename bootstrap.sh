@@ -8,6 +8,11 @@ echo "$SPRING_PROFILES_ACTIVE: $SPRING_PROFILES_ACTIVE"
 echo "APPDYNAMICS_MONITORING $APPDYNAMICS_MONITORING"
 echo "Java version running in this container: $(java --version)"
 
+#
+# dynamics is a tool you can use to create dashboards from logs etc, so I am just using it
+#    so that it makes sense understandable
+
+
 if [ "$APPDYNAMICS_MONITORING" == "enabled" ]
 then
   java ${JAVA_OPTS} -Xms1020m -Xmx1020m -Dspring.profiles.active=$SPRING_PROFILES_ACTIVE -Dappdynamics.agent.applicationName=$MONITORING_GROUP -Dappdynamics.agent.tierName=$APPLICATION_NAME -Dappdynamics.agent.nodeName=\"${containername}\" -javaagent:/var/appdynamics/javaagent.jar -jar /app/app.jar

@@ -33,8 +33,8 @@ export class Infrastructure extends Stack{
             }
         });
 
-        const cluster = new Cluster(this, `play-integrity-service`, {
-            clusterName: `play-integrity`,
+        const cluster = new Cluster(this, `anyCompany-service`, {
+            clusterName: `anyCompany`,
             containerInsights: true,
             vpc: applicationVpc
         });
@@ -47,25 +47,25 @@ export class Infrastructure extends Stack{
             managedPolicyArn: 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
         });
 
-        const anyCompanyServiceTask = new FargateTaskDefinition(this,'play-integrity-task',{
+        const anyCompanyServiceTask = new FargateTaskDefinition(this,'anyCompany-task',{
             memoryLimitMiB: 4096,
             cpu: 2048,
             executionRole: executionRole,
             taskRole: executionRole
         });
 
-        let logGroup = new LogGroup(this, 'play-integrity-logGroup', {
-            logGroupName: `play-integrity-service`,
+        let logGroup = new LogGroup(this, 'anyCompany-logGroup', {
+            logGroupName: `anyCompany-service`,
             retention: RetentionDays.ONE_MONTH
         });
 
-        anyCompanyServiceTask.addContainer('play-integrity-container', {
+        anyCompanyServiceTask.addContainer('anyCompany-container', {
             image: ContainerImage.fromRegistry(env.DOCKER_IMAGE as string),
             essential: true,
             cpu: 1024,
             memoryLimitMiB: 2048,
             healthCheck: {
-                command: ["CMD-SHELL", "curl -f http://localhost:8080/api/android_integrity/ping || exit 1"]
+                command: ["CMD-SHELL", "curl -f http://localhost:8080/api/customer/ping || exit 1"]
             },
             portMappings: [
                 {
@@ -77,7 +77,7 @@ export class Infrastructure extends Stack{
                 ENVIRONMENT: environment,
             },
             logging: new AwsLogDriver({
-                streamPrefix: "play-integrity-service",
+                streamPrefix: "anyCompany-service",
                 logGroup: logGroup,
             }),
         });
@@ -86,11 +86,11 @@ export class Infrastructure extends Stack{
         let anyCompanyEcsSg = new SecurityGroup(this, 'anyCompanySecurityGroup', {
             vpc: applicationVpc,
             allowAllOutbound: true,
-            description: "Security Group for play integrity ECS service, "
+            description: "Security Group for anyCompany ECS service, "
         })
         const anyCompany = new FargateService(this, 'anyCompanyService', {
             cluster: cluster,
-            serviceName: 'play-integrity-service',
+            serviceName: 'anyCompany-service',
             taskDefinition: anyCompanyServiceTask,
             vpcSubnets: {
                 subnetType: SubnetType.PRIVATE_WITH_NAT,
@@ -98,10 +98,10 @@ export class Infrastructure extends Stack{
             securityGroups: [anyCompanyEcsSg]
         });
 
-        const anyCompanyIntegrityTarget = new ApplicationTargetGroup(this, 'anyCompanyTarget', {
+        const anyCompanyTarget = new ApplicationTargetGroup(this, 'anyCompanyTarget', {
             healthCheck: {
                 interval: Duration.seconds(10),
-                path: '/api/android_integrity/ping',
+                path: '/api/customer/ping',
                 port: '8080',
                 timeout: Duration.seconds(5),
                 unhealthyThresholdCount: 5,
@@ -110,7 +110,7 @@ export class Infrastructure extends Stack{
                 enabled: true
             },
             port: 8080,
-            targetGroupName: `play-integrity-service-ecs`,
+            targetGroupName: `anyCompany-service-ecs`,
             protocol: ApplicationProtocol.HTTP,
             targets: [anyCompanyService],
             vpc: applicationVpc
@@ -125,7 +125,7 @@ export class Infrastructure extends Stack{
 
         listener.addTargetGroups('anyCompanyServiceTG', {
             conditions: [
-                ListenerCondition.pathPatterns(['*/android_integrity*'])
+                ListenerCondition.pathPatterns(['*/anyCompany*'])
             ],
             priority: 505,
             targetGroups: [anyCompanyTarget]

@@ -10,9 +10,7 @@ import za.com.anyCompany.model.CustomerModel;
 @RequiredArgsConstructor
 @Service
 public class AddressService {
-
     private final AddressRepo addressRepo;
-
     public AddressModel findShippingAddress(CustomerModel model) {
         return addressRepo.findByCustomerId(model.getId());
     }
