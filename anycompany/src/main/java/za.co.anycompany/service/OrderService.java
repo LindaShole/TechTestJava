@@ -5,18 +5,25 @@ import za.co.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 
+import java.util.Objects;
+
 public class OrderService {
 
-    private OrderRepository orderRepository = new OrderRepository();
 
-    public boolean placeOrder(Order order, int customerId)
+    private final  OrderRepository orderRepository;
+
+    public OrderService(OrderRepository orderRepository){
+        this.orderRepository = orderRepository;
+    }
+
+    public boolean placeOrder(Order order)
     {
-        Customer customer = CustomerRepository.load(customerId);
+        Customer customer = order.getCustomer();
 
         if (order.getAmount() == 0)
             return false;
 
-        if (customer.getCountry() == "UK")
+        if (Objects.equals(customer.getCountry(), "UK"))
             order.setVAT(0.2d);
         else
             order.setVAT(0);
