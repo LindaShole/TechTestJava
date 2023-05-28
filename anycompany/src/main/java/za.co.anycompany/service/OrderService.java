@@ -8,8 +8,8 @@ public class OrderService {
 
     private final OrderRepository orderRepository ;
 
-    public  OrderService(OrderRepository orderRepository){
-        this.orderRepository = orderRepository;
+    public  OrderService(){
+        this.orderRepository = new OrderRepository();
     }
 
     public void placeOrder(Order order)

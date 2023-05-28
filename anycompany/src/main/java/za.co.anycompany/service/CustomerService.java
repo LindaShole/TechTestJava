@@ -5,10 +5,10 @@ import za.co.anycompany.model.Customer;
 
 public class CustomerService {
 
-  CustomerRepository customerRepository;
+ private final CustomerRepository customerRepository;
 
-  public CustomerService(CustomerRepository customerRepository){
-    this.customerRepository = customerRepository;
+  public CustomerService(){
+    this.customerRepository = new CustomerRepository();
   }
 
   public void loadCustomersWithOrders(){

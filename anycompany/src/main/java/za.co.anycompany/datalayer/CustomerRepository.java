@@ -4,12 +4,14 @@ import za.co.anycompany.model.Customer;
 
 import java.sql.*;
 
+import static za.co.anycompany.config.PersistenceManager.getDBConnection;
+
 public class CustomerRepository {
 
     private Connection con = null;
 
-    public CustomerRepository(Connection con){
-        this.con = con;
+    public CustomerRepository(){
+        this.con = getDBConnection();;
     }
 
     public Customer load(int customerId) {

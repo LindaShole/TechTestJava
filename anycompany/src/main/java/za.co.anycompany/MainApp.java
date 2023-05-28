@@ -19,15 +19,13 @@ public class MainApp {
 
   public static void main(String[] args){
 
-   Connection connection =  PersistenceManager.getDBConnection();
-   final OrderRepository orderRepository = new OrderRepository(connection);
-   final CustomerRepository customerRepository = new CustomerRepository(connection);
 
-   CustomerService customerService = new CustomerService(customerRepository);
-   OrderService orderService = new OrderService(orderRepository);
+   CustomerService customerService = new CustomerService();
+
+   OrderService orderService = new OrderService();
 
 
-   PersistenceManager.createTables(connection);
+   PersistenceManager.createTables();
 
     Customer customer = new Customer(1,"John","RSA",new Date());
    customerService.save(customer);

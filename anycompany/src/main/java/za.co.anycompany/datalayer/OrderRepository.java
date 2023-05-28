@@ -11,10 +11,12 @@ public class OrderRepository {
     private  Connection connection;
 
     public OrderRepository(){
+        this.connection = getDBConnection();
     }
 
     public OrderRepository(Connection connection){
-        this.connection = connection;
+
+        //        this.connection = connection;
     }
 
 

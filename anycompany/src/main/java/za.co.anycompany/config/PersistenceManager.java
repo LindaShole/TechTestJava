@@ -7,7 +7,6 @@ import java.sql.Statement;
 
 public class PersistenceManager {
 
-//  private static final Logger LOG = LoggerFactory.getLogger(PersistenceManager.class);
   private static final String DB_DRIVER = "org.h2.Driver";
   private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
   private static final String DB_USER = "";
@@ -34,14 +33,14 @@ public class PersistenceManager {
   }
 
 
-  public static void createTables(Connection connection){
-    customerTable(connection);
-    orderTable(connection);
+  public static void createTables(){
+    customerTable();
+    orderTable();
 
   }
 
-  private static void customerTable(Connection conn){
-
+  private static void customerTable(){
+      Connection conn = getDBConnection();
     try{
     Statement stmt = conn.createStatement();
       String query = "CREATE TABLE CUSTOMER " +
@@ -59,7 +58,9 @@ public class PersistenceManager {
   }
 
 
-  private static void orderTable(Connection conn){
+  private static void orderTable(){
+
+    Connection conn = getDBConnection();
     try{
 
       Statement stmt = conn.createStatement();
