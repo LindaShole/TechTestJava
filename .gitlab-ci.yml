@@ -1,0 +1,134 @@
+image: $DOCKER_IMAGE
+services:
+  - name: $DOCKER_DIND_SERVICE
+    alias: docker
+
+variables:
+  DOCKER_DRIVER: overlay
+  CONTAINER: $ECR_REPO:$CI_PIPELINE_IID
+  MAVEN_CLI_OPTS: "--batch-mode --errors -s /root/.m2/settings-gitlab.xml"
+  BUILDER_IMAGE: "registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/maven-3:latest"
+  REGION: eu-west-1
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .m2/repository
+
+stages:
+  - build
+  - dev_deploy
+  - staging_deploy
+  - production_deploy
+
+maven-build:
+  stage: build
+  tags:
+    - maven
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - echo $CI_BUILD_IMAGE
+    - export AWS_ACCESS_KEY_ID=$DEV_LEGACY_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$DEV_LEGACY_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_ACCOUNT=$DEV_LEGACY_AWS_DEFAULT_ACCOUNT
+    - export AWS_DEFAULT_REGION=$REGION
+    - apk add --no-cache python3 py3-pip
+    - pip3 install --upgrade pip
+    - pip3 install --no-cache-dir awscli
+    - rm -rf /var/cache/apk/*
+    - aws --version
+    - docker run --rm --volume ${PWD}:/builder --volume /.m2:/root/.m2 --workdir /builder $CI_BUILD_IMAGE mvn $MAVEN_CLI_OPTS clean install -DskipTests -Dmaven.test.skip=true -s /root/.m2/settings-gitlab.xml
+    - cp target/*.jar target/app.jar
+    - docker build -f Dockerfile -t $CONTAINER .
+    - aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 828339948234.dkr.ecr.eu-west-1.amazonaws.com
+    - docker push $CONTAINER
+
+deploy-dev:
+  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  stage: dev_deploy
+  script:
+    - echo *****************************************************
+    - echo switch to npm credentials
+    - echo *****************************************************
+    - export AWS_ACCESS_KEY_ID=$NPM_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$NPM_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$NPM_AWS_DEFAULT_REGION
+    - aws codeartifact login --tool npm --repository cv-repo --domain cv-domain --domain-owner 464242368923
+    - npm install -g aws-cdk
+    - npm install
+    - echo *****************************************************
+    - echo switch to deploy credentials
+    - echo *****************************************************
+    - export ENVIRONMENT=dev
+    - export SPRING_PROFILES_ACTIVE=aws
+    - export AWS_ACCESS_KEY_ID=$DEV_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$DEV_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_ACCOUNT=$DEV_AWS_DEFAULT_ACCOUNT
+    - export AWS_DEFAULT_REGION=eu-west-1
+    - export DOCKER_IMAGE=$CONTAINER
+    - cd deploy && npm install -g aws-cdk && npm install
+    - cdk doctor
+    - cdk bootstrap
+    - cdk deploy --require-approval never --verbose
+  rules:
+    - if: "$CI_COMMIT_BRANCH ==  'main' || $CI_COMMIT_BRANCH =~  '/^(hotfix//|feature//|enhancement//|init_dev//)*/'"
+
+deploy-staging:
+  when: manual
+  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  stage: staging_deploy
+  script:
+    - echo *****************************************************
+    - echo switch to npm credentials
+    - echo *****************************************************
+    - export AWS_ACCESS_KEY_ID=$NPM_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$NPM_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$NPM_AWS_DEFAULT_REGION
+    - aws codeartifact login --tool npm --repository cv-repo --domain cv-domain --domain-owner 464242368923
+    - npm install -g aws-cdk
+    - npm install
+    - echo *****************************************************
+    - echo switch to deploy credentials
+    - echo *****************************************************
+    - export AWS_ACCESS_KEY_ID=$STAGING_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$STAGING_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_ACCOUNT=$STAGING_AWS_DEFAULT_ACCOUNT
+    - export AWS_DEFAULT_REGION=$STAGING_AWS_DEFAULT_REGION
+    - export DOCKER_IMAGE=$CONTAINER
+    - export ENVIRONMENT=staging
+    - export SPRING_PROFILES_ACTIVE=aws
+    - cd deploy && npm install -g aws-cdk && npm install
+    - cdk deploy --require-approval never
+  rules:
+    - if: "$CI_COMMIT_BRANCH ==  'main' || $CI_COMMIT_BRANCH =~  '/^(hotfix//|feature//|enhancement//|init_dev//)*/'"
+
+
+deploy-production:
+  when: manual
+  image: registry-glitnir.dstv.com/connected-video-application-team/platform/shared-images/amazon/aws-sam-cli-build-image-nodejs14.x
+  stage: production_deploy
+  script:
+    - echo *****************************************************
+    - echo switch to npm credentials
+    - echo *****************************************************
+    - export AWS_ACCESS_KEY_ID=$NPM_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$NPM_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_REGION=$NPM_AWS_DEFAULT_REGION
+    - aws codeartifact login --tool npm --repository cv-repo --domain cv-domain --domain-owner 464242368923
+    - npm install -g aws-cdk
+    - npm install
+    - echo *****************************************************
+    - echo switch to deploy credentials
+    - echo *****************************************************
+    - export AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
+    - export AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
+    - export AWS_DEFAULT_ACCOUNT=$PROD_AWS_DEFAULT_ACCOUNT
+    - export AWS_DEFAULT_REGION=$PROD_AWS_DEFAULT_REGION
+    - export DOCKER_IMAGE=$CONTAINER
+    - export ENVIRONMENT=prod
+    - export SPRING_PROFILES_ACTIVE=aws
+    - cd deploy && npm install -g aws-cdk && npm install
+    - cdk deploy --require-approval never
+  rules:
+    - if: "$CI_COMMIT_BRANCH ==  'main' || $CI_COMMIT_BRANCH =~  '/^(hotfix//|feature//|enhancement//|init_dev//)*/'"

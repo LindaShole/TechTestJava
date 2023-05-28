@@ -1,0 +1,7 @@
+#
+#spring:
+#  datasource:
+#   url: jdbc:postgresql://localhost:5432/anycompany
+#   username: postgres
+#   password: prod-cred
+#   driver-class-name: org.postgresql.Driver
