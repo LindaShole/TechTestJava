@@ -4,13 +4,21 @@ import za.co.anycompany.model.Order;
 
 import java.sql.*;
 
+import static za.co.anycompany.config.PersistenceManager.getDBConnection;
+
 public class OrderRepository {
 
-    private static final String DB_DRIVER = "org.h2.Driver";
-    private static final String DB_CONNECTION = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1";
-    private static final String DB_USER = "";
-    private static final String DB_PASSWORD = "";
+    private  Connection connection;
 
+    public OrderRepository(){
+    }
+
+    public OrderRepository(Connection connection){
+        this.connection = connection;
+    }
+
+
+    // Not being used
     public void save(Order order) {
         Connection connection = getDBConnection();
         Statement statement = null;
@@ -22,10 +30,11 @@ public class OrderRepository {
             connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
             preparedStatement.setInt(1, order.getOrderId());
             preparedStatement.setDouble(2, order.getAmount());
-            preparedStatement.setDouble(3, order.getVAT());
+            preparedStatement.setDouble(3, order.getVat());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
+            e.printStackTrace();
 
         } finally {
             try {
@@ -38,19 +47,38 @@ public class OrderRepository {
         }
     }
 
-    private static Connection getDBConnection() {
-        Connection dbConnection = null;
+    // Place an order, linked to a customer
+    public void placeOrder(Order order) {
+
         try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_USER, DB_PASSWORD);
-            return dbConnection;
+            // Insert the order details
+            String insertOrderQuery = "INSERT INTO orders (orderId,customerId, amount, product," +
+                    "vat,createdAt) VALUES " +
+                    "(?,?, ?, ?,?,?)";
+
+            // Prepare the statement for inserting order
+            PreparedStatement insertStatement = connection.prepareStatement(insertOrderQuery, Statement.RETURN_GENERATED_KEYS);
+            insertStatement.setInt(1, order.getOrderId());
+            insertStatement.setInt(2, order.getCustomer().getCustomerId());
+            insertStatement.setDouble(3, order.getAmount());
+            insertStatement.setString(4, order.getProduct());
+            insertStatement.setDouble(5, order.getVat());
+            insertStatement.setDate(6, new java.sql.Date(order.getCreatedAt().getTime()));
+
+
+            // Execute the insert statement
+            int affectedRows = insertStatement.executeUpdate();
+
+
+            if (affectedRows > 0) {
+                System.out.println("Order was placed successfully.");
+            } else {
+                System.out.println("Failed to create customer.");
+            }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        return dbConnection;
     }
+
+
 }

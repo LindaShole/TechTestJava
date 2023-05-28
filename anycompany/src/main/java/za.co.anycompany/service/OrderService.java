@@ -1,28 +1,30 @@
 package za.co.anycompany.service;
 
-import za.co.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.datalayer.OrderRepository;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 
 public class OrderService {
 
-    private OrderRepository orderRepository = new OrderRepository();
+    private final OrderRepository orderRepository ;
 
-    public boolean placeOrder(Order order, int customerId)
+    public  OrderService(OrderRepository orderRepository){
+        this.orderRepository = orderRepository;
+    }
+
+    public void placeOrder(Order order)
     {
-        Customer customer = CustomerRepository.load(customerId);
+        Customer customer = order.getCustomer();
 
         if (order.getAmount() == 0)
-            return false;
+            return;
 
         if (customer.getCountry() == "UK")
-            order.setVAT(0.2d);
+            order.setVat(0.2d);
         else
-            order.setVAT(0);
+            order.setVat(0);
 
-        orderRepository.save(order);
+        orderRepository.placeOrder(order);
 
-        return true;
     }
 }
