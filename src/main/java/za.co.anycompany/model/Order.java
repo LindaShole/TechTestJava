@@ -1,32 +1,37 @@
 package za.co.anycompany.model;
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity(name = "customer_order")
+@Table(name = "customer_order")
 public class Order {
 
-    private int orderId;
+    @Id
+    @Getter
+    @Setter
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Getter
+    @Setter
+    @Column(name = "amount", nullable = false)
     private double amount;
+
+    @Getter
+    @Setter
+    @Column(name = "VAT", nullable = false)
     private double VAT;
 
-    public int getOrderId() {
-        return orderId;
+    @OneToOne(mappedBy = "order")
+    private Customer customer;
+
+    public Order() {
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
+    public Order(Long id, double amount, double VAT) {
+        this.id = id;
         this.amount = amount;
-    }
-
-    public double getVAT() {
-        return VAT;
-    }
-
-    public void setVAT(double VAT) {
         this.VAT = VAT;
     }
 }

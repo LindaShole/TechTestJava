@@ -20,7 +20,7 @@ public class OrderRepository {
             statement = connection.createStatement();
             statement.executeUpdate("CREATE TABLE ORDER (oderId int primary key not null, amount number(10,2), vat number (3,1))");
             connection.prepareStatement("INSERT INTO ORDER(oderId, amount, vat) VALUES(?,?,?)");
-            preparedStatement.setInt(1, order.getOrderId());
+//            preparedStatement.setInt(1, order.getOrderId());
             preparedStatement.setDouble(2, order.getAmount());
             preparedStatement.setDouble(3, order.getVAT());
             preparedStatement.executeUpdate();
