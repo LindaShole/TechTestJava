@@ -7,6 +7,8 @@ import za.co.anycompany.model.Order;
 import za.co.anycompany.repository.CustomerRepository;
 import za.co.anycompany.repository.OrderRepository;
 
+import java.util.List;
+
 @Service
 public class OrderService {
 
@@ -24,7 +26,7 @@ public class OrderService {
             return false;
         }
 
-        if (customer.getCountry() == "UK") {
+        if (customer.getCountry().equalsIgnoreCase("UK")) {
             order.setVAT(0.2d);
         } else {
             order.setVAT(0);
@@ -36,4 +38,7 @@ public class OrderService {
     }
 
 
+    public List<Order> getOrders() {
+        return orderRepository.findAll();
+    }
 }

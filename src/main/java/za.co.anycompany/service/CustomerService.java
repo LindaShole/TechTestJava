@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.repository.CustomerRepository;
 
+import java.util.List;
+
 @Service
 public class CustomerService {
 
@@ -15,7 +17,12 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public Customer getCustomer(Long customerId) {
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    public Customer getCustomerById(Long customerId) {
         return customerRepository.findById(customerId).get();
+
     }
 }
