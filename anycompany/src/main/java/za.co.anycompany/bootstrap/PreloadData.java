@@ -6,12 +6,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import za.co.anycompany.datalayer.CustomerRepository;
 import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.model.Address;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
+import za.co.anycompany.model.Product;
 
 import java.util.Arrays;
 import java.util.Date;
 
+// Used for testing
 @Component
 public class PreloadData implements CommandLineRunner {
 
@@ -28,20 +31,21 @@ public class PreloadData implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception{
 
-    Customer customer = new Customer("Vusi","RSA", new Date());
+    Address   address = new Address("66 Kingsway ave","Durban","","");
 
-    Order order = new Order(50,20,"iPhone", customer);
-    Order order2 = new Order(500,2,"Play Station 5", customer);
-    Order order3 = new Order(50,0,"Other", customer);
+    Customer customer = new Customer("Vusi","RSA", new Date(),"79451111",address);
+
+    Order order = new Order(Arrays.asList(new Product("Nike air ",2,400)), customer);
+    Order order2 = new Order(Arrays.asList(new Product("Play Station 5",5,200)), customer);
 
 
 
-    customer.setOrders(Arrays.asList(order, order2, order3));
+    customer.setOrders(Arrays.asList(order, order2));
     customerRepository.save(customer);
 
     orderRepository.save(order);
     orderRepository.save(order2);
-    orderRepository.save(order3);
+
 
   }
 }

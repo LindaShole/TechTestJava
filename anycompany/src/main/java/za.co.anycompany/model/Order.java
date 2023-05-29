@@ -3,6 +3,9 @@ package za.co.anycompany.model;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Table(name = "orders")
 @Entity
@@ -12,46 +15,44 @@ public class Order{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;
-    private double amount;
-    private double VAT;
-    private String product;
+
+    private double Subtotal ;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Product> products;
+
     public Order(){
     }
 
-    public Order(double amount, double VAT, String product, Customer customer){
-        this.amount = amount;
-        this.VAT = VAT;
-        this.product = product;
+    public Order(List<Product> products,Customer customer){
+       this.products = products;
         this.customer = customer;
+        this.setSubtotal();
     }
 
-    public String getProduct(){
-        return product;
+    public double getSubtotal(){
+        return Subtotal;
     }
 
-    public void setProduct(String product){
-        this.product = product;
+    public void setSubtotal(){
+
+        for(Product product : products){
+            Subtotal += product.getQuantity() * product.getPrice();
+        }
     }
 
-    public double getAmount() {
-        return amount;
+    public List<Product> getProducts(){
+        return products;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
-    public double getVAT() {
-        return VAT;
-    }
-
-    public void setVAT(double VAT) {
-        this.VAT = VAT;
+    public void setProducts(List<Product> products){
+        this.products = products;
+        this.Subtotal = 0;
+        this.setSubtotal();
     }
 
     public int getOrderId(){
@@ -74,10 +75,9 @@ public class Order{
     public String toString(){
         return "Order{" +
                 "orderId=" + orderId +
-                ", amount=" + amount +
-                ", VAT=" + VAT +
-                ", product='" + product + '\'' +
+                ", Subtotal=" + Subtotal +
                 ", customer=" + customer +
+                ", products=" + products +
                 '}';
     }
 }
