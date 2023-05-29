@@ -1,7 +1,6 @@
 package za.co.anycompany.service;
 
-import za.co.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.repository.CustomerRepository;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 

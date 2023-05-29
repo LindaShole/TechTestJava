@@ -1,4 +1,4 @@
-package za.co.anycompany.datalayer;
+package za.co.anycompany.repository;
 
 import za.co.anycompany.model.Customer;
 
