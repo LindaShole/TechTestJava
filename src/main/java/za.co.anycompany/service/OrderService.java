@@ -2,6 +2,7 @@ package za.co.anycompany.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import za.co.anycompany.model.Customer;
 import za.co.anycompany.model.Order;
 import za.co.anycompany.repository.CustomerRepository;
@@ -18,11 +19,18 @@ public class OrderService {
     @Autowired
     private CustomerRepository customerRepository;
 
+    @Transactional
     public boolean placeOrder(Order order, Long customerId) {
 
-        Customer customer = customerRepository.findById(customerId).get();
+        Customer customer = null;
 
-        if (order.getAmount() == 0) {
+        if (customerRepository.findById(customerId).isPresent()) {
+            customer = customerRepository.findById(customerId).get();
+        } else {
+            throw new RuntimeException("Customer not present");
+        }
+
+        if (!isOrderValid(order)) {
             return false;
         }
 
@@ -40,5 +48,9 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return orderRepository.findAll();
+    }
+
+    private boolean isOrderValid(Order order) {
+        return !(order.getVAT() <= 0 || order.getAmount() <= 0);
     }
 }
