@@ -5,6 +5,16 @@ public class Order {
     private int orderId;
     private double amount;
     private double VAT;
+    // In JPA this would be an actual entity class. With appropriate annotation.
+    private int customerId;
+
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
 
     public int getOrderId() {
         return orderId;

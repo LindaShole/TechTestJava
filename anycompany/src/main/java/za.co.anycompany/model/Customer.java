@@ -1,11 +1,21 @@
 package za.co.anycompany.model;
 
-import java.util.Date;
+import java.util.*;
 
 public class Customer {
+    private int customerId;
     private String name;
     private String country;
     private Date dateOfBirth;
+    private List<Order> orders = new ArrayList<>();
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public int getCustomerId() {
+        return customerId;
+    }
 
     public String getName() {
         return name;
@@ -29,5 +39,17 @@ public class Customer {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void addOrder(Order order) {
+        this.orders.add(order);
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }
