@@ -1,5 +1,15 @@
 package za.co.anycompany.model;
 
+/**
+ * <p>Title: Order</p>
+ * <p/>
+ * <p>Description: Order domain class representing a customer's order/</p>
+ * <p/>
+ * <p>Company: AnyCompany</p>
+ *
+ * @author Chizeba Maulu
+ * @version 1.0
+ */
 public class Order {
 
     private int orderId;
