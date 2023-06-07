@@ -89,7 +89,7 @@ public class DatabaseManager {
         Statement statement = null;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate("CREATE TABLE IF NOT EXISTS customer (customer_id int primary key not null, full_name varchar, date_of_birth date, country varchar)");
+            statement.executeUpdate("CREATE TABLE IF NOT EXISTS customer (customer_id INT PRIMARY KEY NOT NULL, full_name VARCHAR(100) NOT NULL, date_of_birth DATE, country VARCHAR(100))");
         }
         catch (SQLException e) {
             LOG.warning(e.getMessage());
