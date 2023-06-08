@@ -11,9 +11,9 @@ public interface OrderService {
     void updateOrder(final Order order);
 
     void deleteOrder(final Order order);
-    void deleteOrder(final int orderId);
+    void deleteOrder(final Long orderId);
 
-    Optional<Order> getOrderById(final int orderId);
+    Optional<Order> getOrderById(final Long orderId);
     List<Order> getAllOrders();
 
 

@@ -1,11 +1,9 @@
 package za.co.anycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -14,8 +12,8 @@ import java.util.Date;
 public class Product {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int productId;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long productId;
   @NotNull
   private String name;
 
@@ -26,6 +24,11 @@ public class Product {
 
   @NotNull
   private double price;
+
+  @ManyToOne
+  @JoinColumn(name ="order_id")
+  @JsonIgnore
+  private Order order;
 
   public Product(){
   }
@@ -68,12 +71,20 @@ public class Product {
     this.price = price;
   }
 
-  public int getProductId(){
+  public Long getProductId(){
     return productId;
   }
 
-  public void setProductId(int productId){
+  public void setProductId(Long productId){
     this.productId = productId;
+  }
+
+  public Order getOrder(){
+    return order;
+  }
+
+  public void setOrder(Order order){
+    this.order = order;
   }
 
   @Override

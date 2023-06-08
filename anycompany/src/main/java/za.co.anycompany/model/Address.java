@@ -1,9 +1,8 @@
 package za.co.anycompany.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -11,8 +10,8 @@ public class Address {
 
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int Id;
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private Long Id;
 
   @NotNull
   private String street;
@@ -22,6 +21,10 @@ public class Address {
 
   @NotNull
   private String province;
+
+  @OneToOne(mappedBy = "address")
+  @JsonIgnore
+  Customer customer;
 
   @NotNull
   private String zip;
@@ -35,11 +38,11 @@ public class Address {
     this.zip = zip;
   }
 
-  public int getId(){
+  public Long getId(){
     return Id;
   }
 
-  public void setId(int id){
+  public void setId(Long id){
     Id = id;
   }
 
@@ -75,11 +78,22 @@ public class Address {
     this.zip = zip;
   }
 
+  public Customer getCustomer(){
+    return customer;
+  }
+
+  public void setCustomer(Customer customer){
+    this.customer = customer;
+  }
+
   @Override
   public String toString(){
-    return "Address{ street='" + street + '\'' +
+    return "Address{" +
+            "Id=" + Id +
+            ", street='" + street + '\'' +
             ", city='" + city + '\'' +
             ", province='" + province + '\'' +
+            ", customer=" + customer +
             ", zip='" + zip + '\'' +
             '}';
   }

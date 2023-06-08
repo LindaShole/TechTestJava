@@ -1,28 +1,30 @@
 package za.co.anycompany.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Table(name = "orders")
 @Entity
 @RestResource(path = "orders",rel = "orders")
-public class Order{
+public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderId;
 
     private double Subtotal ;
 
+    private Date placedAt = new Date();
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore // resolve the infinite recursion
     private Customer customer;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Order(){
@@ -49,17 +51,29 @@ public class Order{
         return products;
     }
 
+
+
     public void setProducts(List<Product> products){
         this.products = products;
         this.Subtotal = 0;
         this.setSubtotal();
     }
 
-    public int getOrderId(){
+    public Date getPlacedAt(){
+        return placedAt;
+    }
+
+    public void setPlacedAt(Date placedAt){
+        this.placedAt = placedAt;
+    }
+
+
+
+    public Long getOrderId(){
         return orderId;
     }
 
-    public void setOrderId(int orderId){
+    public void setOrderId(Long orderId){
         this.orderId = orderId;
     }
 
@@ -70,6 +84,8 @@ public class Order{
     public void setCustomer(Customer customer){
         this.customer = customer;
     }
+
+
 
     @Override
     public String toString(){

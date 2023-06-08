@@ -1,19 +1,15 @@
 package za.co.anycompany.model;
 
-import org.springframework.data.rest.core.annotation.RestResource;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@RestResource(rel ="customers" ,path = "customers")
 public class Customer {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int customerId;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long customerId;
 
     @NotNull
     private String name;
@@ -25,9 +21,11 @@ public class Customer {
     private Date dateOfBirth;
 
     @NotNull
+
     private String phoneNumber;
 
     @OneToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id") // FK
     private Address address;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
@@ -76,11 +74,11 @@ public class Customer {
         this.orders = orders;
     }
 
-    public int getCustomerId(){
+    public Long getCustomerId(){
         return customerId;
     }
 
-    public void setCustomerId(int customerId){
+    public void setCustomerId(Long customerId){
         this.customerId = customerId;
     }
 

@@ -9,9 +9,9 @@ import java.util.Optional;
 @Service
 public interface CustomerService {
   void addCustomer(final Customer customer);
-  void updateCustomer(final Customer customer);
+  Customer updateCustomer(final Customer customer);
   void deleteCustomer(final Customer customer);
-  void deleteCustomer(final int customerId);
+  void deleteCustomer(final Long customerId);
   List<Customer> getAllCustomers();
-  Optional<Customer> getCustomer(final int customerId);
+  Optional<Customer> getCustomer(final Long customerId);
 }
