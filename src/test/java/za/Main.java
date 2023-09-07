@@ -1,4 +1,4 @@
-package za.co.anycompany;
+package za;
 
 
 public class Main {
