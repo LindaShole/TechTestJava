@@ -8,5 +8,24 @@ spring:
     username: ${DB_USER}
     password: ${DB_PWD}
 
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        default_schema: public
+
   liquibase:
-    enabled: false
+    enabled: true
+    drop-first: false
+    database-change-log-table: DATABASE_CHANGELOG
+    database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
+    clear-checksums: false
+    test-rollback-on-update: false
+    change-log: classpath:db/changelog/changelog-master.xml
+    driver-class-name: ${spring.datasource.driver-class-name}
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    liquibase-schema: ${spring.jpa.properties.hibernate.default_schema}

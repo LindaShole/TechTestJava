@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Emmanuel Mhlaba" id="1694115857-1">
+        <sqlFile path="scripts/create-customer.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+    <changeSet author="Emmanuel Mhlaba" id="1694115857-2">
+        <sqlFile path="scripts/create-order.sql"
+                 relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
