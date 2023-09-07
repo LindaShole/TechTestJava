@@ -4,6 +4,10 @@ import za.co.anycompany.model.Order;
 
 import java.sql.*;
 
+/**
+ * @deprecated Use the Order repository under the persistence package
+ */
+@Deprecated(forRemoval = true)
 public class OrderRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";

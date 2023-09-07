@@ -4,7 +4,10 @@ import za.co.anycompany.model.Customer;
 
 import java.sql.*;
 
-
+/**
+ * @deprecated Use the Customer repository under the persistence package
+ */
+@Deprecated(forRemoval = true)
 public class CustomerRepository {
 
     private static final String DB_DRIVER = "org.h2.Driver";
