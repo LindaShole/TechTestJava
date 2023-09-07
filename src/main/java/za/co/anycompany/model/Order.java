@@ -1,5 +1,9 @@
 package za.co.anycompany.model;
 
+/**
+ * @deprecated Use the OrderDTO under the dto package
+ */
+@Deprecated(forRemoval = true)
 public class Order {
 
     private int orderId;

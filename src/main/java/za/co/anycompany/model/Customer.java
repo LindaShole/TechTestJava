@@ -2,6 +2,10 @@ package za.co.anycompany.model;
 
 import java.util.Date;
 
+/**
+ * @deprecated Use the CustomerDTO under the dto package
+ */
+@Deprecated(forRemoval = true)
 public class Customer {
     private String name;
     private String country;
