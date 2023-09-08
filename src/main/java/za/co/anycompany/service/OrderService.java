@@ -1,28 +1,12 @@
 package za.co.anycompany.service;
 
-import za.co.anycompany.model.Customer;
-import za.co.anycompany.model.Order;
-import za.co.anycompany.datalayer.CustomerRepository;
-import za.co.anycompany.datalayer.OrderRepository;
+import za.co.anycompany.dto.NewOrderDTO;
+import za.co.anycompany.dto.OrderDTO;
 
-public class OrderService {
+import java.util.UUID;
 
-    private OrderRepository orderRepository = new OrderRepository();
+public interface OrderService {
+    UUID placeOrder(NewOrderDTO order);
 
-    public boolean placeOrder(Order order, int customerId)
-    {
-        Customer customer = CustomerRepository.load(customerId);
-
-        if (order.getAmount() == 0)
-            return false;
-
-        if (customer.getCountry() == "UK")
-            order.setVAT(0.2d);
-        else
-            order.setVAT(0);
-
-        orderRepository.save(order);
-
-        return true;
-    }
+    OrderDTO getOrder(UUID id);
 }
