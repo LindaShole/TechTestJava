@@ -28,9 +28,6 @@ public class OrderServiceImpl implements OrderService {
         if (customer.isEmpty())
             throw new IllegalArgumentException(String.format("Customer id: %s is invalid.", order.customerId()));
 
-        if (order.amount().compareTo(0D) <= 0)
-            throw new IllegalArgumentException("Order amount is invalid for customer id: " + order.customerId());
-
         var customerEntity = customer.get();
 
         var orderEntity = new OrderEntity();
