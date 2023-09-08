@@ -13,15 +13,15 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "CUSTOMER")
+@Entity(name = "customer")
 public class CustomerEntity extends BaseEntity {
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "COUNTRY", nullable = false)
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @Column(name = "DATE_OF_BIRTH", nullable = false)
+    @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)

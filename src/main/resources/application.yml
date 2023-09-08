@@ -3,8 +3,8 @@ spring:
     name: tech-test-java
 
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tech_test
     username: ${DB_USER}
     password: ${DB_PWD}
 
@@ -12,6 +12,7 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
     properties:
       hibernate:
         default_schema: public
@@ -19,8 +20,8 @@ spring:
   liquibase:
     enabled: true
     drop-first: false
-    database-change-log-table: DATABASE_CHANGELOG
-    database-change-log-lock-table: DATABASE_CHANGELOG_LOCK
+    database-change-log-table: database_changelog
+    database-change-log-lock-table: database_changelog_lock
     clear-checksums: false
     test-rollback-on-update: false
     change-log: classpath:db/changelog/changelog-master.xml

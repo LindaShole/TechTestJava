@@ -1,14 +1,50 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="Emmanuel Mhlaba" id="1694115857-1">
-        <sqlFile path="scripts/create-customer.sql"
-                 relativeToChangelogFile="true"/>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.6.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <changeSet author="emmanuelmhlaba (generated)" id="1694150481930-1">
+        <createTable tableName="customer">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="customer_pk"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_of_birth" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
-    <changeSet author="Emmanuel Mhlaba" id="1694115857-2">
-        <sqlFile path="scripts/create-order.sql"
-                 relativeToChangelogFile="true"/>
+    <changeSet author="emmanuelmhlaba (generated)" id="1694150481930-2">
+        <createTable tableName="order">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="order_pk"/>
+            </column>
+            <column name="amount" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="vat" type="FLOAT8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customer_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="emmanuelmhlaba (generated)" id="1694150481930-3">
+        <addForeignKeyConstraint baseColumnNames="customer_id" baseTableName="order" constraintName="order_customer_id_fk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="customer" validate="true"/>
     </changeSet>
 </databaseChangeLog>

@@ -12,15 +12,15 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "ORDER")
+@Entity(name = "order")
 public class OrderEntity extends BaseEntity {
-    @Column(name = "AMOUNT", nullable = false)
+    @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @Column(name = "VAT", nullable = false)
+    @Column(name = "vat", nullable = false)
     private Double vat;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private CustomerEntity customer;
 }

@@ -24,16 +24,16 @@ public abstract class BaseEntity {
     @Id
     @GeneratedValue
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    @Column(name = "ID", updatable = false, nullable = false, unique = true)
+    @Column(name = "id", updatable = false, nullable = false, unique = true)
     private UUID id;
 
     @CreationTimestamp
-    @Column(name = "CREATED", nullable = false)
+    @Column(name = "created", nullable = false)
     @TimeZoneStorage(TimeZoneStorageType.NORMALIZE_UTC)
     private OffsetDateTime createdDate;
 
     @UpdateTimestamp
-    @Column(name = "LAST_UPDATED", nullable = false)
+    @Column(name = "last_updated", nullable = false)
     @TimeZoneStorage(TimeZoneStorageType.NORMALIZE_UTC)
     private OffsetDateTime lastModified;
 }
