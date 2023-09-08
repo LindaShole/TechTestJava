@@ -3,9 +3,7 @@ package za.co.anycompany.mapper;
 import org.mapstruct.Mapper;
 import za.co.anycompany.dto.CustomerDTO;
 import za.co.anycompany.dto.NewCustomerRequestDTO;
-import za.co.anycompany.dto.OrderDTO;
 import za.co.anycompany.persistence.entity.CustomerEntity;
-import za.co.anycompany.persistence.entity.OrderEntity;
 
 import java.util.List;
 
