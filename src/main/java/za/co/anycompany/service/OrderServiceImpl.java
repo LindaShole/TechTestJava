@@ -7,7 +7,6 @@ import za.co.anycompany.dto.NewOrderDTO;
 import za.co.anycompany.dto.OrderDTO;
 import za.co.anycompany.mapper.OrderMapper;
 import za.co.anycompany.persistence.entity.OrderEntity;
-import za.co.anycompany.persistence.repository.CustomerRepository;
 import za.co.anycompany.persistence.repository.OrderRepository;
 
 import java.util.UUID;
@@ -21,6 +20,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final CustomerService customerService;
     private final OrderMapper orderMapper;
+    private final VatCalculator vatCalculator;
 
     @Override
     public UUID placeOrder(NewOrderDTO order) {
@@ -33,7 +33,7 @@ public class OrderServiceImpl implements OrderService {
         var orderEntity = new OrderEntity();
         orderEntity.setAmount(order.amount());
         orderEntity.setCustomer(customerEntity);
-        orderEntity.setVat(customerEntity.getCountry().equals("UK") ? 0.2D : 0D);
+        orderEntity.setVat(vatCalculator.calculate(customerEntity.getCountry()));
 
         try {
             return orderRepository.save(orderEntity).getId();
